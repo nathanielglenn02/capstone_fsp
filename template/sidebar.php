@@ -45,7 +45,7 @@ require_once('header.php');
                 </a>
             </li>
             <li>
-                <a href="#" class="login">
+                <a href="<?= $main_url ?>auth/login.php" class="login">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Login</span>
                 </a>

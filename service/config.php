@@ -12,9 +12,6 @@ if ($koneksi->connect_error) {
     die("error!");
 }
 
-
-$main_url = "http://localhost/Capstone-FSP/";
-
 function uploadimg($url)
 {
     $namafile = $_FILES['image']['name'];
@@ -48,3 +45,4 @@ function uploadimg($url)
     move_uploaded_file($tmp, "../asset/image/" . $namafilebaru);
     return $namafilebaru;
 }
+$main_url = "http://localhost/Capstone-FSP/";
