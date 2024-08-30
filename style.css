@@ -29,6 +29,7 @@ li {
 	--light-yellow: #FFF2C6;
 	--orange: #FD7238;
 	--light-orange: #FFE0D3;
+	--green: #66dc17;
 }
 
 html {
@@ -161,6 +162,10 @@ body {
 
 #sidebar .side-menu li a.logout {
 	color: var(--red);
+}
+
+#sidebar .side-menu li a.login {
+	color: var(--green);
 }
 
 #sidebar .side-menu.top li a:hover {

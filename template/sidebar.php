@@ -44,6 +44,12 @@ require_once('header.php');
                     <span class="text">Logout</span>
                 </a>
             </li>
+            <li>
+                <a href="#" class="login">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Login</span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- SIDEBAR -->
