@@ -26,6 +26,7 @@ require_once('../template/navbar.php');
         <div class="order">
             <div class="head">
                 <h3>Team List</h3>
+                <i class='bx bx-plus'></i>
                 <i class='bx bx-search'></i>
                 <i class='bx bx-filter'></i>
             </div>
@@ -33,6 +34,7 @@ require_once('../template/navbar.php');
                 <thead>
                     <tr>
                         <th>Anggota</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,11 +43,19 @@ require_once('../template/navbar.php');
                             <img src="img/people.png">
                             <p>User 1</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <img src="img/people.png">
                             <p>User 2</p>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </td>
                     </tr>
                     <tr>
@@ -53,17 +63,29 @@ require_once('../template/navbar.php');
                             <img src="img/people.png">
                             <p>User 3</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <img src="img/people.png">
                             <p>User 4</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             <img src="img/people.png">
                             <p>User 5</p>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </td>
                     </tr>
                 </tbody>

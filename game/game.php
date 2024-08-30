@@ -26,6 +26,7 @@ require_once('../template/navbar.php');
         <div class="order">
             <div class="head">
                 <h3>Detail Game</h3>
+                <i class='bx bx-plus'></i>
                 <i class='bx bx-search'></i>
                 <i class='bx bx-filter'></i>
             </div>
@@ -34,6 +35,7 @@ require_once('../template/navbar.php');
                     <tr>
                         <th>Game</th>
                         <th>Deskripsi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +47,10 @@ require_once('../template/navbar.php');
                                 harus mencari senjata, kendaraan, dan perlengkapan lainnya sambil bertahan dari serangan
                                 musuh.</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mobile Legend</td>
@@ -54,6 +60,10 @@ require_once('../template/navbar.php');
                                 mempertahankan basis mereka sendiri. Setiap pemain mengendalikan karakter unik yang
                                 disebut "hero" dengan kemampuan khusus.</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>Valorant</td>
@@ -61,6 +71,10 @@ require_once('../template/navbar.php');
                             <p>game FPS (First-Person Shooter) taktis yang menggabungkan elemen tembak-menembak cepat
                                 dengan kemampuan khusus dari setiap karakter yang disebut "agents". Dalam game ini, dua
                                 tim beranggotakan lima pemain bertarung dalam mode penyerangan dan pertahanan.</p>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </td>
                     </tr>
                     <tr>
@@ -70,6 +84,10 @@ require_once('../template/navbar.php');
                                 membentuk tim untuk bertarung di arena, menggunakan hero dengan berbagai kemampuan unik
                                 untuk menghancurkan basis musuh dan memenangkan pertandingan.</p>
                         </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
                     </tr>
                     <tr>
                         <td>Clash Royale</td>
@@ -78,6 +96,10 @@ require_once('../template/navbar.php');
                                 dan tower defense. Pemain mengumpulkan dan meng-upgrade kartu yang mewakili pasukan,
                                 bangunan, dan mantra untuk digunakan dalam pertempuran melawan pemain lain secara
                                 online.</p>
+                        </td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
                         </td>
                     </tr>
                 </tbody>
