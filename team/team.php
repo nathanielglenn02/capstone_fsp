@@ -21,7 +21,7 @@ $teams = Team::getAllTeams($koneksi);
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a class="active" href="#">Team</a>
+                    <a href="#">Team</a>
                 </li>
             </ul>
         </div>
