@@ -30,7 +30,7 @@ $games = Game::getAllGames($koneksi);
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Detail Game</h3>
+                <h3>Game</h3>
                 <i class='bx bx-plus'></i>
                 <i class='bx bx-search'></i>
                 <i class='bx bx-filter'></i>
@@ -40,6 +40,7 @@ $games = Game::getAllGames($koneksi);
                     <tr>
                         <th>Game</th>
                         <th>Deskripsi</th>
+                        <th>Detail</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -51,7 +52,10 @@ $games = Game::getAllGames($koneksi);
                         echo "<td>" . htmlspecialchars($game->getGameName()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($game->getDescription()) . "</p></td>";
                         echo "<td>";
-                        echo "<a href='edit_game.php?id=" . $game->getGameId() . "'><i class='fa-solid fa-pen'></i></a>";
+                        echo "<a href='detail_game.php?id=" . $game->getGameId() . "'>Detail</a>";
+                        echo "</td>";
+                        echo "<td>";
+                        echo "<a href='edit_game.php?id=" . $game->getGameId() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         echo "<i class='fa-solid fa-trash'></i>"; // Placeholder untuk fungsi delete
                         echo "</td>";
                         echo "</tr>";
