@@ -8,8 +8,8 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil data detail game dari database
-$gameDetails = Game::getGameDetails($koneksi);
+$idgame = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$gameDetails = Game::getGameDetails($koneksi, $idgame);
 
 // Ambil data tim dan event
 $teams = $gameDetails['teams'];
