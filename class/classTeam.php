@@ -1,11 +1,17 @@
 <?php
 class Team
 {
+    /* =======================
+       Data Members
+    ======================== */
     private $teamId;
     private $teamName;
     private $gameId; // Foreign key ke Game
     private $conn;
 
+    /* =======================
+        Constructors
+    ======================== */
     public function __construct($conn, $teamId = null, $teamName = null, $gameId = null)
     {
         $this->conn = $conn;
@@ -14,6 +20,9 @@ class Team
         $this->gameId = $gameId;
     }
 
+    /* =======================
+       Properties
+    ======================== */
     // Getter dan Setter
     public function getTeamId()
     {
@@ -45,6 +54,14 @@ class Team
         $this->gameId = $gameId;
     }
 
+    /* =======================
+       Methods
+    ======================== */
+
+    // Metode untuk menambah team ke database
+
+
+    // Metode untuk membaca semua team dari database
     public static function getAllTeams($koneksi)
     {
         $query = "SELECT t.idteam, g.name as game_name, t.name as team_name FROM team as t
