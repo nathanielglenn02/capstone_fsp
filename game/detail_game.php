@@ -60,7 +60,7 @@ $events = $gameDetails['events'];
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
                         echo "<td>" . htmlspecialchars($event->getEventName()) . "</td>";
                         echo "<td>" . htmlspecialchars($event->getDate()) . "</td>";
-                        echo "<td>" . htmlspecialchars($event->getDescription()) . "</td>";
+                        echo "<td><p>" . htmlspecialchars($event->getDescription()) . "</p></td>";
                         echo "</tr>";
                     }
                     ?>

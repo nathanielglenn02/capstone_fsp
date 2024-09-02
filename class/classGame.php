@@ -114,7 +114,7 @@ class Game
         // Loop untuk mengisi array dengan data dari query
         while ($row = mysqli_fetch_assoc($result)) {
             // Buat objek Team dan Event, kemudian masukkan ke array masing-masing
-            $team = new Team($koneksi, $row['team_id'], $row['id_game'], $row['team_name'] );
+            $team = new Team($koneksi, $row['team_id'], $row['team_name'], $row['id_game'] );
             $teams[] = $team;
         
             $event = new Event($koneksi, $row['event_name'], $row['description'], $row['event_date']);
