@@ -1,6 +1,7 @@
 <?php
 require_once('../service/config.php');
 require_once('../class/classTeam.php');
+require_once('../class/classAchievement.php'); // Pastikan classAchievement.php disertakan
 
 $title = "Team - Club Informatics 2024";
 require_once('../template/header.php');
@@ -10,17 +11,11 @@ require_once('../template/navbar.php');
 // Mengambil semua data tim dari database
 $teams = Team::getAllTeams($koneksi);
 
-// Misalkan idteam tertentu diambil dari query string atau yang sedang aktif
+// Mengambil idteam dari parameter URL, jika tidak ada default ke 1
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : 1;
 
-// Query untuk mendapatkan achievement tim
-$query = "SELECT name, description FROM achievement WHERE idteam = ?";
-$stmt = mysqli_prepare($koneksi, $query);
-mysqli_stmt_bind_param($stmt, "i", $idteam);
-mysqli_stmt_execute($stmt);
-$achievements = mysqli_stmt_get_result($stmt);
-
-mysqli_stmt_close($stmt);
+// Mengambil semua achievement berdasarkan idTeam
+$achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
 ?>
 
 <main>
@@ -60,7 +55,7 @@ mysqli_stmt_close($stmt);
                     // Loop untuk menampilkan data tim yang diambil dari database
                     foreach ($teams as $team) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
+                        echo "<td><a href='team.php?idteam=" . $team->getTeamId() . "'>" . htmlspecialchars($team->getTeamName()) . "</a></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "<td>";
                         echo "<a href='edit_team.php?id=" . $team->getTeamId() . "'><i class='fa-solid fa-pen'></i></a>";
@@ -79,11 +74,14 @@ mysqli_stmt_close($stmt);
                 <i class='bx bx-filter'></i>
             </div>
             <ul class="todo-list">
-                <?php while ($achievement = mysqli_fetch_assoc($achievements)): ?>
-                    <li class="completed">
-                        <p><?php echo htmlspecialchars($achievement['name']); ?></p>
-                    </li>
-                <?php endwhile; ?>
+                <?php
+                // Loop untuk menampilkan semua achievement dari tim yang aktif
+                foreach ($achievements as $achievement) {
+                    echo "<li class='completed'>";
+                    echo "<p>" . htmlspecialchars($achievement->getName()) . "</p>";
+                    echo "</li>";
+                }
+                ?>
             </ul>
         </div>
     </div>
