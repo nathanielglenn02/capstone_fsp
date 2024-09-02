@@ -23,7 +23,7 @@ $events = $gameDetails['events'];
             <h1>Game Details</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="../index.php">Dashboard</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
