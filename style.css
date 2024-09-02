@@ -48,6 +48,10 @@ body {
 }
 
 
+/* HIDDEN */
+.hidden {
+    visibility: hidden;
+}
 
 
 

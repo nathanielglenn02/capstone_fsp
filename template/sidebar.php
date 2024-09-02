@@ -11,7 +11,6 @@ require_once('header.php');
             <span class="text">Informatic E-Sport</span>
         </a>
         <ul class="side-menu top">
-            <!-- <li class="active"> -->
             <li>
                 <a href="<?= $main_url ?>index.php">
                     <i class='bx bxs-dashboard'></i>
