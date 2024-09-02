@@ -22,7 +22,7 @@ $games = Game::getAllGames($koneksi);
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a class="active" href="#">Game</a>
+                    <a href="#">Game</a>
                 </li>
             </ul>
         </div>

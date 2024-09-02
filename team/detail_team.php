@@ -37,7 +37,7 @@ if ($idteam) {
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a class="active" href="#">Team Details</a>
+                    <a href="#">Team Details</a>
                 </li>
             </ul>
         </div>

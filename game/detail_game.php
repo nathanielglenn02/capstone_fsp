@@ -31,7 +31,7 @@ $events = $gameDetails['events'];
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a class="active" href="#">Game Details</a>
+                    <a href="#">Game Details</a>
                 </li>
             </ul>
         </div>
