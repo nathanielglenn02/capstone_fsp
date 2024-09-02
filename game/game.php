@@ -51,8 +51,8 @@ $games = Game::getAllGames($koneksi);
                         echo "<td>" . htmlspecialchars($game->getGameName()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($game->getDescription()) . "</p></td>";
                         echo "<td>";
-                        echo "<i class='fa-solid fa-pen'></i>";
-                        echo "<i class='fa-solid fa-trash'></i>";
+                        echo "<a href='edit_game.php?id=" . $game->getGameId() . "'><i class='fa-solid fa-pen'></i></a>";
+                        echo "<i class='fa-solid fa-trash'></i>"; // Placeholder untuk fungsi delete
                         echo "</td>";
                         echo "</tr>";
                     }

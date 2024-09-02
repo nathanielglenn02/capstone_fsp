@@ -47,7 +47,7 @@ class Team
 
     public static function getAllTeams($koneksi)
     {
-        $query = "SELECT t.idteam, g.name as game_name, t.name as team_name FROM team as t
+        $query = "SELECT t.idteam, g.name as game_name, t.name as team_name, g.idgame as game_id FROM team as t
                     inner join game as g on t.idgame = g.idgame";
         $result = mysqli_query($koneksi, $query);
 
@@ -58,8 +58,8 @@ class Team
         $teams = [];
 
         while ($row = mysqli_fetch_assoc($result)) {
-            var_dump($row);
-            $team = new Team($row['idteam'], $row['team_name'], $row['game_name']);
+            // Menginisialisasi objek Team dengan koneksi, idteam, nama tim, dan idgame
+            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
             $teams[] = $team;
         }
 

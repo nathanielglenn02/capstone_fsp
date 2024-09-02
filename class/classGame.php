@@ -62,4 +62,23 @@ class Game
 
         return $games;
     }
+
+    // Metode untuk mengupdate game dari database
+    public function updateGame($koneksi)
+    {
+        $query = "UPDATE game SET name = ?, description = ? WHERE idgame = ?";
+        $stmt = mysqli_prepare($koneksi, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($koneksi));
+        }
+
+        mysqli_stmt_bind_param($stmt, "ssi", $this->gameName, $this->description, $this->gameId);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
+    }
 }

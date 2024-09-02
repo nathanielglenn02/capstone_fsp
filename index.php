@@ -9,7 +9,6 @@ require_once('class/classTeam.php');
 $teams = Team::getAllTeams($koneksi);
 ?>
 
-
 <!-- MAIN -->
 <main>
     <div class="head-title">
@@ -44,13 +43,13 @@ $teams = Team::getAllTeams($koneksi);
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    // Loop untuk menampilkan data game yang diambil dari database
+                    <?php
+                    // Loop untuk menampilkan data team yang diambil dari database
                     foreach ($teams as $team) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
-                        echo "<td>" . htmlspecialchars($team->getGameId ()) . "</td>";
+                        echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "</tr>";
                     }
                     ?>
