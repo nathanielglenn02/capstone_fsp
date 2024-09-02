@@ -53,7 +53,7 @@ $teams = Team::getAllTeams($koneksi);
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
                         echo "<td>";
-                        echo "<a href='edit_team.php?id=" . $team->getTeamId() . "'><i class='fa-solid fa-pen'></i></a>";
+                        echo "<a href='edit_team.php?id=" . $team->getTeamId() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         echo "<a href='delete_team.php?id=" . $team->getTeamId() . "' onclick=\"return confirm('Apakah Anda yakin ingin menghapus tim ini?');\"><i class='fa-solid fa-trash'></i></a>";
                         echo "</td>";
                         echo "</tr>";
