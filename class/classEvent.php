@@ -3,14 +3,14 @@ class Event
 {
     private $eventId;
     private $eventName;
-    private $gameId; // Foreign key ke Game
+    private $description; // Foreign key ke Game
     private $date; // Tanggal event
 
-    public function __construct($eventId, $eventName, $gameId, $date)
+    public function __construct($eventId, $eventName, $description, $date)
     {
         $this->eventId = $eventId;
         $this->eventName = $eventName;
-        $this->gameId = $gameId;
+        $this->description = $description;
         $this->date = $date;
     }
 
@@ -35,14 +35,14 @@ class Event
         $this->eventName = $eventName;
     }
 
-    public function getGameId()
+    public function getDescription()
     {
-        return $this->gameId;
+        return $this->description;
     }
 
-    public function setGameId($gameId)
+    public function setDescription($description)
     {
-        $this->gameId = $gameId;
+        $this->description = $description;
     }
 
     public function getDate()
@@ -54,4 +54,5 @@ class Event
     {
         $this->date = $date;
     }
+
 }
