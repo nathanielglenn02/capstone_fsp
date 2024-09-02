@@ -42,4 +42,24 @@ class Game
     {
         $this->description = $description;
     }
+
+    // Metode untuk membaca semua game dari database
+    public static function getAllGames($koneksi)
+    {
+        $query = "SELECT idgame, name, description FROM game";
+        $result = mysqli_query($koneksi, $query);
+
+        if (!$result) {
+            die("Query Error: " . mysqli_error($koneksi));
+        }
+
+        $games = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $game = new Game($row['idgame'], $row['name'], $row['description']);
+            $games[] = $game;
+        }
+
+        return $games;
+    }
 }

@@ -1,9 +1,14 @@
 <?php
 require_once('../service/config.php');
+require_once('../class/classGame.php');
+
 $title = "Game - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
+
+// Mengambil semua data game dari database
+$games = Game::getAllGames($koneksi);
 ?>
 
 <!-- Konten Utama -->
@@ -39,69 +44,19 @@ require_once('../template/navbar.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>PUBG</td>
-                        <td>
-                            <p>PUBG adalah game battle royale di mana 100 pemain bertempur dalam peta yang semakin
-                                mengecil, dengan tujuan menjadi pemain atau tim terakhir yang bertahan hidup. Pemain
-                                harus mencari senjata, kendaraan, dan perlengkapan lainnya sambil bertahan dari serangan
-                                musuh.</p>
-                        </td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mobile Legend</td>
-                        <td>
-                            <p>Mobile Legends adalah game MOBA (Multiplayer Online Battle Arena) di mana dua tim,
-                                masing-masing terdiri dari lima pemain, bertarung untuk menghancurkan basis musuh sambil
-                                mempertahankan basis mereka sendiri. Setiap pemain mengendalikan karakter unik yang
-                                disebut "hero" dengan kemampuan khusus.</p>
-                        </td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Valorant</td>
-                        <td>
-                            <p>game FPS (First-Person Shooter) taktis yang menggabungkan elemen tembak-menembak cepat
-                                dengan kemampuan khusus dari setiap karakter yang disebut "agents". Dalam game ini, dua
-                                tim beranggotakan lima pemain bertarung dalam mode penyerangan dan pertahanan.</p>
-                        </td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Honor of King</td>
-                        <td>
-                            <p>Honor of Kings adalah game MOBA populer di China yang mirip dengan Mobile Legends. Pemain
-                                membentuk tim untuk bertarung di arena, menggunakan hero dengan berbagai kemampuan unik
-                                untuk menghancurkan basis musuh dan memenangkan pertandingan.</p>
-                        </td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Clash Royale</td>
-                        <td>
-                            <p>Clash Royale adalah game strategi waktu nyata yang menggabungkan elemen permainan kartu
-                                dan tower defense. Pemain mengumpulkan dan meng-upgrade kartu yang mewakili pasukan,
-                                bangunan, dan mantra untuk digunakan dalam pertempuran melawan pemain lain secara
-                                online.</p>
-                        </td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
+                    <?php
+                    // Loop untuk menampilkan data game yang diambil dari database
+                    foreach ($games as $game) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($game->getGameName()) . "</td>";
+                        echo "<td><p>" . htmlspecialchars($game->getDescription()) . "</p></td>";
+                        echo "<td>";
+                        echo "<i class='fa-solid fa-pen'></i>";
+                        echo "<i class='fa-solid fa-trash'></i>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
@@ -109,5 +64,4 @@ require_once('../template/navbar.php');
 
     <?php
     require_once('../template/footer.php');
-
     ?>
