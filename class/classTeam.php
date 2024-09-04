@@ -81,4 +81,97 @@ class Team
 
         return $teams;
     }
+
+    public function createTeam()
+    {
+        $query = "INSERT INTO team (name, idgame) VALUES (?, ?)";
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($this->conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "si", $this->teamName, $this->gameId);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    public static function getTeamById($conn, $idteam)
+    {
+        $query = "SELECT * FROM team WHERE idteam = ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $idteam);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            return new Team($conn, $row['idteam'], $row['name'], $row['idgame']);
+        } else {
+            return null;
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    public function updateTeam()
+    {
+        $query = "UPDATE team SET name = ?, idgame = ? WHERE idteam = ?";
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($this->conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "sii", $this->teamName, $this->gameId, $this->teamId);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    public static function deleteTeamById($conn, $idteam)
+    {
+        // Pertama, hapus anggota tim dari tabel team_members
+        $queryMembers = "DELETE FROM team_members WHERE idteam = ?";
+        $stmtMembers = mysqli_prepare($conn, $queryMembers);
+
+        if ($stmtMembers === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmtMembers, "i", $idteam);
+
+        if (!mysqli_stmt_execute($stmtMembers)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmtMembers));
+        }
+
+        mysqli_stmt_close($stmtMembers);
+
+        // Kemudian, hapus tim dari tabel team
+        $query = "DELETE FROM team WHERE idteam = ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $idteam);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
+    }
 }
