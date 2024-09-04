@@ -58,9 +58,6 @@ class Team
        Methods
     ======================== */
 
-    // Metode untuk menambah team ke database
-
-
     // Metode untuk membaca semua team dari database
     public static function getAllTeams($koneksi)
     {
@@ -140,25 +137,9 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
-    public static function deleteTeamById($conn, $idteam)
+    // Metode untuk menghapus tim
+    public function deleteTeam($conn)
     {
-        // Pertama, hapus anggota tim dari tabel team_members
-        $queryMembers = "DELETE FROM team_members WHERE idteam = ?";
-        $stmtMembers = mysqli_prepare($conn, $queryMembers);
-
-        if ($stmtMembers === false) {
-            die('Prepare failed: ' . mysqli_error($conn));
-        }
-
-        mysqli_stmt_bind_param($stmtMembers, "i", $idteam);
-
-        if (!mysqli_stmt_execute($stmtMembers)) {
-            die('Execute failed: ' . mysqli_stmt_error($stmtMembers));
-        }
-
-        mysqli_stmt_close($stmtMembers);
-
-        // Kemudian, hapus tim dari tabel team
         $query = "DELETE FROM team WHERE idteam = ?";
         $stmt = mysqli_prepare($conn, $query);
 
@@ -166,7 +147,7 @@ class Team
             die('Prepare failed: ' . mysqli_error($conn));
         }
 
-        mysqli_stmt_bind_param($stmt, "i", $idteam);
+        mysqli_stmt_bind_param($stmt, "i", $this->teamId);
 
         if (!mysqli_stmt_execute($stmt)) {
             die('Execute failed: ' . mysqli_stmt_error($stmt));

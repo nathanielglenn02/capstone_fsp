@@ -2,18 +2,16 @@
 require_once('../service/config.php');
 require_once('../class/classTeam.php');
 
-// Mengambil idteam dari URL
-$idteam = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if (isset($_GET['id'])) {
+    $teamId = intval($_GET['id']);
 
-if ($idteam == 0) {
-    // Jika idteam tidak valid, redirect ke halaman team
-    header('Location: team.php');
-    exit();
+    // Inisialisasi objek Team dengan ID
+    $team = new Team($koneksi, $teamId, "", "");
+
+    // Panggil metode untuk menghapus tim
+    $team->deleteTeam($koneksi);
+
+    // Redirect kembali ke halaman team
+    header("Location: team.php");
+    exit;
 }
-
-// Menghapus data tim berdasarkan idteam
-Team::deleteTeamById($koneksi, $idteam);
-
-// Setelah berhasil dihapus, redirect kembali ke halaman team
-header('Location: team.php');
-exit();

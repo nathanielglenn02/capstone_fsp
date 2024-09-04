@@ -29,6 +29,18 @@ require_once('header.php');
                     <span class="text">Team</span>
                 </a>
             </li>
+            <li>
+                <a href="<?= $main_url ?>event/event.php">
+                    <i class='bx bx-calendar-event'></i>
+                    <span class="text">Event</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?= $main_url ?>achievement/achievement.php">
+                    <i class='bx bx-trophy'></i>
+                    <span class="text">Achievement</span>
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
             <li>
