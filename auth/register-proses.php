@@ -11,24 +11,21 @@ if (isset($_POST['simpan'])) {
     $profile = "member";
     $pass = password_hash($password, PASSWORD_DEFAULT);
 
-    mysqli_query($koneksi, "INSERT INTO member VALUES(null,'$fname','$lname','$username','$pass','$profile')");
-    // $stmt = $koneksi->prepare("INSERT INTO member (fname, lname, username, password, profile) VALUES (?, ?, ?, ?, ?)");
-    // if (!$stmt) {
-    //     die("Prepare failed: " . $koneksi->error);
-    // }
-    // $stmt->bind_param("sssss", $fname, $lname, $username, $pass, $profile);
+    $stmt = $koneksi->prepare("INSERT INTO member (fname, lname, username, password, profile) VALUES (?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . $koneksi->error);
+    }
+    $stmt->bind_param("sssss", $fname, $lname, $username, $pass, $profile);
 
-    // if ($stmt->execute()) {
-    //     echo "<script>
-    //     alert('Registrasi berhasil, silahkan login.');
-    //     window.location.href = 'registrasi.php';
-    //     </script>";
-    // } else {
-    //     echo "<script>
-    //     alert('Registrasi gagal: " . $stmt->error . "');
-    //     window.location.href = 'registrasi.php';
-    //     </script>";
-    // }
-    
-
+    if ($stmt->execute()) {
+        echo "<script>
+        alert('Registrasi berhasil, silahkan login.');
+        window.location.href = 'registrasi.php';
+        </script>";
+    } else {
+        echo "<script>
+        alert('Registrasi gagal: " . $stmt->error . "');
+        window.location.href = 'registrasi.php';
+        </script>";
+    }
 }

@@ -101,37 +101,47 @@ class Achievement
         mysqli_stmt_close($stmt);
     }
 
-    // Method untuk mendapatkan semua achievement berdasarkan idTeam
-    public static function getAchievementsByTeam($conn, $idTeam)
+    public static function getAllAchievement($koneksi)
     {
-        $query = "SELECT * FROM achievement WHERE idteam = ?";
+        $query = "SELECT a.idachievement, t.name as team_name, a.name, a.date, a.description FROM achievement as a
+                    inner join team as t on a.idteam = t.idteam";
+        $result = mysqli_query($koneksi, $query);
+
+        if (!$result) {
+            die("Query Error: " . mysqli_error($koneksi));
+        }
+
+        $achievements = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $achievement = new Achievement($koneksi, $row['idachievement'], $row['team_name'], $row['name'], $row['date'], $row['description']);
+            $achievements[] = $achievement;
+        }
+
+        return $achievements;
+    }
+    // Method untuk mendapatkan semua achievement berdasarkan idTeam
+    public static function getAchievementsByTeam($conn, $idAchievement)
+    {
+        $query = "SELECT * FROM achievement WHERE idachievement = ?";
         $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt === false) {
             die('Prepare failed: ' . mysqli_error($conn));
         }
 
-        mysqli_stmt_bind_param($stmt, "i", $idTeam);
+        mysqli_stmt_bind_param($stmt, "i", $idAchievement);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
-        $achievements = [];
-
-        while ($row = mysqli_fetch_assoc($result)) {
-            $achievement = new Achievement(
-                $conn,
-                $row['idachievement'],
-                $row['idteam'],
-                $row['name'],
-                $row['date'],
-                $row['description']
-            );
-            $achievements[] = $achievement;
+        if ($row = mysqli_fetch_assoc($result)) {
+            return new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
+            $row['date'], $row['description']);
+        } else {
+            return null;
         }
 
         mysqli_stmt_close($stmt);
-
-        return $achievements;
     }
 
     // Method untuk update achievement
@@ -154,13 +164,13 @@ class Achievement
     }
 
     // Method untuk delete achievement
-    public function deleteAchievement()
+    public function deleteAchievement($conn): void
     {
         $query = "DELETE FROM achievement WHERE idachievement = ?";
-        $stmt = mysqli_prepare($this->conn, $query);
+        $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt === false) {
-            die('Prepare failed: ' . mysqli_error($this->conn));
+            die('Prepare failed: ' . mysqli_error($conn));
         }
 
         mysqli_stmt_bind_param($stmt, "i", $this->idAchievement);

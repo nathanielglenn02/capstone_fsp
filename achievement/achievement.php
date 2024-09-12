@@ -7,11 +7,7 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data achievement dari database dengan nama tim terkait
-$query = "SELECT achievement.idachievement, achievement.name AS achievement_name, achievement.date, achievement.description, team.name AS team_name 
-          FROM achievement 
-          JOIN team ON achievement.idteam = team.idteam";
-$result = mysqli_query($koneksi, $query);
+$achievements = Achievement::getAllAchievement($koneksi);
 ?>
 
 <main>
@@ -45,17 +41,22 @@ $result = mysqli_query($koneksi, $query);
                         <th>Achievement Name</th>
                         <th>Date</th>
                         <th>Description</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     // Loop untuk menampilkan data achievement yang diambil dari database
-                    while ($row = mysqli_fetch_assoc($result)) {
+                    foreach ($achievements as $achievement) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($row['team_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['achievement_name']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['date']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['description']) . "</td>";
+                        echo "<td>" . htmlspecialchars($achievement->getIdTeam()) . "</td>";
+                        echo "<td>" . htmlspecialchars($achievement->getName()) . "</td>";
+                        echo "<td>" . htmlspecialchars($achievement->getDate()) . "</td>";
+                        echo "<td>" . htmlspecialchars($achievement->getDescription()) . "</td>";
+                        echo "<td>";
+                        echo "<a href='edit_achievement.php?id=" . $achievement->getIdAchievement() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
+                        echo "<a href='delete_achievement.php?id=" . $achievement->getIdAchievement() . "' onclick=\"return confirm('Apakah Anda yakin ingin menghapus achievement ini?');\"><i class='fa-solid fa-trash'></i></a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>
