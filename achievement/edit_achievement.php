@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamid = $_POST['team_id'];
     $date = $_POST['ach_date'];
     $description = $_POST['ach_desc'];
-    
     $achievement = new Achievement($koneksi);
+    $achievement->setIdAchievement($idachievement);
     $achievement->setName($achievementName);
     $achievement->setIdTeam($teamid);
     $achievement->setDate($date);
@@ -66,13 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form method="POST">
                 <div class="form-group">
                     <label for="achievement_name">Achievement Name</label>
-                    <input type="text" id="achievement_name" name="achievement_name" value="<?php echo htmlspecialchars($achievement->getName()); ?>" required>
+                    <input type="text" id="achievement_name" name="achievement_name"
+                        value="<?php echo htmlspecialchars($achievement->getName()); ?>" required>
                 </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
                     <select id="team_id" name="team_id" required>
                         <?php foreach ($teams as $team): ?>
-                            <option value="<?php echo $team->getTeamId(); ?>" <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
+                            <option value="<?php echo $team->getTeamId(); ?>"
+                                <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($team->getTeamName()); ?>
                             </option>
                         <?php endforeach; ?>
@@ -80,12 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="ach_date">Date</label>
-                    <input type="date" id="ach_date" name="ach_date" value="<?php echo htmlspecialchars($achievement->getDate()); ?>" required>
-                </div>  
+                    <input type="date" id="ach_date" name="ach_date"
+                        value="<?php echo htmlspecialchars($achievement->getDate()); ?>" required>
+                </div>
                 <div class="form-group">
                     <label for="ach_desc">Description</label>
-                    <textarea id="ach_desc" name="ach_desc" required><?php echo htmlspecialchars($achievement->getDescription()); ?></textarea>
-                </div>  
+                    <textarea id="ach_desc" name="ach_desc"
+                        required><?php echo htmlspecialchars($achievement->getDescription()); ?></textarea>
+                </div>
                 <button type="submit" class="btn">Update Achievement</button>
             </form>
         </div>
