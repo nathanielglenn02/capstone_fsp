@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h1>Create Achievement</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a class="active" href="team.php">Achievement</a>
+                    <a class="active" href="achievement.php">Achievement</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
@@ -48,14 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
-            <div class="head">
-                <h3>Add New Achievement</h3>
-            </div>
-            <form method="POST">
+            <form id="create_achievement" method="POST">
                 <div class="form-group">
                     <label for="team_name">Achievement Name</label>
                     <input type="text" id="achievement_name" name="achievement_name" required>
-                </div>  
+                </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
                     <select id="team_id" name="team_id" required>
@@ -67,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="ach_date">Date</label>
                     <input type="date" id="ach_date" name="ach_date" required>
-                </div>  
+                </div>
                 <div class="form-group">
                     <label for="ach_desc">Description</label>
                     <textarea id="ach_desc" name="ach_desc" required></textarea>
-                </div>  
+                </div>
                 <button type="submit" class="btn">Create Achievement</button>
             </form>
         </div>

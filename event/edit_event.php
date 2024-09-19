@@ -31,7 +31,7 @@ require_once('../template/navbar.php');
             <h1>Edit Event</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a class="active" href="event.php">Events</a>
+                    <a class="active" href="event.php">Event</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
@@ -59,7 +59,7 @@ require_once('../template/navbar.php');
                     <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($event->getDate()); ?>"
                         required>
                 </div>
-                <button type="submit" class="btn">Update Event</button>
+                <button type="submit" class="btn">Edit Event</button>
             </form>
         </div>
     </div>

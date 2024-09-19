@@ -44,10 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
-            <div class="head">
-                <h3>Add New Team</h3>
-            </div>
-            <form method="POST">
+            <form id="create_team" method="POST">
                 <div class="form-group">
                     <label for="team_name">Team Name</label>
                     <input type="text" id="team_name" name="team_name" required>
@@ -56,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="game_id">Game</label>
                     <select id="game_id" name="game_id" required>
                         <?php foreach ($games as $game): ?>
-                            <option value="<?php echo $game->getGameId(); ?>"><?php echo $game->getGameName(); ?></option>
+                        <option value="<?php echo $game->getGameId(); ?>"><?php echo $game->getGameName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

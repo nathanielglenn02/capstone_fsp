@@ -2,7 +2,7 @@
 require_once('../service/config.php');
 require_once('../class/classGame.php');
 
-$title = "Game - Club Informatics 2024";
+$title = "Edit Game - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
@@ -59,7 +59,7 @@ if (isset($_GET['id'])) {
                 <textarea id="description" name="description"
                     required><?php echo htmlspecialchars($description); ?></textarea>
 
-                <button type="submit" class="btn">Update Game</button>
+                <button type="submit" class="btn">Edit Game</button>
             </form>
         </div>
     </div>

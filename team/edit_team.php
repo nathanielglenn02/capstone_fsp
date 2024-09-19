@@ -63,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="game_id">Game:</label>
                 <select id="game_id" name="game_id" required>
                     <?php foreach ($games as $game): ?>
-                        <option value="<?php echo $game->getGameId(); ?>"
-                            <?php echo $game->getGameId() == $team->getGameId() ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($game->getGameName()); ?>
-                        </option>
+                    <option value="<?php echo $game->getGameId(); ?>"
+                        <?php echo $game->getGameId() == $team->getGameId() ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($game->getGameName()); ?>
+                    </option>
                     <?php endforeach; ?>
                 </select>
 
-                <button type="submit" class="btn">Update Team</button>
+                <button type="submit" class="btn">Edit Team</button>
             </form>
         </div>
     </div>

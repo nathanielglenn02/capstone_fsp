@@ -45,14 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <main>
     <div class="head-title">
         <div class="left">
-            <h1>Update Achievement</h1>
+            <h1>Edit Achievement</h1>
             <ul class="breadcrumb">
                 <li>
                     <a class="active" href="achievement.php">Achievement</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a href="#">Update Achievement</a>
+                    <a href="#">Edit Achievement</a>
                 </li>
             </ul>
         </div>
@@ -70,10 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="team_id">Team</label>
                     <select id="team_id" name="team_id" required>
                         <?php foreach ($teams as $team): ?>
-                            <option value="<?php echo $team->getTeamId(); ?>"
-                                <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($team->getTeamName()); ?>
-                            </option>
+                        <option value="<?php echo $team->getTeamId(); ?>"
+                            <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($team->getTeamName()); ?>
+                        </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <textarea id="ach_desc" name="ach_desc"
                         required><?php echo htmlspecialchars($achievement->getDescription()); ?></textarea>
                 </div>
-                <button type="submit" class="btn">Update Achievement</button>
+                <button type="submit" class="btn">Edit Achievement</button>
             </form>
         </div>
     </div>

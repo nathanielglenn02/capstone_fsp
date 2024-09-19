@@ -666,8 +666,6 @@ body {
 }
 
 /* Container styling for edit_team */
-
-
 /* Form Styling */
 #edit_team label {
 	font-size: 16px;
@@ -683,7 +681,7 @@ body {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #ddd;
-	border-radius: 4px;
+	border-radius: 15px;
 	font-size: 16px;
 	color: #333;
 	margin-bottom: 15px;
@@ -759,7 +757,181 @@ body {
 	resize: vertical;
 }
 
+/* CREATE STYLE */
+/* CREATE GAME */
+/* Form Styling */
+#create_game .form-group {
+	margin-bottom: 15px;
+}
 
+#create_game label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#create_game input[type="text"],
+#create_game textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+#create_game textarea {
+	height: 100px;
+	resize: vertical;
+}
+
+/* Button Styling */
+#create_game .btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#create_game .btn:hover {
+	background-color: #005f7f;
+}
+
+/* CREAM TEAM */
+#create_team .form-group {
+	margin-bottom: 15px;
+}
+
+#create_team label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#create_team input[type="text"],
+#create_team select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+/* Button Styling */
+#create_team .btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#create_team .btn:hover {
+	background-color: #005f7f;
+}
+
+/* CREATE EVENT */
+/* Form Styling */
+#create_event .form-group {
+	margin-bottom: 15px;
+}
+
+#create_event label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#create_event input[type="text"],
+#create_event input[type="date"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+/* Button Styling */
+#create_event .btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#create_event .btn:hover {
+	background-color: #005f7f;
+}
+
+/* CREATE ACHIEVEMENT */
+/* Form Styling */
+#create_achievement .form-group {
+	margin-bottom: 15px;
+}
+
+#create_achievement label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+	margin-bottom: 5px;
+	display: block;
+}
+
+#create_achievement input[type="text"],
+#create_achievement input[type="date"],
+#create_achievement select,
+#create_achievement textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+	font-size: 16px;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+#create_achievement textarea {
+	height: 100px;
+	resize: vertical;
+}
+
+/* Button Styling */
+#create_achievement .btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+#create_achievement .btn:hover {
+	background-color: #005f7f;
+}
 
 
 

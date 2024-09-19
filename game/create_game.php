@@ -2,6 +2,12 @@
 require_once('../service/config.php');
 require_once('../class/classGame.php');
 
+$title = "Create Game - Club Informatics 2024";
+require_once('../template/header.php');
+require_once('../template/sidebar.php');
+require_once('../template/navbar.php');
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gameName = $_POST['name'];
     $description = $_POST['description'];
@@ -22,18 +28,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="head-title">
         <div class="left">
-            <h1>Tambah Game Baru</h1>
+            <h1>Create Game</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a class="active" href="game.php">Game</a>
+                </li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>
+                    <a href="#">Create Game</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <form method="post">
-        <label for="name">Nama Game:</label>
-        <input type="text" id="name" name="name" required>
+    <div class="table-data">
+        <div class="order">
+            <form id="create_game" method="post">
+                <label for="name">Nama Game:</label>
+                <input type="text" id="name" name="name" required>
 
-        <label for="description">Deskripsi:</label>
-        <textarea id="description" name="description" required></textarea>
+                <label for="description">Deskripsi:</label>
+                <textarea id="description" name="description" required></textarea>
 
-        <input type="submit" value="Simpan">
-    </form>
+                <button type="submit" class="btn">Create Game</button>
+            </form>
+        </div>
+    </div>
 </main>
 
 <?php

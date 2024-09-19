@@ -2,7 +2,7 @@
 require_once('../service/config.php');
 require_once('../class/classEvent.php');
 
-$title = "Events - Club Informatics 2024";
+$title = "Event - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
@@ -14,14 +14,14 @@ $events = Event::getAllEvents($koneksi);
 <main>
     <div class="head-title">
         <div class="left">
-            <h1>Events</h1>
+            <h1>Event</h1>
             <ul class="breadcrumb">
                 <li>
                     <a class="active" href="../index.php">Dashboard</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a href="#">Events</a>
+                    <a href="#">Event</a>
                 </li>
             </ul>
         </div>
