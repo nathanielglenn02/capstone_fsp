@@ -2,6 +2,11 @@
 require_once('../service/config.php');
 require_once('../class/classGame.php');
 
+$title = "Game - Club Informatics 2024";
+require_once('../template/header.php');
+require_once('../template/sidebar.php');
+require_once('../template/navbar.php');
+
 if (isset($_GET['id'])) {
     $gameId = intval($_GET['id']);
 
@@ -33,17 +38,29 @@ if (isset($_GET['id'])) {
     <div class="head-title">
         <div class="left">
             <h1>Edit Game</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a class="active" href="game.php">Game</a>
+                </li>
+                <li><i class='bx bx-chevron-right'></i></li>
+                <li>
+                    <a href="#">Edit Game</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <form method="post">
-        <label for="name">Nama Game:</label>
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
+    <div class="order">
+        <form id="edit_game" method="post">
+            <label for="name">Nama Game:</label>
+            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
 
-        <label for="description">Deskripsi:</label>
-        <textarea id="description" name="description" required><?php echo htmlspecialchars($description); ?></textarea>
+            <label for="description">Deskripsi:</label>
+            <textarea id="description" name="description"
+                required><?php echo htmlspecialchars($description); ?></textarea>
 
-        <input type="submit" value="Update">
-    </form>
+            <input type="submit" value="Update">
+        </form>
+    </div>
 </main>
 
 <?php
