@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <h1>Update Achievement</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a class="active" href="team.php">Achievement</a>
+                    <a class="active" href="achievement.php">Achievement</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
@@ -60,10 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
-            <div class="head">
-                <h3>Update Achievement</h3>
-            </div>
-            <form method="POST">
+            <form id="edit_achievement" method="POST">
                 <div class="form-group">
                     <label for="achievement_name">Achievement Name</label>
                     <input type="text" id="achievement_name" name="achievement_name"

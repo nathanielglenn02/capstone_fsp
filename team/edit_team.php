@@ -55,24 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
-            <div class="head">
-                <h3>Edit Team</h3>
-            </div>
-            <form method="POST">
-                <div class="form-group">
-                    <label for="team_name">Team Name</label>
-                    <input type="text" id="team_name" name="team_name" value="<?php echo htmlspecialchars($team->getTeamName()); ?>" required>
-                </div>
-                <div class="form-group">
-                    <label for="game_id">Game</label>
-                    <select id="game_id" name="game_id" required>
-                        <?php foreach ($games as $game): ?>
-                            <option value="<?php echo $game->getGameId(); ?>" <?php echo $game->getGameId() == $team->getGameId() ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($game->getGameName()); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+            <form id="edit_team" method="POST">
+                <label for="team_name">Team Name:</label>
+                <input type="text" id="team_name" name="team_name"
+                    value="<?php echo htmlspecialchars($team->getTeamName()); ?>" required>
+
+                <label for="game_id">Game:</label>
+                <select id="game_id" name="game_id" required>
+                    <?php foreach ($games as $game): ?>
+                        <option value="<?php echo $game->getGameId(); ?>"
+                            <?php echo $game->getGameId() == $team->getGameId() ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($game->getGameName()); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
                 <button type="submit" class="btn">Update Team</button>
             </form>
         </div>

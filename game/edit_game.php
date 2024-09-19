@@ -49,17 +49,19 @@ if (isset($_GET['id'])) {
             </ul>
         </div>
     </div>
-    <div class="order">
-        <form id="edit_game" method="post">
-            <label for="name">Nama Game:</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
+    <div class="table-data">
+        <div class="order">
+            <form id="edit_game" method="post">
+                <label for="name">Nama Game:</label>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
 
-            <label for="description">Deskripsi:</label>
-            <textarea id="description" name="description"
-                required><?php echo htmlspecialchars($description); ?></textarea>
+                <label for="description">Deskripsi:</label>
+                <textarea id="description" name="description"
+                    required><?php echo htmlspecialchars($description); ?></textarea>
 
-            <input type="submit" value="Update">
-        </form>
+                <button type="submit" class="btn">Update Game</button>
+            </form>
+        </div>
     </div>
 </main>
 

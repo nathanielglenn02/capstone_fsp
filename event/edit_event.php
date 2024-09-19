@@ -31,31 +31,38 @@ require_once('../template/navbar.php');
             <h1>Edit Event</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="event.php">Events</a>
+                    <a class="active" href="event.php">Events</a>
                 </li>
                 <li><i class='bx bx-chevron-right'></i></li>
                 <li>
-                    <a class="active" href="#">Edit Event</a>
+                    <a href="#">Edit Event</a>
                 </li>
             </ul>
         </div>
     </div>
     <!-- Form untuk mengedit event -->
-    <form action="edit_event.php?idevent=<?php echo $idevent; ?>" method="POST">
-        <div>
-            <label for="name">Event Name</label>
-            <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($event->getEventName()); ?>" required>
+    <div class="table-data">
+        <div class="order">
+            <form id="edit_event" action="edit_event.php?idevent=<?php echo $idevent; ?>" method="POST">
+                <div class="form-group">
+                    <label for="name">Event Name</label>
+                    <input type="text" id="name" name="name"
+                        value="<?php echo htmlspecialchars($event->getEventName()); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description"
+                        value="<?php echo htmlspecialchars($event->getDescription()); ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($event->getDate()); ?>"
+                        required>
+                </div>
+                <button type="submit" class="btn">Update Event</button>
+            </form>
         </div>
-        <div>
-            <label for="description">Description</label>
-            <input type="text" id="description" name="description" value="<?php echo htmlspecialchars($event->getDescription()); ?>" required>
-        </div>
-        <div>
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" value="<?php echo htmlspecialchars($event->getDate()); ?>" required>
-        </div>
-        <button type="submit">Update Event</button>
-    </form>
+    </div>
 </main>
 
 <?php
