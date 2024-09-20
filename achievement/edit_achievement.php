@@ -16,7 +16,7 @@ if ($idachievement == 0) {
     exit();
 }
 
-$achievement = Achievement::getAchievementsByTeam($koneksi, $idachievement);
+$achievement = Achievement::getAchievementById($koneksi, $idachievement);
 $teams = Team::getAllTeams($koneksi);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

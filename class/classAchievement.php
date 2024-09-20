@@ -120,6 +120,34 @@ class Achievement
 
         return $achievements;
     }
+
+    public static function getAchievementById($conn, $idachievement)
+    {
+            $query = "SELECT * FROM achievement WHERE idachievement = ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $idachievement);
+
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        $row = mysqli_fetch_assoc($result);
+
+        mysqli_stmt_close($stmt);
+
+        if ($row) {
+            return new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
+                $row['date'], $row['description']);
+        }
+
+        return null;
+
+    }
     // Method untuk mendapatkan semua achievement berdasarkan idTeam
     public static function getAchievementsByTeam($conn, $idteam)
     {
