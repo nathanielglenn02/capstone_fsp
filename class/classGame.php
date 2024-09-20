@@ -96,26 +96,27 @@ class Game
         return $games;
     }
 
-    public static function getGameDetails($koneksi, $idgame) {
+    public static function getGameDetails($koneksi, $idgame)
+    {
         $query = "SELECT t.idteam as team_id, t.name as team_name, t.idgame as id_game, e.name as event_name, e.date as event_date, e.description as description 
                   FROM game as g
                   INNER JOIN team as t ON g.idgame = t.idgame 
                   INNER JOIN event_teams as et ON t.idteam = et.idteam
                   INNER JOIN event as e ON e.idevent = et.idevent 
                   WHERE g.idgame = ?";
-    
+
         $stmt = mysqli_prepare($koneksi, $query);
         if (!$stmt) {
             die("Prepare Error: " . mysqli_error($koneksi));
         }
-    
+
         mysqli_stmt_bind_param($stmt, 'i', $idgame);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));
         }
-    
+
         $teams = [];
         $events = [];
 
@@ -123,13 +124,13 @@ class Game
 
             $team = new Team($koneksi, $row['team_id'], $row['team_name'], $row['id_game']);
             $teams[] = $team;
-            
+
             $event = new Event($koneksi, $row['event_name'], $row['description'], $row['event_date']);
             $events[] = $event;
         }
         return ['teams' => $teams, 'events' => $events];
     }
-    
+
 
     // Metode untuk mengupdate game dari database
     public function updateGame($koneksi)
@@ -145,6 +146,28 @@ class Game
 
         if (!mysqli_stmt_execute($stmt)) {
             die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
+    }
+
+    public static function getGameById($conn, $gameId)
+    {
+        $query = "SELECT idgame, name, description FROM game WHERE idgame = ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $gameId);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            return new Game($row['idgame'], $row['name'], $row['description']);
+        } else {
+            return null;
         }
 
         mysqli_stmt_close($stmt);
