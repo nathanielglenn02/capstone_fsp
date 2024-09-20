@@ -1,10 +1,10 @@
 <?php
-require_once "service/config.php";
+require_once "../service/config.php";
 $title = 'Dashboard';
 require_once('template/header.php');
 require_once('template/sidebar.php');
 require_once('template/navbar.php');
-require_once('class/classTeam.php');
+require_once('../class/classTeam.php');
 
 $teams = Team::getAllTeams($koneksi);
 ?>

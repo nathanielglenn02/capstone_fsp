@@ -1,7 +1,7 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classTeam.php');
-require_once('../class/classGame.php');
+require_once('../../service/config.php');
+require_once('../../class/classTeam.php');
+require_once('../../class/classGame.php');
 
 $title = "Create Team - Club Informatics 2024";
 require_once('../template/header.php');
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="game_id">Game</label>
                     <select id="game_id" name="game_id" required>
                         <?php foreach ($games as $game): ?>
-                        <option value="<?php echo $game->getGameId(); ?>"><?php echo $game->getGameName(); ?></option>
+                            <option value="<?php echo $game->getGameId(); ?>"><?php echo $game->getGameName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

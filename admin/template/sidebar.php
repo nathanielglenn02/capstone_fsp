@@ -12,31 +12,31 @@ require_once('header.php');
         </a>
         <ul class="side-menu top">
             <li>
-                <a href="<?= $main_url ?>index.php">
+                <a href="<?= $main_url ?>Admin/index.php">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Home</span>
                 </a>
             </li>
             <li>
-                <a href="<?= $main_url ?>game/game.php">
+                <a href="<?= $main_url ?>Admin/game/game.php">
                     <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Game</span>
                 </a>
             </li>
             <li>
-                <a href="<?= $main_url ?>team/team.php">
+                <a href="<?= $main_url ?>Admin/team/team.php">
                     <i class='bx bxs-group'></i>
                     <span class="text">Team</span>
                 </a>
             </li>
             <li>
-                <a href="<?= $main_url ?>event/event.php">
+                <a href="<?= $main_url ?>Admin/event/event.php">
                     <i class='bx bx-calendar-event'></i>
                     <span class="text">Event</span>
                 </a>
             </li>
             <li>
-                <a href="<?= $main_url ?>achievement/achievement.php">
+                <a href="<?= $main_url ?>Admin/achievement/achievement.php">
                     <i class='bx bx-trophy'></i>
                     <span class="text">Achievement</span>
                 </a>
@@ -44,23 +44,17 @@ require_once('header.php');
         </ul>
         <ul class="side-menu">
             <li>
-                <a href="#">
-                    <i class='bx bxs-cog'></i>
-                    <span class="text">Settings</span>
-                </a>
-            </li>
-            <li>
                 <a href="#" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="<?= $main_url ?>auth/login.php" class="login">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Login</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </section>
     <!-- SIDEBAR -->

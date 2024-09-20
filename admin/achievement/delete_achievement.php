@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classAchievement.php');
+require_once('../../service/config.php');
+require_once('../../class/classAchievement.php');
 
 if (isset($_GET['id'])) {
     $achievementid = intval($_GET['id']);

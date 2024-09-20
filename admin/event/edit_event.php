@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classEvent.php');
+require_once('../../service/config.php');
+require_once('../../class/classEvent.php');
 
 $idevent = isset($_GET['idevent']) ? intval($_GET['idevent']) : 0;
 

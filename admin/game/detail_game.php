@@ -1,8 +1,8 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classGame.php');
-require_once('../class/classTeam.php');
-require_once('../class/classEvent.php');
+require_once('../../service/config.php');
+require_once('../../class/classGame.php');
+require_once('../../class/classTeam.php');
+require_once('../../class/classEvent.php');
 $title = "Game Details - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');

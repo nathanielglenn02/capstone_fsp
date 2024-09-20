@@ -1,7 +1,7 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classAchievement.php');
-require_once('../class/classTeamMembers.php');
+require_once('../../service/config.php');
+require_once('../../class/classAchievement.php');
+require_once('../../class/classTeamMembers.php');
 
 $title = "Team Details - Club Informatics 2024";
 require_once('../template/header.php');
@@ -75,7 +75,7 @@ if ($idteam) {
                     echo "<p>" . htmlspecialchars($achievement->getName()) . "</p>";
                     echo "</li>";
                 }
-                ?>  
+                ?>
             </ul>
         </div>
     </div>

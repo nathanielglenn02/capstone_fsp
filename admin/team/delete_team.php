@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classTeam.php');
+require_once('../../service/config.php');
+require_once('../../class/classTeam.php');
 
 if (isset($_GET['id'])) {
     $teamId = intval($_GET['id']);

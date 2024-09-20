@@ -1,8 +1,8 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classAchievement.php');
-require_once('../class/classTeam.php');
-require_once('../class/classGame.php');
+require_once('../../service/config.php');
+require_once('../../class/classAchievement.php');
+require_once('../../class/classTeam.php');
+require_once('../../class/classGame.php');
 
 $title = "Create Achievement - Club Informatics 2024";
 require_once('../template/header.php');

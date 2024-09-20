@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classGame.php');
+require_once('../../service/config.php');
+require_once('../../class/classGame.php');
 
 $title = "Create Game - Club Informatics 2024";
 require_once('../template/header.php');

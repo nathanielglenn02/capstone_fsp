@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classEvent.php');
+require_once('../../service/config.php');
+require_once('../../class/classEvent.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $_POST['name'];

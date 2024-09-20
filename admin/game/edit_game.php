@@ -1,6 +1,6 @@
 <?php
-require_once('../service/config.php');
-require_once('../class/classGame.php');
+require_once('../../service/config.php');
+require_once('../../class/classGame.php');
 
 $gameId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
