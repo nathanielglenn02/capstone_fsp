@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: event.php");
     exit;
 } else {
-    // Ambil data event berdasarkan ID untuk diedit
     $event = Event::getEventById($koneksi, $idevent);
 }
 

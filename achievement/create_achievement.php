@@ -9,10 +9,8 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data game untuk dropdown
 $teams = team::getAllTeams($koneksi);
 
-// Proses saat form disubmit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievementName = $_POST['achievement_name'];
     $teamid = $_POST['team_id'];

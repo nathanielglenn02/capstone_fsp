@@ -10,7 +10,6 @@ require_once('../template/navbar.php');
 if (isset($_GET['id'])) {
     $gameId = intval($_GET['id']);
 
-    // Query untuk mendapatkan data game berdasarkan ID
     $query = "SELECT idgame, name, description FROM game WHERE idgame = ?";
     $stmt = mysqli_prepare($koneksi, $query);
     mysqli_stmt_bind_param($stmt, "i", $gameId);
@@ -23,11 +22,10 @@ if (isset($_GET['id'])) {
         $gameName = $_POST['name'];
         $description = $_POST['description'];
 
-        // Update game
         $game = new Game($gameId, $gameName, $description);
         $game->updateGame($koneksi);
 
-        header("Location: game.php"); // Redirect ke halaman game.php
+        header("Location: game.php");
         exit;
     }
 }
