@@ -5,22 +5,18 @@ require_once('../class/classGame.php');
 $gameId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($gameId == 0) {
-    // Jika ID game tidak valid, redirect ke halaman game
     header('Location: game.php');
     exit();
 }
 
-// Mengambil data game berdasarkan ID
 $game = Game::getGameById($koneksi, $gameId);
 
 if (!$game) {
-    // Jika data game tidak ditemukan, redirect ke halaman game
     header('Location: game.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Proses update game
     $gameName = $_POST['name'];
     $description = $_POST['description'];
 
@@ -29,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $game->updateGame($koneksi);
 
-    // Redirect ke halaman game setelah update berhasil
     header("Location: game.php");
     exit;
 }
@@ -60,10 +55,12 @@ require_once('../template/navbar.php');
         <div class="order">
             <form id="edit_game" method="POST">
                 <label for="name">Nama Game:</label>
-                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($game->getGameName()); ?>" required>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($game->getGameName()); ?>"
+                    required>
 
                 <label for="description">Deskripsi:</label>
-                <textarea id="description" name="description" required><?php echo htmlspecialchars($game->getDescription()); ?></textarea>
+                <textarea id="description" name="description"
+                    required><?php echo htmlspecialchars($game->getDescription()); ?></textarea>
 
                 <button type="submit" class="btn">Edit Game</button>
             </form>
