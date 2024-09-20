@@ -53,7 +53,6 @@ if ($idteam) {
             </div>
             <ul class="todo-list">
                 <?php
-                // Loop untuk menampilkan semua anggota dari tim yang aktif
                 foreach ($teamMembers as $member) {
                     echo "<li class='completed'>";
                     echo "<p>" . htmlspecialchars($member->getMemberName()) . "</p>";
