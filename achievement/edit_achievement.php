@@ -9,22 +9,16 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil idteam dari URL
 $idachievement = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($idachievement == 0) {
-    // Jika idteam tidak valid, redirect ke halaman team
     header('Location: achievement.php');
     exit();
 }
 
-// Mengambil data tim berdasarkan idteam
 $achievement = Achievement::getAchievementsByTeam($koneksi, $idachievement);
-
-// Mengambil semua data game untuk dropdown
 $teams = Team::getAllTeams($koneksi);
 
-// Proses saat form disubmit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievementName = $_POST['achievement_name'];
     $teamid = $_POST['team_id'];
@@ -70,10 +64,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="team_id">Team</label>
                     <select id="team_id" name="team_id" required>
                         <?php foreach ($teams as $team): ?>
-                        <option value="<?php echo $team->getTeamId(); ?>"
-                            <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($team->getTeamName()); ?>
-                        </option>
+                            <option value="<?php echo $team->getTeamId(); ?>"
+                                <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($team->getTeamName()); ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>

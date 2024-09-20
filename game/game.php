@@ -7,7 +7,6 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data game dari database
 $games = Game::getAllGames($koneksi);
 ?>
 
@@ -46,7 +45,6 @@ $games = Game::getAllGames($koneksi);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data game yang diambil dari database
                     foreach ($games as $game) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($game->getGameName()) . "</td>";

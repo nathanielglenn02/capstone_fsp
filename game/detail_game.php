@@ -55,9 +55,7 @@ $events = $gameDetails['events'];
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data detail game
                     foreach ($teams as $key => $team) {
-                        // Mengambil event yang sesuai dengan tim saat ini
                         $event = $events[$key] ?? null;
 
                         echo "<tr>";

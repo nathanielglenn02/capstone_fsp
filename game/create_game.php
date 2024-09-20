@@ -12,13 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gameName = $_POST['name'];
     $description = $_POST['description'];
 
-    // Membuat objek Game baru
     $game = new Game(null, $gameName, $description);
-
-    // Menyimpan game baru ke dalam database menggunakan metode createGame
     $game->createGame($koneksi);
-
-    // Redirect kembali ke halaman game.php setelah berhasil menambahkan data
     header("Location: game.php");
     exit;
 }

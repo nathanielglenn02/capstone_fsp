@@ -7,7 +7,6 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data tim dari database
 $teams = Team::getAllTeams($koneksi);
 ?>
 
@@ -46,7 +45,6 @@ $teams = Team::getAllTeams($koneksi);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data tim yang diambil dari database
                     foreach ($teams as $team) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";

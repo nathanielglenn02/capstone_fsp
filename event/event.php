@@ -7,7 +7,6 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data event dari database
 $events = Event::getAllEvents($koneksi);
 ?>
 
@@ -46,7 +45,6 @@ $events = Event::getAllEvents($koneksi);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data event yang diambil dari database
                     foreach ($events as $event) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($event->getEventName()) . "</td>";

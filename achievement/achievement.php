@@ -46,7 +46,6 @@ $achievements = Achievement::getAllAchievement($koneksi);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data achievement yang diambil dari database
                     foreach ($achievements as $achievement) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($achievement->getIdTeam()) . "</td>";

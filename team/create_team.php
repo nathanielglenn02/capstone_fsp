@@ -8,10 +8,8 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil semua data game untuk dropdown
 $games = Game::getAllGames($koneksi);
 
-// Proses saat form disubmit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamName = $_POST['team_name'];
     $gameId = $_POST['game_id'];
