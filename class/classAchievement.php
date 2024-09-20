@@ -121,27 +121,28 @@ class Achievement
         return $achievements;
     }
     // Method untuk mendapatkan semua achievement berdasarkan idTeam
-    public static function getAchievementsByTeam($conn, $idAchievement)
+    public static function getAchievementsByTeam($conn, $idteam)
     {
-        $query = "SELECT * FROM achievement WHERE idachievement = ?";
+        $query = "SELECT * FROM achievement WHERE idteam = ?";
         $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt === false) {
             die('Prepare failed: ' . mysqli_error($conn));
         }
 
-        mysqli_stmt_bind_param($stmt, "i", $idAchievement);
+        mysqli_stmt_bind_param($stmt, "i", $idteam);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
-        if ($row = mysqli_fetch_assoc($result)) {
-            return new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
-            $row['date'], $row['description']);
-        } else {
-            return null;
+        $achievements = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $achievements[] = new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
+                $row['date'], $row['description']);
         }
 
         mysqli_stmt_close($stmt);
+
+        return $achievements;
     }
 
     // Method untuk update achievement

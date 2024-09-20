@@ -65,19 +65,18 @@ if ($idteam) {
 
         <div class="todo">
             <div class="head">
-                <h3>Achievments</h3>
+                <h3>Achievements</h3>
                 <a href="create_achievement.php?idteam=<?php echo $idteam; ?>"><i class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
             <ul class="todo-list">
                 <?php
-                // Loop untuk menampilkan semua achievement dari tim yang aktif
                 foreach ($achievements as $achievement) {
                     echo "<li class='completed'>";
                     echo "<p>" . htmlspecialchars($achievement->getName()) . "</p>";
                     echo "</li>";
                 }
-                ?>
+                ?>  
             </ul>
         </div>
     </div>
