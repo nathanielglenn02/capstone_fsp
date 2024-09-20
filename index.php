@@ -46,8 +46,6 @@ $teams = Team::getAllTeams($koneksi);
                         echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
-                        echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
-                        echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "</tr>";
                     }
                     ?>
