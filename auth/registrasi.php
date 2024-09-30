@@ -1,6 +1,6 @@
 <?php
 $title = "Registrasi - Club Informatics 2024";
-require_once('../template/header.php');
+require_once('template/header.php');
 require_once('../service/config.php');
 require_once('../class/classMember.php');
 ?>
@@ -17,11 +17,13 @@ require_once('../class/classMember.php');
         <input type="text" id="username" name="username"><br><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Daftar" name = "simpan">
+        <input type="submit" value="Daftar" name="simpan">
     </form>
+
+    <p>Sudah punya akun? <a href="login.php">Login di sini</a></p>
 </div>
 
 <?php
-require_once('../template/footer.php');
+require_once('template/footer.php');
 
 ?>

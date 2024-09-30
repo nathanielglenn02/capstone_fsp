@@ -44,7 +44,7 @@ require_once('header.php');
         </ul>
         <ul class="side-menu">
             <li>
-                <a href="#" class="logout">
+                <a href="<?= $main_url ?>auth/logout.php" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>

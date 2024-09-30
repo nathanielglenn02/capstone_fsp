@@ -7,6 +7,13 @@ require_once('template/navbar.php');
 require_once('../class/classTeam.php');
 
 $teams = Team::getAllTeams($koneksi);
+
+session_start();
+
+if (isset($_SESSION['logout_success'])) {
+    echo "<p style='color: green;'>" . $_SESSION['logout_success'] . "</p>";
+    unset($_SESSION['logout_success']); // Hapus session setelah ditampilkan
+}
 ?>
 
 <!-- MAIN -->

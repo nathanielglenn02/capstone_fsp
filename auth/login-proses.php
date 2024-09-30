@@ -14,14 +14,19 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
-        if (password_verify($password, $row["password"])) { 
+        if (password_verify($password, $row["password"])) {
             $_SESSION['ssLogin'] = true;
             $_SESSION['idmember'] = $row['idmember'];
             $_SESSION['ssUser'] = $username;
-            echo "<script>
-                alert('Login berhasil!');
-                window.location.href = '../index.php';
-                </script>";
+            $_SESSION['role'] = $row['profile'];
+
+            // Cek role dan arahkan ke folder yang sesuai
+            if ($_SESSION['role'] == 'admin') {
+                header("Location: ../admin/index.php");
+            } else {
+                header("Location: ../member/index.php");
+            }
+
             exit;
         } else {
             echo "<script>
@@ -38,4 +43,3 @@ if (isset($_POST['login'])) {
 
     $stmt->close();
 }
-?>
