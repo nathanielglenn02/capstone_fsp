@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../../service/config.php');
 require_once('../../class/classTeam.php');
 
@@ -6,6 +7,11 @@ $title = "Team - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
 
 $teams = Team::getAllTeams($koneksi);
 ?>
@@ -39,6 +45,7 @@ $teams = Team::getAllTeams($koneksi);
                         <th>Team Name</th>
                         <th>Game</th>
                         <th>Detail</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,6 +56,12 @@ $teams = Team::getAllTeams($koneksi);
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
                         echo "<td>";
+
+                        echo "<form method='POST' action='join_team.php'>";
+                        echo "<input type='hidden' name='idteam' value='" . $team->getTeamId() . "'>";
+                        echo "<button type='submit'>Join</button>";
+                        echo "</form>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>
