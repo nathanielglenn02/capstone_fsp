@@ -9,18 +9,25 @@ if (!isset($_SESSION['idmember'])) {
 require_once('../../service/config.php');
 require_once('../../class/classAchievement.php');
 require_once('../../class/classTeamMembers.php');
+require_once('../../class/classEventTeams.php');
 
 $title = "Team Details - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
+// Mengambil idteam dari parameter URL
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
 
 if ($idteam) {
+    // Mengambil semua achievement berdasarkan idTeam
     $achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
 
+    // Mengambil semua anggota tim berdasarkan idTeam
     $teamMembers = TeamMembers::getMembersByTeam($koneksi, $idteam);
+
+    // Mengambil semua event yang pernah diikuti oleh tim
+    $teamEvents = EventTeams::getEventsByTeam($koneksi, $idteam);
 } else {
     echo "ID team tidak ditemukan.";
     exit;
@@ -66,6 +73,32 @@ if ($idteam) {
             </ul>
         </div>
 
+        <div class="order">
+            <div class="head">
+                <h3>Events Participated</h3>
+                <i class='bx bx-filter'></i>
+            </div>
+            <ul class="todo-list">
+                <?php
+                if (!empty($teamEvents)) {
+                    foreach ($teamEvents as $event) {
+                        echo "<li class='completed'>";
+                        echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
+                        // Tambahkan href dengan parameter idteam
+                        // echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen'></i></a>";
+                        echo "<a href='../event/delete_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event?');\"><i class='fa-solid fa-trash'></i></a>";
+                        echo "</li>";
+                    }
+                } else {
+                    echo "<p>No events participated yet.</p>";
+                }
+                ?>
+            </ul>
+        </div>
+
+
+
+        <!-- Daftar Achievements -->
         <div class="todo">
             <div class="head">
                 <h3>Achievements</h3>
@@ -87,9 +120,6 @@ if ($idteam) {
                 }
                 ?>
             </ul>
-
-
-
         </div>
     </div>
 
