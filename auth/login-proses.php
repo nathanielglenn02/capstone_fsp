@@ -17,12 +17,12 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row["password"])) {
             $_SESSION['ssLogin'] = true;
             $_SESSION['idmember'] = $row['idmember'];
-            $_SESSION['ssUser'] = $username;
-            $_SESSION['role'] = $row['profile'];
+            $_SESSION['username'] = $username;
+            $_SESSION['profile'] = $row['profile'];
             $_SESSION['user_id'] = $row['idmember'];
 
             // Cek role dan arahkan ke folder yang sesuai
-            if ($_SESSION['role'] == 'admin') {
+            if ($_SESSION['profile'] == 'admin') {
                 header("Location: ../admin/index.php");
             } else {
                 header("Location: ../member/index.php");

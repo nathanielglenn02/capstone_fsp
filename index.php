@@ -7,8 +7,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if (isset($_SESSION['role'])) {
-    $role = $_SESSION['role'];
+if (isset($_SESSION['profile'])) {
+    $role = $_SESSION['profile'];
 
     if ($role === 'admin') {
 
