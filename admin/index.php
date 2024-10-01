@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['idmember'])) {
+    header('Location: ../../auth/login.php');
+    exit;
+}
+
 require_once "../service/config.php";
 $title = 'Dashboard';
 require_once('template/header.php');

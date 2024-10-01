@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['idmember'])) {
+    header('Location: ../../auth/login.php');
+    exit;
+}
+
 require_once('../../service/config.php');
 require_once('../../class/classAchievement.php');
 require_once('../../class/classTeamMembers.php');
@@ -8,14 +15,12 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil idteam dari parameter URL
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
 
 if ($idteam) {
-    // Mengambil semua achievement berdasarkan idTeam
+
     $achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
 
-    // Mengambil semua anggota tim berdasarkan idTeam
     $teamMembers = TeamMembers::getMembersByTeam($koneksi, $idteam);
 } else {
     echo "ID team tidak ditemukan.";
