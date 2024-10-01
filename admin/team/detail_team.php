@@ -72,11 +72,20 @@ if ($idteam) {
                 <?php
                 foreach ($achievements as $achievement) {
                     echo "<li class='completed'>";
-                    echo "<p>" . htmlspecialchars($achievement->getName()) . "</p>";
+                    echo "<div class='left'>";
+                    echo "<p><strong>" . htmlspecialchars($achievement->getName()) . "</strong></p>";
+                    echo "<small>Description: " . htmlspecialchars($achievement->getDescription()) . "</small>";
+                    echo "</div>";
+                    echo "<div class='right'>";
+                    echo "<small>Date: " . htmlspecialchars($achievement->getDate()) . "</small>";
+                    echo "</div>";
                     echo "</li>";
                 }
                 ?>
             </ul>
+
+
+
         </div>
     </div>
 
