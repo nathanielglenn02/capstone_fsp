@@ -57,7 +57,6 @@ if ($idteam) {
         <div class="order">
             <div class="head">
                 <h3>Team Members</h3>
-                <a href="add_member.php?idteam=<?php echo $idteam; ?>"><i class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
             <ul class="todo-list">
@@ -104,30 +103,40 @@ if ($idteam) {
             </ul>
         </div>
 
-
         <div class="todo">
             <div class="head">
                 <h3>Achievements</h3>
-                <a href="create_achievement.php?idteam=<?php echo $idteam; ?>"><i class='bx bx-plus'></i></a>
+                <a href="../achievement/create_achievement.php"><i class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
 
             <ul class="todo-list">
                 <?php
-                foreach ($achievements as $achievement) {
-                    echo "<li class='completed'>";
-                    echo "<div class='left'>";
-                    echo "<p><strong>" . htmlspecialchars($achievement->getName()) . "</strong></p>";
-                    echo "<small>Description: " . htmlspecialchars($achievement->getDescription()) . "</small>";
-                    echo "</div>";
-                    echo "<div class='right'>";
-                    echo "<small>Date: " . htmlspecialchars($achievement->getDate()) . "</small>";
-                    echo "</div>";
-                    echo "</li>";
+                if (!empty($achievements)) {
+                    foreach ($achievements as $achievement) {
+                        echo "<li class='completed'>";
+                        echo "<div class='left'>";
+                        echo "<p><strong>" . htmlspecialchars($achievement->getName()) . "</strong></p>";
+                        echo "<small>Description: " . htmlspecialchars($achievement->getDescription()) . "</small>";
+                        echo "</div>";
+                        echo "<div class='right'>";
+                        echo "<small>Date: " . htmlspecialchars($achievement->getDate()) . "</small>";
+                        echo "</div>";
+                        echo "<div class='action-buttons'>";
+                        echo "<a href='../achievement/edit_achievement.php?id=" . $achievement->getIdAchievement() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
+                        echo "<a href='../achievement/delete_achievement.php?id=" . $achievement->getIdAchievement() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this achievement?');\"><i class='fa-solid fa-trash'></i></a>";
+                        echo "</div>";
+                        echo "</li>";
+                    }
+                } else {
+                    echo "<p>No achievements added yet.</p>";
                 }
                 ?>
             </ul>
         </div>
+
+
+
     </div>
 
     <?php

@@ -16,6 +16,8 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
+$return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
+
 $idachievement = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($idachievement == 0) {
@@ -38,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievement->setDate($date);
     $achievement->setDescription($description);
     $achievement->updateAchievement();
-    header('Location: achievement.php');
+
+    header('Location: ' . $return_url);
     exit();
 }
 ?>

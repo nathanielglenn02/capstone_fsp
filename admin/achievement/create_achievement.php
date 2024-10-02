@@ -18,6 +18,8 @@ require_once('../template/navbar.php');
 
 $teams = team::getAllTeams($koneksi);
 
+$return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievementName = $_POST['achievement_name'];
     $teamid = $_POST['team_id'];
@@ -30,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievement->setDate($date);
     $achievement->setDescription($description);
     $achievement->createAchievement();
-    header('Location: achievement.php');
+
+    header('Location: ' . $return_url);
     exit();
 }
 ?>

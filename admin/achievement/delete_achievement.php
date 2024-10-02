@@ -9,10 +9,16 @@ if (!isset($_SESSION['idmember'])) {
 require_once('../../service/config.php');
 require_once('../../class/classAchievement.php');
 
+$return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
+
 if (isset($_GET['id'])) {
     $achievementid = intval($_GET['id']);
     $achievement = new Achievement($koneksi, $achievementid, "", "", "", "");
     $achievement->deleteAchievement($koneksi);
-    header("Location: achievement.php");
+
+    header('Location: ' . $return_url);
+    exit;
+} else {
+    echo "Achievement ID not found.";
     exit;
 }
