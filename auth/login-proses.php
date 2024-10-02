@@ -31,13 +31,13 @@ if (isset($_POST['login'])) {
             exit;
         } else {
             echo "<script>
-                alert('Password salah!');
+                alert('Username atau Password salah!');
                 window.location.href = 'login.php';
                 </script>";
         }
     } else {
         echo "<script>
-            alert('Username tidak terdaftar!');
+            alert('Username atau Password salah!');
             window.location.href = 'login.php';
             </script>";
     }
