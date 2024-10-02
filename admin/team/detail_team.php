@@ -16,20 +16,15 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-// Mengambil idteam dari parameter URL
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
 
 if ($idteam) {
-    // Mengambil semua achievement berdasarkan idTeam
     $achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
 
-    // Mengambil semua anggota tim berdasarkan idTeam
     $teamMembers = TeamMembers::getMembersByTeam($koneksi, $idteam);
 
-    // Mengambil semua event yang pernah diikuti oleh tim
     $teamEvents = EventTeams::getEventsByTeam($koneksi, $idteam);
 
-    // Store the current URL in a session variable
     $_SESSION['return_url'] = $_SERVER['REQUEST_URI'];
 } else {
     echo "ID team tidak ditemukan.";
@@ -77,14 +72,12 @@ if ($idteam) {
         </div>
 
         <?php
-        // Menyimpan URL saat ini untuk redirect setelah edit
         $domain = $_SERVER['HTTP_HOST'];
         $path = $_SERVER['SCRIPT_NAME'];
         $queryString = $_SERVER['QUERY_STRING'];
         $url_asal = "http://" . $domain . $path . "?" . $queryString;
         ?>
 
-        <!-- Daftar Events Participated -->
         <div class="order">
             <div class="head">
                 <h3>Events Participated</h3>
@@ -96,10 +89,13 @@ if ($idteam) {
                     foreach ($teamEvents as $event) {
                         echo "<li class='completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
-                        // Updated edit link without url_asal parameter
+
+                        // Tambahkan div wrapper untuk tombol edit dan hapus
+                        echo "<div class='action-buttons'>";
                         echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
-                        // Delete link remains the same
-                        echo "<a href='../event/delete_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event?');\"><i class='fa-solid fa-trash'></i></a>";
+                        echo "<a href='../event/delete_event_team.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event from the team?');\"><i class='fa-solid fa-trash'></i></a>";
+                        echo "</div>";
+
                         echo "</li>";
                     }
                 } else {
@@ -110,10 +106,6 @@ if ($idteam) {
         </div>
 
 
-
-
-
-        <!-- Daftar Achievements -->
         <div class="todo">
             <div class="head">
                 <h3>Achievements</h3>
