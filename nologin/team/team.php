@@ -39,7 +39,7 @@ $teams = Team::getAllTeams($koneksi);
                     <tr>
                         <th>Team Name</th>
                         <th>Game</th>
-                        <th>Detail</th>
+                        <!-- <th>Detail</th> -->
                         <!-- <th>Aksi</th> -->
                     </tr>
                 </thead>
@@ -49,11 +49,11 @@ $teams = Team::getAllTeams($koneksi);
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
-                        echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
-                        echo "<td>";
+                        // echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
+                        // echo "<td>";
                         // echo "<a href='edit_team.php?id=" . $team->getTeamId() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         // echo "<a href='delete_team.php?id=" . $team->getTeamId() . "' onclick=\"return confirm('Apakah Anda yakin ingin menghapus tim ini?');\"><i class='fa-solid fa-trash'></i></a>";
-                        echo "</td>";
+                        // echo "</td>";
                         echo "</tr>";
                     }
                     ?>

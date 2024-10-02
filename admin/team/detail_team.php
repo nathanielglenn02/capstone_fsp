@@ -61,10 +61,14 @@ if ($idteam) {
             </div>
             <ul class="todo-list">
                 <?php
-                foreach ($teamMembers as $member) {
-                    echo "<li class='completed'>";
-                    echo "<p>" . htmlspecialchars($member->getMemberName()) . "</p>";
-                    echo "</li>";
+                if (!empty($teamEvents)) {
+                    foreach ($teamMembers as $member) {
+                        echo "<li class='teamMembers-completed'>";
+                        echo "<p>" . htmlspecialchars($member->getMemberName()) . "</p>";
+                        echo "</li>";
+                    }
+                } else {
+                    echo "<p>No Team Members participated yet.</p>";
                 }
                 ?>
             </ul>
@@ -87,13 +91,12 @@ if ($idteam) {
                 <?php
                 if (!empty($teamEvents)) {
                     foreach ($teamEvents as $event) {
-                        echo "<li class='completed'>";
+                        echo "<li class='event-completed'>";  // Add the class here
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
                         echo "<div class='action-buttons'>";
                         echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         echo "<a href='../event/delete_event_team.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event from the team?');\"><i class='fa-solid fa-trash'></i></a>";
                         echo "</div>";
-
                         echo "</li>";
                     }
                 } else {

@@ -22,6 +22,14 @@ li {
     margin-right: 5px;
 }
 
+.todo-list li.event-completed {
+    border-left: 10px solid var(--blue);
+}
+
+.todo-list li.teamMembers-completed {
+    border-left: 10px solid var(--blue);
+}
+
 .todo-list li {
     background-color: #f1f1f1;
     border-radius: 8px;

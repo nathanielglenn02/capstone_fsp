@@ -39,7 +39,7 @@ $games = Game::getAllGames($koneksi);
                     <tr>
                         <th>Game</th>
                         <th>Deskripsi</th>
-                        <th>Detail</th>
+                        <!-- <th>Detail</th> -->
                         <!-- <th>Aksi</th> -->
                     </tr>
                 </thead>
@@ -49,9 +49,9 @@ $games = Game::getAllGames($koneksi);
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($game->getGameName()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($game->getDescription()) . "</p></td>";
-                        echo "<td>";
-                        echo "<a href='detail_game.php?id=" . $game->getGameId() . "'>Detail</a>";
-                        echo "</td>";
+                        // echo "<td>";
+                        // echo "<a href='detail_game.php?id=" . $game->getGameId() . "'>Detail</a>";
+                        // echo "</td>";
                         echo "<td>";
                         // echo "<a href='edit_game.php?id=" . $game->getGameId() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         // echo "<a href='delete_game.php?id=" . $game->getGameId() . "' onclick=\"return confirm('Apakah Anda yakin ingin menghapus game ini?');\"><i class='fa-solid fa-trash'></i></a>";
