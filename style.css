@@ -64,20 +64,46 @@ li {
     border-color: var(--blue);
 }
 
-.btn-login {
-    background-color: var(--blue);
+textarea {
+    width: 100%;
+    max-width: 600px; 
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.btn-join {
+    background-color: #3C91E6;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 10px 15px;
+    font-size: 14px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; 
 }
 
-.btn-login:hover {
-    background-color: var(--dark-grey);
+.btn-join:hover {
+    background-color: #2A6DB8;
 }
+
+.btn-join i {
+    margin-right: 5px; 
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
 
 .register-link {
     margin-top: 20px;

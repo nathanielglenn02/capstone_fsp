@@ -8,16 +8,12 @@ if (!isset($_SESSION['idmember'])) {
 
 require_once('../../service/config.php');
 require_once('../../class/classTeam.php');
+require_once('../../class/classJoinProposal.php');
 
 $title = "Team - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
 
 $teams = Team::getAllTeams($koneksi);
 ?>
@@ -36,7 +32,11 @@ $teams = Team::getAllTeams($koneksi);
                 </li>
             </ul>
         </div>
+        <div class="right">>
+            <a href="join_status.php" class="btn btn-primary">Lihat Status Join</a>
+        </div>
     </div>
+
     <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
@@ -63,18 +63,33 @@ $teams = Team::getAllTeams($koneksi);
                         echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
                         echo "<td>";
 
-                        echo "<form method='POST' action='join_team.php'>";
+                        echo "<form method='POST' action='join_team.php' onsubmit='return confirmJoin()'>";
+                        echo "<div class='form-group'>";
+                        echo "<textarea name='description' placeholder='Tuliskan pesan Anda di sini...' rows='3'></textarea>";
+                        echo "<button type='submit' class='btn btn-join'><i class='fas fa-user-plus'></i>Join</button>";
+                        echo "</div>";
                         echo "<input type='hidden' name='idteam' value='" . $team->getTeamId() . "'>";
-                        echo "<button type='submit'>Join</button>";
                         echo "</form>";
+
                         echo "</td>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
+
+
+
+
+
             </table>
         </div>
     </div>
+
+    <script>
+        function confirmJoin() {
+            return confirm("Apakah Anda yakin ingin bergabung dengan tim ini?");
+        }
+    </script>
 
     <?php
     require_once('../template/footer.php');
