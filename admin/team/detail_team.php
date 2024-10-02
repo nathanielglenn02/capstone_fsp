@@ -28,6 +28,9 @@ if ($idteam) {
 
     // Mengambil semua event yang pernah diikuti oleh tim
     $teamEvents = EventTeams::getEventsByTeam($koneksi, $idteam);
+
+    // Store the current URL in a session variable
+    $_SESSION['return_url'] = $_SERVER['REQUEST_URI'];
 } else {
     echo "ID team tidak ditemukan.";
     exit;
@@ -73,6 +76,15 @@ if ($idteam) {
             </ul>
         </div>
 
+        <?php
+        // Menyimpan URL saat ini untuk redirect setelah edit
+        $domain = $_SERVER['HTTP_HOST'];
+        $path = $_SERVER['SCRIPT_NAME'];
+        $queryString = $_SERVER['QUERY_STRING'];
+        $url_asal = "http://" . $domain . $path . "?" . $queryString;
+        ?>
+
+        <!-- Daftar Events Participated -->
         <div class="order">
             <div class="head">
                 <h3>Events Participated</h3>
@@ -84,7 +96,9 @@ if ($idteam) {
                     foreach ($teamEvents as $event) {
                         echo "<li class='completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
-                        // Tambahkan href dengan parameter idteam
+                        // Updated edit link without url_asal parameter
+                        echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
+                        // Delete link remains the same
                         echo "<a href='../event/delete_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event?');\"><i class='fa-solid fa-trash'></i></a>";
                         echo "</li>";
                     }
@@ -97,6 +111,8 @@ if ($idteam) {
 
 
 
+
+
         <!-- Daftar Achievements -->
         <div class="todo">
             <div class="head">
@@ -104,6 +120,7 @@ if ($idteam) {
                 <a href="create_achievement.php?idteam=<?php echo $idteam; ?>"><i class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
+
             <ul class="todo-list">
                 <?php
                 foreach ($achievements as $achievement) {

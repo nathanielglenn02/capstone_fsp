@@ -9,7 +9,12 @@ if (!isset($_SESSION['idmember'])) {
 require_once('../../service/config.php');
 require_once('../../class/classEvent.php');
 
+// Tangkap idteam dan idevent dari URL
 $idevent = isset($_GET['idevent']) ? intval($_GET['idevent']) : 0;
+$idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : 0;
+
+// Get return URL from session
+$return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'event.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $eventName = $_POST['name'];
@@ -19,9 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $event = new Event($idevent, $eventName, $description, $date);
     $event->updateEvent($koneksi);
 
-    header("Location: event.php");
+    // Redirect to the stored return URL after edit is complete
+    header("Location: " . $return_url);
     exit;
 } else {
+    // Ambil data event berdasarkan ID
     $event = Event::getEventById($koneksi, $idevent);
 }
 
@@ -49,7 +56,7 @@ require_once('../template/navbar.php');
     <!-- Form untuk mengedit event -->
     <div class="table-data">
         <div class="order">
-            <form id="edit_event" action="edit_event.php?idevent=<?php echo $idevent; ?>" method="POST">
+            <form id="edit_event" action="edit_event.php?idevent=<?php echo $idevent; ?>&idteam=<?php echo $idteam; ?>" method="POST">
                 <div class="form-group">
                     <label for="name">Event Name</label>
                     <input type="text" id="name" name="name"
