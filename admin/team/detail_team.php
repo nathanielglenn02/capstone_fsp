@@ -81,6 +81,7 @@ if ($idteam) {
         <div class="order">
             <div class="head">
                 <h3>Events Participated</h3>
+                <a href="../event/create_event_team.php?idteam=<?php echo $idteam; ?>"><i class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
             <ul class="todo-list">
@@ -89,8 +90,6 @@ if ($idteam) {
                     foreach ($teamEvents as $event) {
                         echo "<li class='completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
-
-                        // Tambahkan div wrapper untuk tombol edit dan hapus
                         echo "<div class='action-buttons'>";
                         echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         echo "<a href='../event/delete_event_team.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event from the team?');\"><i class='fa-solid fa-trash'></i></a>";

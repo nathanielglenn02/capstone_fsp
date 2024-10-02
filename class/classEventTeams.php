@@ -63,6 +63,26 @@ class EventTeams
         mysqli_stmt_close($stmt);
     }
 
+    public static function isEventInTeam($koneksi, $eventId, $teamId)
+    {
+        $query = "SELECT COUNT(*) as count FROM event_teams WHERE idevent = ? AND idteam = ?";
+        $stmt = mysqli_prepare($koneksi, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($koneksi));
+        }
+
+        mysqli_stmt_bind_param($stmt, "ii", $eventId, $teamId);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $row = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+
+        return $row['count'] > 0;
+    }
+
+
     public static function getEventsByTeam($koneksi, $teamId)
     {
         $query = "SELECT e.* FROM event_teams et 
