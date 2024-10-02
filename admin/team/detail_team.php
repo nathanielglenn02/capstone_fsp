@@ -85,7 +85,6 @@ if ($idteam) {
                         echo "<li class='completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
                         // Tambahkan href dengan parameter idteam
-                        // echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen'></i></a>";
                         echo "<a href='../event/delete_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this event?');\"><i class='fa-solid fa-trash'></i></a>";
                         echo "</li>";
                     }
