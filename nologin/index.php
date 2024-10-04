@@ -11,7 +11,7 @@ $limit = 5; // Tampilkan 5 data per halaman
 
 $search = isset($_GET['search']) ? $_GET['search'] : "";
 // Panggil method untuk mengambil data team dengan pagination
-$teams = Team::getAllTeams($koneksi, $page, $limit, $search);
+$teams = Team::getAllTeamsWithPaging($koneksi, $page, $limit, $search);
 
 // Ambil total jumlah data untuk menghitung total halaman
 $search_query = "%" . $search . "%";
