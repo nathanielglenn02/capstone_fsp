@@ -33,7 +33,6 @@ $teams = Team::getAllTeams($koneksi);
             <table>
                 <thead>
                     <tr>
-                        <th>ID Team</th>
                         <th>Name</th>
                         <th>Game</th>
                     </tr>
@@ -43,7 +42,6 @@ $teams = Team::getAllTeams($koneksi);
                     // Loop untuk menampilkan data team yang diambil dari database
                     foreach ($teams as $team) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         echo "</tr>";
