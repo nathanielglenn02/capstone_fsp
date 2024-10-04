@@ -87,6 +87,28 @@ class Event
     }
 
     // Metode untuk mendapatkan semua event
+    public static function getAllEvents($koneksi)
+    {
+        $stmt = $koneksi->prepare("
+            SELECT * from event
+        ");
+        $stmt->bind_param("sii");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if (!$result) {
+            die("Query Error: " . mysqli_error($koneksi));
+        }
+
+        $events = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $event = new Event($row['idevent'], $row['name'], $row['description'], $row['date']);
+            $events[] = $event;
+        }
+
+        return $events;
+    }
     public static function getAllEventsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
