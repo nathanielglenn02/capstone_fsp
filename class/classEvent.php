@@ -87,11 +87,19 @@ class Event
     }
 
     // Metode untuk mendapatkan semua event
-    public static function getAllEvents($koneksi)
+    public static function getAllEventsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
-        $query = "SELECT * FROM event";
-        $result = mysqli_query($koneksi, $query);
-
+        $offset = ($page - 1) * $limit;
+        $search = "%" . $search . "%"; 
+        $stmt = $koneksi->prepare("
+            SELECT * from event
+            WHERE name LIKE ?
+            LIMIT ?, ?
+        ");
+        $stmt->bind_param("sii", $search, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));
         }

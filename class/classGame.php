@@ -77,10 +77,41 @@ class Game
 
 
     // Metode untuk membaca semua game dari database
-    public static function getAllGames($koneksi)
+    public static function getAllGames($koneksi){
+        $stmt = $koneksi->prepare("
+            SELECT idgame, name, description
+            FROM game
+        ");
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            die("Query Error: " . mysqli_error($koneksi));
+        }
+
+        $games = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $game = new Game($row['idgame'], $row['name'], $row['description']);
+            $games[] = $game;
+        }
+
+        return $games;
+    }
+    public static function getAllGamesWithPaging($koneksi,  $page = 1, $limit = 5, $search = "")
     {
-        $query = "SELECT idgame, name, description FROM game";
-        $result = mysqli_query($koneksi, $query);
+        $offset = ($page - 1) * $limit;
+        $search = "%" . $search . "%"; 
+        $stmt = $koneksi->prepare("
+            SELECT idgame, name, description
+            FROM game
+            WHERE name LIKE ?
+            LIMIT ?, ?
+        ");
+        $stmt->bind_param("sii", $search, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));

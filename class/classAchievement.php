@@ -101,11 +101,19 @@ class Achievement
         mysqli_stmt_close($stmt);
     }
 
-    public static function getAllAchievement($koneksi)
+    public static function getAllAchievementWithPaging($koneksi,  $page = 1, $limit = 5, $search = "" )
     {
-        $query = "SELECT a.idachievement, t.name as team_name, a.name, a.date, a.description FROM achievement as a
-                    inner join team as t on a.idteam = t.idteam";
-        $result = mysqli_query($koneksi, $query);
+        $offset = ($page - 1) * $limit;
+        $search = "%" . $search . "%"; 
+        $stmt = $koneksi->prepare("
+            SELECT a.idachievement, t.name as team_name, a.name, a.date, a.description FROM achievement as a
+            inner join team as t on a.idteam = t.idteam
+            WHERE a.name LIKE ?
+            LIMIT ?, ?
+        ");
+        $stmt->bind_param("sii", $search, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));

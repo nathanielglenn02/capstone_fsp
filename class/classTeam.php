@@ -59,23 +59,48 @@ class Team
     ======================== */
 
     // Metode untuk membaca semua team dari database
-    public static function getAllTeams($koneksi)
-    {
-        $query = "SELECT t.idteam, g.name as game_name, t.name as team_name FROM team as t
-                    inner join game as g on t.idgame = g.idgame";
-        $result = mysqli_query($koneksi, $query);
-
-        if (!$result) {
-            die("Query Error: " . mysqli_error($koneksi));
-        }
+    public static function getAllTeams($koneksi){
+        $stmt = $koneksi->prepare("
+            SELECT t.idteam, g.name as game_name, t.name as team_name 
+            FROM team as t
+            INNER JOIN game as g ON t.idgame = g.idgame
+        ");
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
 
         $teams = [];
+        while ($row = $result->fetch_assoc()) {
+            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
+            $teams[] = $team;
+    }
 
-        while ($row = mysqli_fetch_assoc($result)) {
+    $stmt->close();
+    return $teams;
+    }
+    public static function getAllTeamsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
+    {
+        $offset = ($page - 1) * $limit;
+        $search = "%" . $search . "%"; 
+        $stmt = $koneksi->prepare("
+            SELECT t.idteam, g.name as game_name, t.name as team_name 
+            FROM team as t
+            INNER JOIN game as g ON t.idgame = g.idgame
+            WHERE t.name LIKE ?
+            LIMIT ?, ?
+        ");
+        $stmt->bind_param("sii", $search, $offset, $limit);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+
+        $teams = [];
+        while ($row = $result->fetch_assoc()) {
             $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
             $teams[] = $team;
         }
 
+        $stmt->close();
         return $teams;
     }
 

@@ -14,22 +14,22 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-$events = Event::getAllEvents($koneksi);
+$events = Event::getAllEventsWithPaging($koneksi);
 ?>
 
 <main>
     <div class="head-title">
         <div class="left">
             <h1>Event</h1>
-            <ul class="breadcrumb">
-                <li>
-                    <a class="active" href="../index.php">Dashboard</a>
-                </li>
-                <li><i class='bx bx-chevron-right'></i></li>
-                <li>
-                    <a href="#">Event</a>
-                </li>
-            </ul>
+                <ul class="breadcrumb">
+                    <li>
+                        <a class="active" href="../index.php">Dashboard</a>
+                    </li>
+                    <li><i class='bx bx-chevron-right'></i></li>
+                    <li>
+                        <a href="#">Event</a>
+                    </li>
+                </ul>
         </div>
     </div>
     <!-- Konten Utama -->
