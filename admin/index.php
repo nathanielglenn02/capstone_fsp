@@ -63,7 +63,7 @@ $total_pages = ceil($total_teams / $limit);
                 </thead>
                 <tbody>
                     <?php
-                    // Loop untuk menampilkan data team yang diambil dari database
+
                     foreach ($teams as $team) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";

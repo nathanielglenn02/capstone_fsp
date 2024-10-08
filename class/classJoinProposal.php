@@ -45,12 +45,12 @@ class JoinProposal
         $this->idmember = $idmember;
     }
 
-    public function getIdTeam()
+    public function getTeamId()
     {
         return $this->idteam;
     }
 
-    public function setIdTeam($idteam)
+    public function setTeamId($idteam)
     {
         $this->idteam = $idteam;
     }
