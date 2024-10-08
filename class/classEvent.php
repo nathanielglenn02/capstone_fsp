@@ -67,7 +67,7 @@ class Event
     /* =======================
        Methods
     ======================== */
-    // Metode untuk membuat event baru
+
     public function createEvent($koneksi)
     {
         $query = "INSERT INTO event (name, description, date) VALUES (?, ?, ?)";
@@ -86,7 +86,7 @@ class Event
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk mendapatkan semua event
+
     public static function getAllEvents($koneksi)
     {
         $stmt = $koneksi->prepare("
@@ -95,7 +95,7 @@ class Event
         $stmt->bind_param("sii");
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));
         }
@@ -112,7 +112,7 @@ class Event
     public static function getAllEventsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%"; 
+        $search = "%" . $search . "%";
         $stmt = $koneksi->prepare("
             SELECT * from event
             WHERE name LIKE ?
@@ -121,7 +121,7 @@ class Event
         $stmt->bind_param("sii", $search, $offset, $limit);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if (!$result) {
             die("Query Error: " . mysqli_error($koneksi));
         }
@@ -136,7 +136,7 @@ class Event
         return $events;
     }
 
-    // Metode untuk mendapatkan event berdasarkan ID
+
     public static function getEventById($koneksi, $idevent)
     {
         $query = "SELECT * FROM event WHERE idevent = ?";
@@ -161,7 +161,7 @@ class Event
         return $event;
     }
 
-    // Metode untuk mengupdate event
+
     public function updateEvent($koneksi)
     {
         $query = "UPDATE event SET name = ?, description = ?, date = ? WHERE idevent = ?";
@@ -180,7 +180,7 @@ class Event
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk menghapus event
+
     public function deleteEvent($koneksi)
     {
         $query = "DELETE FROM event WHERE idevent = ?";

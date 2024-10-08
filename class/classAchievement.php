@@ -82,7 +82,6 @@ class Achievement
     /* =======================
        Methods
     ======================== */
-    // Method untuk menambah achievement
     public function createAchievement()
     {
         $query = "INSERT INTO achievement (idteam, name, date, description) VALUES (?, ?, ?, ?)";
@@ -101,10 +100,10 @@ class Achievement
         mysqli_stmt_close($stmt);
     }
 
-    public static function getAllAchievementWithPaging($koneksi,  $page = 1, $limit = 5, $search = "" )
+    public static function getAllAchievementWithPaging($koneksi,  $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%"; 
+        $search = "%" . $search . "%";
         $stmt = $koneksi->prepare("
             SELECT a.idachievement, t.name as team_name, a.name, a.date, a.description FROM achievement as a
             inner join team as t on a.idteam = t.idteam
@@ -131,7 +130,7 @@ class Achievement
 
     public static function getAchievementById($conn, $idachievement)
     {
-            $query = "SELECT * FROM achievement WHERE idachievement = ?";
+        $query = "SELECT * FROM achievement WHERE idachievement = ?";
         $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt === false) {
@@ -149,14 +148,19 @@ class Achievement
         mysqli_stmt_close($stmt);
 
         if ($row) {
-            return new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
-                $row['date'], $row['description']);
+            return new Achievement(
+                $conn,
+                $row['idachievement'],
+                $row['idteam'],
+                $row['name'],
+                $row['date'],
+                $row['description']
+            );
         }
 
         return null;
-
     }
-    // Method untuk mendapatkan semua achievement berdasarkan idTeam
+
     public static function getAchievementsByTeam($conn, $idteam)
     {
         $query = "SELECT * FROM achievement WHERE idteam = ?";
@@ -172,8 +176,14 @@ class Achievement
 
         $achievements = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $achievements[] = new Achievement($conn, $row['idachievement'], $row['idteam'], $row['name'],
-                $row['date'], $row['description']);
+            $achievements[] = new Achievement(
+                $conn,
+                $row['idachievement'],
+                $row['idteam'],
+                $row['name'],
+                $row['date'],
+                $row['description']
+            );
         }
 
         mysqli_stmt_close($stmt);
@@ -181,7 +191,6 @@ class Achievement
         return $achievements;
     }
 
-    // Method untuk update achievement
     public function updateAchievement()
     {
         $query = "UPDATE achievement SET idteam = ?, name = ?, date = ?, description = ? WHERE idachievement = ?";
@@ -200,7 +209,6 @@ class Achievement
         mysqli_stmt_close($stmt);
     }
 
-    // Method untuk delete achievement
     public function deleteAchievement($conn): void
     {
         $query = "DELETE FROM achievement WHERE idachievement = ?";

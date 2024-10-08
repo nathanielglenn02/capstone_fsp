@@ -1,13 +1,19 @@
 <?php
 class JoinProposal
 {
+    /* =======================
+       Data Members
+    ======================== */
     private $id;
     private $idmember;
     private $idteam;
     private $description;
     private $status;
 
-    // Constructor
+
+    /* =======================
+        Constructors
+    ======================== */
     public function __construct($id, $idmember, $idteam, $description, $status)
     {
         $this->id = $id;
@@ -16,8 +22,63 @@ class JoinProposal
         $this->description = $description;
         $this->status = $status;
     }
+    /* =======================
+       Properties
+    ======================== */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-    // Fungsi untuk mengambil semua proposal berdasarkan id member
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getIdMember()
+    {
+        return $this->idmember;
+    }
+
+    public function setIdMember($idmember)
+    {
+        $this->idmember = $idmember;
+    }
+
+    public function getIdTeam()
+    {
+        return $this->idteam;
+    }
+
+    public function setIdTeam($idteam)
+    {
+        $this->idteam = $idteam;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+
+    /* =======================
+       Methods
+    ======================== */
     public static function getProposalsByMember($koneksi, $idmember)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ?";
@@ -39,7 +100,6 @@ class JoinProposal
         return $proposals;
     }
 
-    // Fungsi untuk mendapatkan proposal berdasarkan id member dan id team
     public static function getProposalByMemberAndTeam($koneksi, $idmember, $idteam)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ? AND idteam = ?";
@@ -61,7 +121,6 @@ class JoinProposal
         return null;
     }
 
-    // Fungsi untuk membuat proposal baru
     public static function createProposal($koneksi, $idmember, $idteam, $description)
     {
         $status = 'waiting'; // Status default
@@ -69,21 +128,5 @@ class JoinProposal
         $stmt = $koneksi->prepare($query);
         $stmt->bind_param("iiss", $idmember, $idteam, $description, $status);
         $stmt->execute();
-    }
-
-    // Getter methods
-    public function getTeamId()
-    {
-        return $this->idteam;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
     }
 }

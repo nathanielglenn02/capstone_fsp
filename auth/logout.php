@@ -1,6 +1,6 @@
 <?php
 session_start();
-session_destroy(); // Menghancurkan session
+session_destroy();
 
 echo "<script>
     alert('Anda telah berhasil logout.');
