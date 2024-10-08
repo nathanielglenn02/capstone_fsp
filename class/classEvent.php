@@ -92,7 +92,6 @@ class Event
         $stmt = $koneksi->prepare("
             SELECT * from event
         ");
-        $stmt->bind_param("sii");
         $stmt->execute();
         $result = $stmt->get_result();
 
