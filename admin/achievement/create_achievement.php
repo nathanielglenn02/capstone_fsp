@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
-                    <select id="team_id" name="team_id" required>
+                    <select id="team_id" name="team_id" <?= isset($_GET['team_id']) ? 'disable' : '' ?> required>
                         <?php foreach ($teams as $team): ?>
-                            <option value="<?php echo $team->getTeamId(); ?>"><?php echo $team->getTeamName(); ?></option>
+                        <option value="<?php echo $team->getTeamId(); ?>"><?php echo $team->getTeamName(); ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

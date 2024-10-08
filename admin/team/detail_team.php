@@ -109,7 +109,8 @@ if ($idteam) {
         <div class="todo">
             <div class="head">
                 <h3>Achievements</h3>
-                <a href="../achievement/create_achievement.php"><i class='bx bx-plus'></i></a>
+                <a href="../achievement/create_achievement.php?idteam=<?php echo "$idteam" ?>"><i
+                        class='bx bx-plus'></i></a>
                 <i class='bx bx-filter'></i>
             </div>
 
