@@ -9,7 +9,6 @@ if (isset($_POST['simpan'])) {
     $password = trim(htmlspecialchars($_POST['password']));
     $profile = "member";
 
-    // Hash password
     $pass = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $koneksi->prepare("INSERT INTO member (fname, lname, username, password, profile) VALUES (?, ?, ?, ?, ?)");

@@ -18,7 +18,6 @@ require_once('../template/navbar.php');
 $idgame = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $gameDetails = Game::getGameDetails($koneksi, $idgame);
 
-// Ambil data tim dan event
 $teams = $gameDetails['teams'];
 $events = $gameDetails['events'];
 ?>

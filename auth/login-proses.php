@@ -21,7 +21,6 @@ if (isset($_POST['login'])) {
             $_SESSION['profile'] = $row['profile'];
             $_SESSION['user_id'] = $row['idmember'];
 
-            // Cek role dan arahkan ke folder yang sesuai
             if ($_SESSION['profile'] == 'admin') {
                 header("Location: ../admin/index.php");
             } else {

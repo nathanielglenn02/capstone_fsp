@@ -56,7 +56,7 @@ class Game
     /* =======================
        Methods
     ======================== */
-    // Metode untuk menambah game ke database
+
     public function createGame($koneksi)
     {
         $query = "INSERT INTO game (name, description) VALUES (?, ?)";
@@ -76,14 +76,14 @@ class Game
     }
 
 
-    // Metode untuk membaca semua game dari database
-    public static function getAllGames($koneksi){
+    public static function getAllGames($koneksi)
+    {
         $stmt = $koneksi->prepare("
             SELECT idgame, name, description
             FROM game
         ");
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
 
         if (!$result) {
@@ -102,7 +102,7 @@ class Game
     public static function getAllGamesWithPaging($koneksi,  $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%"; 
+        $search = "%" . $search . "%";
         $stmt = $koneksi->prepare("
             SELECT idgame, name, description
             FROM game
@@ -163,7 +163,6 @@ class Game
     }
 
 
-    // Metode untuk mengupdate game dari database
     public function updateGame($koneksi)
     {
         $query = "UPDATE game SET name = ?, description = ? WHERE idgame = ?";
@@ -204,7 +203,7 @@ class Game
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk menghapus game dari database
+
     public function deleteGame($koneksi)
     {
         $query = "DELETE FROM game WHERE idgame = ?";
