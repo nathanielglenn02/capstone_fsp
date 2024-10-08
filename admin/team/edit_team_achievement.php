@@ -24,13 +24,13 @@ if ($idachievement == 0) {
     header('Location: achievement.php');
     exit();
 }
-
+$team_id = isset($_GET['idteam']) ? $_GET['idteam'] : 0;
 $achievement = Achievement::getAchievementById($koneksi, $idachievement);
 $teams = Team::getAllTeams($koneksi);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $achievementName = $_POST['achievement_name'];
-    $teamid = $_POST['team_id'];
+    $teamid = $team_id;
     $date = $_POST['ach_date'];
     $description = $_POST['ach_desc'];
     $achievement = new Achievement($koneksi);
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php foreach ($teams as $team): ?>
                             <option value="<?php echo $team->getTeamId(); ?>"
                                 <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($team->getTeamName()); ?>
+                                <?php echo htmlspecialchars($team->getTeamName()); ?>   
                             </option>
                         <?php endforeach; ?>
                     </select>

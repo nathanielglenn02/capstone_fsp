@@ -41,8 +41,7 @@ $total_pages = ceil($total_teams / $limit);
         <div class="order">
             <div class="head">
                 <h3>Team List</h3>
-                
-                <form method="GET" action="">
+                <form method="GET" action="" >
                     <input type="text" name="search" placeholder="Search team..." value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" />
                     <button type="submit"><i class='bx bx-search'></i></button>
                 </form>
