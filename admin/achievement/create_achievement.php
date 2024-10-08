@@ -16,6 +16,8 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
+$idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
+
 $teams = team::getAllTeams($koneksi);
 
 $return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
@@ -63,12 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
-                    <select id="team_id" name="team_id" <?= isset($_GET['team_id']) ? 'disable' : '' ?> required>
+                    <select id="team_id" name="team_id" <?= $idteam ? 'disabled' : '' ?> required>
                         <?php foreach ($teams as $team): ?>
-                        <option value="<?php echo $team->getTeamId(); ?>"><?php echo $team->getTeamName(); ?></option>
+                            <option value="<?php echo $team->getTeamId(); ?>"
+                                <?= $idteam == $team->getTeamId() ? 'selected' : '' ?>>
+                                <?php echo $team->getTeamName(); ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
+
+                <?php if ($idteam): ?>
+                    <input type="hidden" name="team_id" value="<?php echo $idteam; ?>">
+                <?php endif; ?>
+
                 <div class="form-group">
                     <label for="ach_date">Date</label>
                     <input type="date" id="ach_date" name="ach_date" required>
