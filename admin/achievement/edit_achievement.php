@@ -18,6 +18,7 @@ require_once('../template/navbar.php');
 
 $return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
 
+$idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
 $idachievement = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($idachievement == 0) {
@@ -72,11 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
-                    <select id="team_id" name="team_id" required>
+                    <select id="team_id" name="team_id" <?= $idteam ? 'disabled' : '' ?> required>
                         <?php foreach ($teams as $team): ?>
                             <option value="<?php echo $team->getTeamId(); ?>"
-                                <?php echo $team->getTeamId() == $achievement->getIdTeam() ? 'selected' : ''; ?>>
-                                <?php echo htmlspecialchars($team->getTeamName()); ?>
+                                <?= $idteam == $team->getTeamId() ? 'selected' : '' ?>>
+                                <?php echo $team->getTeamName(); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

@@ -127,7 +127,7 @@ if ($idteam) {
                         echo "<small>Date: " . htmlspecialchars($achievement->getDate()) . "</small>";
                         echo "</div>";
                         echo "<div class='action-buttons'>";
-                        echo "<a href='edit_team_achievement.php?id=" . $achievement->getIdAchievement() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
+                        echo "<a href='../achievement/edit_achievement.php?id=" . $achievement->getIdAchievement() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
                         echo "<a href='../achievement/delete_achievement.php?id=" . $achievement->getIdAchievement() . "&idteam=" . $idteam . "' onclick=\"return confirm('Are you sure you want to delete this achievement?');\"><i class='fa-solid fa-trash'></i></a>";
                         echo "</div>";
                         echo "</li>";
