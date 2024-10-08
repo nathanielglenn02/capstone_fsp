@@ -1,6 +1,10 @@
 <?php
 class Member
 {
+
+    /* =======================
+       Data Members
+    ======================== */
     private $idMember;
     private $firstName;
     private $lastName;
@@ -8,6 +12,10 @@ class Member
     private $password;
     private $profile; // enum ('admin', 'member')
 
+
+    /* =======================
+        Constructors
+    ======================== */
     public function __construct($idMember, $firstName, $lastName, $username, $password, $profile)
     {
         $this->idMember = $idMember;
@@ -18,7 +26,9 @@ class Member
         $this->profile = $profile;
     }
 
-    // Getter dan Setter
+    /* =======================
+       Properties
+    ======================== */
     public function getIdMember()
     {
         return $this->idMember;

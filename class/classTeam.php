@@ -6,7 +6,7 @@ class Team
     ======================== */
     private $teamId;
     private $teamName;
-    private $gameId; // Foreign key ke Game
+    private $gameId;
     private $conn;
 
     /* =======================
@@ -23,7 +23,7 @@ class Team
     /* =======================
        Properties
     ======================== */
-    // Getter dan Setter
+
     public function getTeamId()
     {
         return $this->teamId;
@@ -58,30 +58,31 @@ class Team
        Methods
     ======================== */
 
-    // Metode untuk membaca semua team dari database
-    public static function getAllTeams($koneksi){
+
+    public static function getAllTeams($koneksi)
+    {
         $stmt = $koneksi->prepare("
             SELECT t.idteam, g.name as game_name, t.name as team_name 
             FROM team as t
             INNER JOIN game as g ON t.idgame = g.idgame
         ");
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
 
         $teams = [];
         while ($row = $result->fetch_assoc()) {
             $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
             $teams[] = $team;
-    }
+        }
 
-    $stmt->close();
-    return $teams;
+        $stmt->close();
+        return $teams;
     }
     public static function getAllTeamsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%"; 
+        $search = "%" . $search . "%";
         $stmt = $koneksi->prepare("
             SELECT t.idteam, g.name as game_name, t.name as team_name 
             FROM team as t
@@ -91,7 +92,7 @@ class Team
         ");
         $stmt->bind_param("sii", $search, $offset, $limit);
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
 
         $teams = [];
@@ -162,7 +163,6 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk menghapus tim
     public function deleteTeam($conn)
     {
         $query = "DELETE FROM team WHERE idteam = ?";
