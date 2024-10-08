@@ -91,7 +91,7 @@ if ($idteam) {
                 <?php
                 if (!empty($teamEvents)) {
                     foreach ($teamEvents as $event) {
-                        echo "<li class='event-completed'>";  // Add the class here
+                        echo "<li class='event-completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
                         echo "<div class='action-buttons'>";
                         echo "<a href='../event/edit_event.php?idevent=" . $event->getEventId() . "&idteam=" . $idteam . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
