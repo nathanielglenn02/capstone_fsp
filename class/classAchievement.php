@@ -161,6 +161,57 @@ class Achievement
         return null;
     }
 
+    public static function getPaginatedAchievementsByTeam($conn, $idteam, $page = 1, $limit = 5)
+    {
+        $offset = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM achievement WHERE idteam = ? LIMIT ?, ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "iii", $idteam, $offset, $limit);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $achievements = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $achievements[] = new Achievement(
+                $conn,
+                $row['idachievement'],
+                $row['idteam'],
+                $row['name'],
+                $row['date'],
+                $row['description']
+            );
+        }
+
+        mysqli_stmt_close($stmt);
+
+        return $achievements;
+    }
+
+    public static function getTotalAchievementsByTeam($conn, $idteam)
+    {
+        $query = "SELECT COUNT(*) AS total FROM achievement WHERE idteam = ?";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+
+        mysqli_stmt_bind_param($stmt, "i", $idteam);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $row = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+
+        return $row['total'];
+    }
+
     public static function getAchievementsByTeam($conn, $idteam)
     {
         $query = "SELECT * FROM achievement WHERE idteam = ?";
