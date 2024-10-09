@@ -81,6 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </option>
                         <?php endforeach; ?>
                     </select>
+
+                    <?php if ($idteam): ?>
+                        <input type="hidden" name="team_id" value="<?= $idteam ?>">
+                    <?php endif; ?>
+
                 </div>
                 <div class="form-group">
                     <label for="ach_date">Date</label>
