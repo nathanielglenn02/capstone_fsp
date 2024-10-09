@@ -86,11 +86,11 @@ $total_pages = ceil($total_teams / $limit);
             <div class="pagination" style="text-align: right;">
                 <?php
                 if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">
-                    << </a>
+                    <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">
+                        << </a>
                         <?php else: ?>
-                        <a href="#" class="disabled">
-                            << </a>
+                            <a href="#" class="disabled">
+                                << </a>
                                 <?php endif; ?>
 
                                 <?php
@@ -100,17 +100,17 @@ $total_pages = ceil($total_teams / $limit);
                                 $end_page = min($max_hal, $start_page + 2);
 
                                 for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
-                                <?php if ($hal == $page): ?>
-                                <b><?= $hal ?></b>
-                                <?php else: ?>
-                                <a href="?page=<?= $hal ?>&search=<?= urlencode($search) ?>"><?= $hal ?></a>
-                                <?php endif; ?>
+                                    <?php if ($hal == $page): ?>
+                                        <b><?= $hal ?></b>
+                                    <?php else: ?>
+                                        <a href="?page=<?= $hal ?>&search=<?= urlencode($search) ?>"><?= $hal ?></a>
+                                    <?php endif; ?>
                                 <?php endfor; ?>
 
                                 <?php if ($page < $max_hal): ?>
-                                <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">>></a>
+                                    <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">>></a>
                                 <?php else: ?>
-                                <a href="#" class="disabled">>></a>
+                                    <a href="#" class="disabled">>></a>
                                 <?php endif; ?>
             </div>
         </div>

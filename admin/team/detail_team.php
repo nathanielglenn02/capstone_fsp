@@ -20,10 +20,15 @@ $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
 
 if ($idteam) {
     $achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
-
     $teamMembers = TeamMembers::getMembersByTeam($koneksi, $idteam);
 
-    $teamEvents = EventTeams::getEventsByTeam($koneksi, $idteam);
+    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $limit = 5;
+
+    $teamEvents = EventTeams::getPaginatedEventsByTeam($koneksi, $idteam, $page, $limit);
+
+    $totalEvents = EventTeams::getTotalEventsByTeam($koneksi, $idteam);
+    $totalPages = ceil($totalEvents / $limit);
 
     $_SESSION['return_url'] = $_SERVER['REQUEST_URI'];
 } else {
@@ -104,7 +109,36 @@ if ($idteam) {
                 }
                 ?>
             </ul>
+
+            <div class="pagination" style="text-align: right;">
+                <?php if ($page > 1): ?>
+                    <a href="?idteam=<?= $idteam ?>&page=<?= $page - 1 ?>">
+                        << </a>
+                        <?php else: ?>
+                            <a href="#" class="disabled">
+                                << </a>
+                                <?php endif; ?>
+
+                                <?php
+                                $start_page = max(1, $page - 1);
+                                $end_page = min($totalPages, $start_page + 2);
+
+                                for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
+                                    <?php if ($hal == $page): ?>
+                                        <b><?= $hal ?></b>
+                                    <?php else: ?>
+                                        <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+
+                                <?php if ($page < $totalPages): ?>
+                                    <a href="?idteam=<?= $idteam ?>&page=<?= $page + 1 ?>">>></a>
+                                <?php else: ?>
+                                    <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
+            </div>
         </div>
+
 
         <div class="todo">
             <div class="head">
