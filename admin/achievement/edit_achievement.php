@@ -73,10 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="team_id">Team</label>
-                    <select id="team_id" name="team_id" <?= $idteam ? 'disabled' : '' ?> required>
+                    <select id="team_id" name="team_id" required>
                         <?php foreach ($teams as $team): ?>
                             <option value="<?php echo $team->getTeamId(); ?>"
-                                <?= $idteam == $team->getTeamId() ? 'selected' : '' ?>>
+                                <?= $achievement->getIdTeam() == $team->getTeamId() ? 'selected' : '' ?>>
                                 <?php echo $team->getTeamName(); ?>
                             </option>
                         <?php endforeach; ?>
