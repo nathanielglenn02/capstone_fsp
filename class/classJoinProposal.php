@@ -79,12 +79,94 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+    public static function getProposalsByMemberWithPaging($koneksi, $idmember, $page = 1, $limit = 5)
+    {
+        $offset = ($page - 1) * $limit;
 
-    public static function getAllProposal($koneksi){
+        $query = "SELECT * FROM join_proposal WHERE idmember = ? LIMIT ?, ?";
+        $stmt = $koneksi->prepare($query);
+        $stmt->bind_param("iii", $idmember, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $proposals = [];
+        while ($row = $result->fetch_assoc()) {
+            $proposals[] = new self(
+                $row['idjoin_proposal'],
+                $row['idmember'],
+                $row['idteam'],
+                $row['description'],
+                $row['status']
+            );
+        }
+        $stmt->close();
+
+        return $proposals;
+    }
+
+    public static function getTotalProposalsByMember($koneksi, $idmember)
+    {
+        $query = "SELECT COUNT(*) AS total FROM join_proposal WHERE idmember = ?";
+        $stmt = $koneksi->prepare($query);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        return $row['total'];
+    }
+
+    public static function getAllProposalWithPaging($koneksi, $page = 1, $limit = 5)
+    {
+        $offset = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM join_proposal LIMIT ?, ?";
+        $stmt = $koneksi->prepare($query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($koneksi));
+        }
+
+        $stmt->bind_param("ii", $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $proposals = [];
+        while ($row = $result->fetch_assoc()) {
+            $proposals[] = new self(
+                $row['idjoin_proposal'],
+                $row['idmember'],
+                $row['idteam'],
+                $row['description'],
+                $row['status']
+            );
+        }
+        $stmt->close();
+
+        return $proposals;
+    }
+
+    public static function getTotalProposals($koneksi)
+    {
+        $query = "SELECT COUNT(*) AS total FROM join_proposal";
+        $stmt = $koneksi->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        return $row['total'];
+    }
+
+    public static function getAllProposal($koneksi)
+    {
         $query = "SELECT * FROM join_proposal";
         $stmt = $koneksi->prepare($query);
         $stmt->execute();
-        $result = $stmt->get_result();   
+        $result = $stmt->get_result();
 
         $proposals = [];
         while ($row = $result->fetch_assoc()) {
@@ -99,12 +181,13 @@ class JoinProposal
         return $proposals;
     }
 
-    public static function getProposalById($koneksi, $idProposal){
+    public static function getProposalById($koneksi, $idProposal)
+    {
         $query = "SELECT * FROM join_proposal where idjoin_proposal = ?";
         $stmt = $koneksi->prepare($query);
         $stmt->bind_param("i", $idProposal);
         $stmt->execute();
-        $result = $stmt->get_result();   
+        $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
         if ($row) {
@@ -140,7 +223,7 @@ class JoinProposal
         return $proposals;
     }
 
-    
+
     public static function getProposalByMemberAndTeam($koneksi, $idmember, $idteam)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ? AND idteam = ?";
