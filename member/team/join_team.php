@@ -19,7 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idteam'])) {
     $existingProposal = JoinProposal::getProposalByMemberAndTeam($koneksi, $idmember, $idteam);
 
     if ($existingProposal) {
-        echo "<script>alert('Anda sudah mengajukan join ke tim ini. Mohon tunggu konfirmasi.'); window.location.href = 'team.php';</script>";
+        $status = $existingProposal->getStatus();
+
+        if ($status === 'waiting') {
+            echo "<script>alert('Anda sudah mengajukan join ke tim ini. Mohon tunggu konfirmasi.'); window.location.href = 'team.php';</script>";
+        } elseif ($status === 'approved') {
+            echo "<script>alert('Anda sudah mengajukan join ke tim ini dan Anda telah berhasil bergabung dengan tim ini.'); window.location.href = 'team.php';</script>";
+        } elseif ($status === 'rejected') {
+            echo "<script>alert('Anda sudah mengajukan join ke tim ini, dan pengajuan Anda untuk bergabung dengan tim ini ditolak.'); window.location.href = 'team.php';</script>";
+        }
     } else {
         JoinProposal::createProposal($koneksi, $idmember, $idteam, $description);
         echo "<script>alert('Join proposal berhasil diajukan.'); window.location.href = 'team.php';</script>";
