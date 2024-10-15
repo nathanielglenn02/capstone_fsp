@@ -79,6 +79,46 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+
+    public static function getAllProposal($koneksi){
+        $query = "SELECT * FROM join_proposal";
+        $stmt = $koneksi->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();   
+
+        $proposals = [];
+        while ($row = $result->fetch_assoc()) {
+            $proposals[] = new self(
+                $row['idjoin_proposal'],
+                $row['idmember'],
+                $row['idteam'],
+                $row['description'],
+                $row['status'],
+            );
+        }
+        return $proposals;
+    }
+
+    public static function getProposalById($koneksi, $idProposal){
+        $query = "SELECT * FROM join_proposal where idjoin_proposal = ?";
+        $stmt = $koneksi->prepare($query);
+        $stmt->bind_param("i", $idProposal);
+        $stmt->execute();
+        $result = $stmt->get_result();   
+        $row = $result->fetch_assoc();
+
+        if ($row) {
+            return new self(
+                $row['idjoin_proposal'],
+                $row['idmember'],
+                $row['idteam'],
+                $row['description'],
+                $row['status']
+            );
+        }
+        return null;
+    }
+
     public static function getProposalsByMember($koneksi, $idmember)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ?";
@@ -100,6 +140,7 @@ class JoinProposal
         return $proposals;
     }
 
+    
     public static function getProposalByMemberAndTeam($koneksi, $idmember, $idteam)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ? AND idteam = ?";

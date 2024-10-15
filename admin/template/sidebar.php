@@ -41,6 +41,12 @@ require_once('header.php');
                     <span class="text">Achievement</span>
                 </a>
             </li>
+            <li>
+                <a href="<?= $main_url ?>Admin/status_member/status_member.php">
+                    <i class='bx bxs-edit-alt'></i>
+                    <span class="text">Status Member</span>
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
             <li>
