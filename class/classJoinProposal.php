@@ -79,6 +79,27 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+    public static function getApprovedProposalByMember($koneksi, $idmember)
+    {
+        $query = "SELECT * FROM join_proposal WHERE idmember = ? AND status = 'approved'";
+        $stmt = $koneksi->prepare($query);
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row) {
+            return new self(
+                $row['idjoin_proposal'],
+                $row['idmember'],
+                $row['idteam'],
+                $row['description'],
+                $row['status']
+            );
+        }
+        return null;
+    }
+
     public function rejectOtherProposals($koneksi)
     {
         $query = "UPDATE join_proposal SET status = 'rejected' WHERE idmember = ? AND idjoin_proposal != ? AND status = 'waiting'";

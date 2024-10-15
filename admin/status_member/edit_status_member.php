@@ -24,24 +24,29 @@ if ($idProposal == 0) {
     exit();
 }
 
+$joinProposal = JoinProposal::getProposalById($koneksi, $idProposal);
+$memberName = Member::getMemberNameById($koneksi, $joinProposal->getIdMember());
 
-$joinProposals = JoinProposal::getProposalById($koneksi, $idProposal);
-$memberName = Member::getMemberNameById($koneksi, $joinProposals->getIdMember());
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
+
+    if ($status !== 'rejected') {
+        $approvedProposal = JoinProposal::getApprovedProposalByMember($koneksi, $joinProposal->getIdMember());
+
+        if ($approvedProposal && $approvedProposal->getId() != $idProposal) {
+            echo "<script>alert('Member ini sudah bergabung dengan tim lain. Tidak bisa mengubah status menjadi waiting atau approved.'); window.location.href = 'status_member.php';</script>";
+            exit();
+        }
+    }
+
     $proposal = new JoinProposal();
     $proposal->setStatus($status);
     $proposal->setId($idProposal);
-
-    $proposal->setIdMember($joinProposals->getIdMember());
     $proposal->updateProposal($koneksi);
 
-    if ($status === 'approved') {
-        $proposal->rejectOtherProposals($koneksi);
-    }
     header('Location: status_member.php');
+    exit();
 }
-
 ?>
 
 <main>
@@ -71,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="status">Status:</label>
                     <select id="status" name="status" required>
-                        <option value="Waiting" <?= $joinProposals->getStatus() == 'waiting' ? 'selected' : '' ?>>Waiting</option>
-                        <option value="approved" <?= $joinProposals->getStatus() == 'approved' ? 'selected' : '' ?>>Approved</option>
-                        <option value="rejected" <?= $joinProposals->getStatus() == 'rejected' ? 'selected' : '' ?>>Rejected</option>
+                        <option value="waiting" <?= $joinProposal->getStatus() == 'waiting' ? 'selected' : '' ?>>Waiting</option>
+                        <option value="approved" <?= $joinProposal->getStatus() == 'approved' ? 'selected' : '' ?>>Approved</option>
+                        <option value="rejected" <?= $joinProposal->getStatus() == 'rejected' ? 'selected' : '' ?>>Rejected</option>
                     </select>
                 </div>
                 <button type="submit" class="btn">Update Status</button>
