@@ -79,6 +79,15 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+    public function rejectOtherProposals($koneksi)
+    {
+        $query = "UPDATE join_proposal SET status = 'rejected' WHERE idmember = ? AND idjoin_proposal != ? AND status = 'waiting'";
+        $stmt = $koneksi->prepare($query);
+        $stmt->bind_param("ii", $this->idmember, $this->id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     public static function getProposalsByMemberWithPaging($koneksi, $idmember, $page = 1, $limit = 5)
     {
         $offset = ($page - 1) * $limit;
