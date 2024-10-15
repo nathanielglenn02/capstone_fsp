@@ -41,6 +41,12 @@ require_once('header.php');
                     <span class="text">Achievement</span>
                 </a>
             </li>
+            <li>
+                <a href="<?= $main_url ?>member/team/join_status.php">
+                <i class='bx bxs-edit-alt'></i>
+                    <span class="text">Status Proposal</span>
+                </a>
+            </li>
         </ul>
         <ul class="side-menu">
             <li>

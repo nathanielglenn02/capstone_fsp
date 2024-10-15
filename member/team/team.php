@@ -45,9 +45,6 @@ $total_pages = ceil($total_teams / $limit);
                 </li>
             </ul>
         </div>
-        <div class="right">>
-            <a href="join_status.php" class="btn btn-primary">Lihat Status Join</a>
-        </div>
     </div>
 
     <!-- Konten Utama -->
