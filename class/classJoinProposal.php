@@ -14,7 +14,7 @@ class JoinProposal
     /* =======================
         Constructors
     ======================== */
-    public function __construct($id, $idmember, $idteam, $description, $status)
+    public function __construct($id = null, $idmember = null, $idteam = null, $description = null, $status = null)
     {
         $this->id = $id;
         $this->idmember = $idmember;
@@ -169,5 +169,22 @@ class JoinProposal
         $stmt = $koneksi->prepare($query);
         $stmt->bind_param("iiss", $idmember, $idteam, $description, $status);
         $stmt->execute();
+    }
+    public function updateProposal($koneksi)
+    {
+        $query = "UPDATE join_proposal SET status = ? WHERE idjoin_proposal = ?";
+        $stmt = mysqli_prepare($koneksi, $query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($koneksi));
+        }
+
+        mysqli_stmt_bind_param($stmt, "si", $this->status, $this->id);
+
+        if (!mysqli_stmt_execute($stmt)) {
+            die('Execute failed: ' . mysqli_stmt_error($stmt));
+        }
+
+        mysqli_stmt_close($stmt);
     }
 }

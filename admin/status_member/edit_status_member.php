@@ -29,7 +29,13 @@ if ($idProposal == 0) {
 $joinProposals = JoinProposal::getProposalById($koneksi, $idProposal);
 $memberName = Member::getMemberNameById($koneksi, $joinProposals->getIdMember());
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+    $status = $_POST['status'];
+    $proposal = new JoinProposal();
+    $proposal->setStatus($status);
+    $proposal->setId($idProposal);
+    $proposal->updateProposal($koneksi);
+
+    header('Location: status_member.php');
 }
 ?>
 
@@ -61,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="status">Status:</label>
                     <select id="status" name="status" required>
                         <option value="Pending" <?= $joinProposals->getStatus() == 'Pending' ? 'selected' : '' ?>>Pending</option>
-                        <option value="Terima" <?= $joinProposals->getStatus() == 'Terima' ? 'selected' : '' ?>>Terima</option>
-                        <option value="Tolak" <?= $joinProposals->getStatus() == 'Tolak' ? 'selected' : '' ?>>Tolak</option>
+                        <option value="approved" <?= $joinProposals->getStatus() == 'approved' ? 'selected' : '' ?>>Approve</option>
+                        <option value="rejected" <?= $joinProposals->getStatus() == 'rejected' ? 'selected' : '' ?>>Reject</option>
                     </select>
                 </div>
                 <button type="submit" class="btn">Update Status</button>
