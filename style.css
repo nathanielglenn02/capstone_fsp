@@ -40,14 +40,6 @@
 	color: #666;
 }
 
-a {
-	text-decoration: none;
-}
-
-li {
-	list-style: none;
-}
-
 .login-container {
 	display: flex;
 	justify-content: center;
@@ -138,7 +130,6 @@ textarea {
 	gap: 10px;
 }
 
-
 .register-link {
 	margin-top: 20px;
 }
@@ -227,6 +218,15 @@ textarea {
 	max-width: 100%;
 }
 
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+
 :root {
 	--poppins: 'Poppins', sans-serif;
 	--lato: 'Lato', sans-serif;
@@ -249,24 +249,11 @@ html {
 	overflow-x: hidden;
 }
 
-body.dark {
-	--light: #0C0C1E;
-	--grey: #060714;
-	--dark: #FBFBFB;
-}
-
-body {
-	background: var(--grey);
-	overflow-x: hidden;
-}
-
 
 /* HIDDEN */
 .hidden {
 	visibility: hidden;
 }
-
-
 
 /* SIDEBAR */
 #sidebar {
@@ -398,9 +385,6 @@ body {
 /* SIDEBAR */
 
 
-
-
-
 /* CONTENT */
 #content {
 	position: relative;
@@ -472,12 +456,7 @@ body {
 	border-radius: 50%;
 }
 
-
-
 /* NAVBAR */
-
-
-
 
 
 /* MAIN */
@@ -538,8 +517,6 @@ body {
 }
 
 
-
-
 #content main .box-info {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -590,9 +567,6 @@ body {
 #content main .box-info li .text p {
 	color: var(--dark);
 }
-
-
-
 
 
 #content main .table-data {
@@ -762,7 +736,6 @@ body {
 	resize: vertical;
 }
 
-/* Styling for buttons in edit_game and edit_team */
 #edit_game .btn,
 #edit_team .btn,
 #edit_event .btn,
@@ -776,9 +749,7 @@ body {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	width: 150px;
-	/* This ensures the button adjusts to content */
 	display: inline-block;
-	/* To ensure it's the same size as Update Team */
 }
 
 #edit_game .btn:hover,
@@ -790,15 +761,12 @@ body {
 
 #edit_game {
 	text-align: left;
-	/* Aligns button to the left, similar to Update Team */
 }
 
 #edit_game .btn {
 	margin-top: 20px;
 }
 
-/* Container styling for edit_team */
-/* Form Styling */
 #edit_team label {
 	font-size: 16px;
 	font-weight: 500;
@@ -823,8 +791,6 @@ body {
 	height: 40px;
 }
 
-/* Container styling for edit_event */
-/* Form Styling */
 #edit_event .form-group {
 	margin-bottom: 15px;
 }
@@ -858,7 +824,6 @@ body {
 	color: #333;
 }
 
-/* Form Styling */
 #edit_achievement .form-group {
 	margin-bottom: 15px;
 }
@@ -891,7 +856,6 @@ body {
 
 /* CREATE STYLE */
 /* CREATE GAME */
-/* Form Styling */
 #create_game .form-group {
 	margin-bottom: 15px;
 }
@@ -920,7 +884,6 @@ body {
 	resize: vertical;
 }
 
-/* Button Styling */
 #create_game .btn {
 	padding: 10px 20px;
 	font-size: 16px;
@@ -960,7 +923,6 @@ body {
 	margin-bottom: 15px;
 }
 
-/* Button Styling */
 #create_team .btn {
 	padding: 10px 20px;
 	font-size: 16px;
@@ -977,7 +939,6 @@ body {
 }
 
 /* CREATE EVENT */
-/* Form Styling */
 #create_event .form-group {
 	margin-bottom: 15px;
 }
@@ -1001,7 +962,6 @@ body {
 	margin-bottom: 15px;
 }
 
-/* Button Styling */
 #create_event .btn {
 	padding: 10px 20px;
 	font-size: 16px;
@@ -1018,7 +978,6 @@ body {
 }
 
 /* CREATE ACHIEVEMENT */
-/* Form Styling */
 #create_achievement .form-group {
 	margin-bottom: 15px;
 }
@@ -1049,7 +1008,6 @@ body {
 	resize: vertical;
 }
 
-/* Button Styling */
 #create_achievement .btn {
 	padding: 10px 20px;
 	font-size: 16px;

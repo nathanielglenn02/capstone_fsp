@@ -27,7 +27,6 @@ class Achievement
     /* =======================
        Properties
     ======================== */
-    // Getter dan Setter
     public function getIdAchievement()
     {
         return $this->idAchievement;

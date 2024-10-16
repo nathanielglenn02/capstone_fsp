@@ -23,7 +23,6 @@ class Event
     /* =======================
        Properties
     ======================== */
-    // Getter dan Setter
     public function getEventId()
     {
         return $this->eventId;

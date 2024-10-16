@@ -8,7 +8,6 @@ require_once('header.php');
     <nav>
         <i class='bx bx-menu'></i>
 
-        <!-- Invisible Text/Spacer -->
         <div style="flex-grow: 1;"></div>
 
         <a href="#" class="profile">

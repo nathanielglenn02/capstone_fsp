@@ -22,7 +22,6 @@ class Game
     /* =======================
        Properties
     ======================== */
-    // Getter dan Setter
     public function getGameId()
     {
         return $this->gameId;
