@@ -47,7 +47,6 @@ $_SESSION['return_url'] = $_SERVER['REQUEST_URI'];
             </ul>
         </div>
     </div>
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <div class="head">

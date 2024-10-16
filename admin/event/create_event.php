@@ -42,7 +42,6 @@ require_once('../template/navbar.php');
             </ul>
         </div>
     </div>
-    <!-- Form untuk menambah event baru -->
     <div class="table-data">
         <div class="order">
             <form id="create_event" action="create_event.php" method="POST">

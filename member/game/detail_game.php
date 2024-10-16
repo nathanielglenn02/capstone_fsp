@@ -21,8 +21,6 @@ $gameDetails = Game::getGameDetails($koneksi, $idgame);
 $teams = $gameDetails['teams'];
 $events = $gameDetails['events'];
 ?>
-
-<!-- Konten Utama -->
 <main>
     <div class="head-title">
         <div class="left">

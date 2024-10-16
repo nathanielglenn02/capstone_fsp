@@ -52,7 +52,6 @@ if ($idteam) {
         </div>
     </div>
 
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -90,7 +89,7 @@ if ($idteam) {
                 <?php
                 if (!empty($teamEvents)) {
                     foreach ($teamEvents as $event) {
-                        echo "<li class='event-completed'>";  // Add the class here
+                        echo "<li class='event-completed'>";
                         echo "<p>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</p>";
                         echo "<div class='action-buttons'>";
                         echo "</div>";

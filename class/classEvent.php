@@ -6,8 +6,8 @@ class Event
     ======================== */
     private $eventId;
     private $eventName;
-    private $description; // Foreign key ke Game
-    private $date; // Tanggal event
+    private $description;
+    private $date;
 
     /* =======================
         Constructors
@@ -152,7 +152,7 @@ class Event
         if ($row = mysqli_fetch_assoc($result)) {
             $event = new Event($row['idevent'], $row['name'], $row['description'], $row['date']);
         } else {
-            $event = null; // Tidak ditemukan
+            $event = null;
         }
 
         mysqli_stmt_close($stmt);

@@ -9,7 +9,6 @@ require_once('../class/classMember.php');
     <div class="login-container">
         <div class="login-form">
             <h3>Registrasi Akun Baru</h3>
-            <!-- Form Registrasi -->
             <form action="register-proses.php" method="POST">
                 <div class="form-group">
                     <label for="fname">First Name:</label>

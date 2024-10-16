@@ -1,5 +1,5 @@
 <?php
-require_once('classEvent.php'); // Tambahkan ini untuk menyertakan class Event
+require_once('classEvent.php');
 
 class EventTeams
 {

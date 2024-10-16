@@ -42,7 +42,6 @@ require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 ?>
 
-<!-- Konten Form Edit -->
 <main>
     <div class="head-title">
         <div class="left">

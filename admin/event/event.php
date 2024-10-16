@@ -47,7 +47,6 @@ $total_pages = ceil($total_events / $limit);
             </ul>
         </div>
     </div>
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <div class="head">

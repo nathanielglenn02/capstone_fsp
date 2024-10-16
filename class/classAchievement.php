@@ -14,7 +14,6 @@ class Achievement
     /* =======================
         Constructors
     ======================== */
-    // Constructor
     public function __construct($conn, $idAchievement = null, $idTeam = null, $name = null, $date = null, $description = null)
     {
         $this->conn = $conn;

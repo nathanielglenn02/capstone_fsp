@@ -10,7 +10,7 @@ class Member
     private $lastName;
     private $username;
     private $password;
-    private $profile; // enum ('admin', 'member')
+    private $profile;
 
 
     /* =======================
@@ -90,19 +90,20 @@ class Member
     }
 
 
-    public static function getMemberNameById($koneksi, $idmember) {
+    public static function getMemberNameById($koneksi, $idmember)
+    {
         $query = "SELECT fname FROM member WHERE idmember = ?";
         $stmt = $koneksi->prepare($query);
-        
+
         if (!$stmt) {
             die("Error preparing statement: " . $koneksi->error);
         }
-    
+
         $stmt->bind_param("i", $idmember);
         $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
-        
+
         return $row['fname'] ?? null;
     }
 }

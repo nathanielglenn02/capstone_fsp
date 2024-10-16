@@ -82,7 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </ul>
         </div>
     </div>
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <form id="edit_status_member" method="POST">
@@ -94,9 +93,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="form-group">
                     <label for="status">Status:</label>
                     <select id="status" name="status" required>
-                        <option value="waiting" <?= $joinProposal->getStatus() == 'waiting' ? 'selected' : '' ?>>Waiting</option>
-                        <option value="approved" <?= $joinProposal->getStatus() == 'approved' ? 'selected' : '' ?>>Approved</option>
-                        <option value="rejected" <?= $joinProposal->getStatus() == 'rejected' ? 'selected' : '' ?>>Rejected</option>
+                        <option value="waiting" <?= $joinProposal->getStatus() == 'waiting' ? 'selected' : '' ?>>Waiting
+                        </option>
+                        <option value="approved" <?= $joinProposal->getStatus() == 'approved' ? 'selected' : '' ?>>
+                            Approved</option>
+                        <option value="rejected" <?= $joinProposal->getStatus() == 'rejected' ? 'selected' : '' ?>>
+                            Rejected</option>
                     </select>
                 </div>
                 <button type="submit" class="btn">Update Status</button>

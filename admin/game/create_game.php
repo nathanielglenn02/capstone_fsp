@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- Konten Utama -->
 <main>
     <div class="head-title">
         <div class="left">

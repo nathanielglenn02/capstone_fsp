@@ -286,7 +286,7 @@ class JoinProposal
 
     public static function createProposal($koneksi, $idmember, $idteam, $description)
     {
-        $status = 'waiting'; // Status default
+        $status = 'waiting';
         $query = "INSERT INTO join_proposal (idmember, idteam, description, status) VALUES (?, ?, ?, ?)";
         $stmt = $koneksi->prepare($query);
         $stmt->bind_param("iiss", $idmember, $idteam, $description, $status);

@@ -55,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </ul>
         </div>
     </div>
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <form id="create_achievement" method="POST">

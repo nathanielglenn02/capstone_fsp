@@ -60,7 +60,6 @@ if ($idteam) {
         </div>
     </div>
 
-    <!-- Konten Utama -->
     <div class="table-data">
         <div class="order">
             <div class="head">
