@@ -104,8 +104,17 @@ class JoinProposal
     {
         $query = "UPDATE join_proposal SET status = 'rejected' WHERE idmember = ? AND idjoin_proposal != ? AND status = 'waiting'";
         $stmt = $koneksi->prepare($query);
+
+        if ($stmt === false) {
+            die('Prepare failed: ' . $koneksi->error);
+        }
+
         $stmt->bind_param("ii", $this->idmember, $this->id);
-        $stmt->execute();
+
+        if (!$stmt->execute()) {
+            die('Execute failed: ' . $stmt->error);
+        }
+
         $stmt->close();
     }
 

@@ -16,7 +16,6 @@ require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
 $return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
-
 $idProposal = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($idProposal == 0) {
@@ -39,10 +38,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    $proposal = new JoinProposal();
-    $proposal->setStatus($status);
-    $proposal->setId($idProposal);
-    $proposal->updateProposal($koneksi);
+    $joinProposal->setStatus($status);
+    $joinProposal->updateProposal($koneksi);
+
+    if ($status === 'approved') {
+
+        $query = "INSERT INTO team_members (idteam, idmember) VALUES (?, ?) ON DUPLICATE KEY UPDATE idteam = ?";
+        $stmt = $koneksi->prepare($query);
+        $idteam = $joinProposal->getTeamId();
+        $idmember = $joinProposal->getIdMember();
+        $stmt->bind_param("iii", $idteam, $idmember, $idteam);
+        $stmt->execute();
+        $stmt->close();
+
+        $joinProposal->rejectOtherProposals($koneksi);
+    } elseif ($status === 'rejected') {
+        $query = "DELETE FROM team_members WHERE idteam = ? AND idmember = ?";
+        $stmt = $koneksi->prepare($query);
+        $idteam = $joinProposal->getTeamId();
+        $idmember = $joinProposal->getIdMember();
+        $stmt->bind_param("ii", $idteam, $idmember);
+        $stmt->execute();
+        $stmt->close();
+    }
 
     header('Location: status_member.php');
     exit();
