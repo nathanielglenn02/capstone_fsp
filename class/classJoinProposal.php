@@ -79,6 +79,54 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+    public static function getApprovedTeamsByMemberWithPaging($koneksi, $idmember, $page = 1, $limit = 5)
+    {
+        $offset = ($page - 1) * $limit;
+        $query = "
+        SELECT t.* 
+        FROM join_proposal jp
+        INNER JOIN team t ON jp.idteam = t.idteam
+        WHERE jp.idmember = ? AND jp.status = 'approved'
+        LIMIT ?, ?
+    ";
+        $stmt = $koneksi->prepare($query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . $koneksi->error);
+        }
+        $stmt->bind_param("iii", $idmember, $offset, $limit);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $approvedTeams = [];
+        while ($row = $result->fetch_assoc()) {
+            $approvedTeams[] = $row;
+        }
+
+        $stmt->close();
+        return $approvedTeams;
+    }
+
+    public static function getTotalApprovedTeamsByMember($koneksi, $idmember)
+    {
+        $query = "
+        SELECT COUNT(*) AS total 
+        FROM join_proposal jp
+        INNER JOIN team t ON jp.idteam = t.idteam
+        WHERE jp.idmember = ? AND jp.status = 'approved'
+    ";
+        $stmt = $koneksi->prepare($query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . $koneksi->error);
+        }
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+
+        return $row['total'];
+    }
+
     public static function getApprovedTeamsByMember($koneksi, $idmember)
     {
         $query = "
@@ -99,14 +147,12 @@ class JoinProposal
 
         $approvedTeams = [];
         while ($row = $result->fetch_assoc()) {
-            $approvedTeams[] = $row;  // Fetch all approved teams
+            $approvedTeams[] = $row;
         }
 
         $stmt->close();
         return $approvedTeams;
     }
-
-
 
     public static function getApprovedProposalByMember($koneksi, $idmember)
     {

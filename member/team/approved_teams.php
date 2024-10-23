@@ -108,6 +108,29 @@ require_once('../template/navbar.php');
                     ?>
                 </tbody>
             </table>
+            <div class="pagination">
+                <?php if ($page > 1): ?>
+                    <a href="?page=<?= $page - 1 ?>">
+                        << Previous</a>
+                        <?php else: ?>
+                            <span class="disabled">
+                                << Previous</span>
+                                <?php endif; ?>
+
+                                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                    <?php if ($i == $page): ?>
+                                        <span class="current"><?= $i ?></span>
+                                    <?php else: ?>
+                                        <a href="?page=<?= $i ?>"><?= $i ?></a>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+
+                                <?php if ($page < $total_pages): ?>
+                                    <a href="?page=<?= $page + 1 ?>">Next >></a>
+                                <?php else: ?>
+                                    <span class="disabled">Next >></span>
+                                <?php endif; ?>
+            </div>
         </div>
     </div>
 </main>

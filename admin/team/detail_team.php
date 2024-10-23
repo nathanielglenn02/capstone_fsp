@@ -22,6 +22,12 @@ if ($idteam) {
     $achievements = Achievement::getAchievementsByTeam($koneksi, $idteam);
     $teamMembers = TeamMembers::getMembersByTeam($koneksi, $idteam);
 
+    $pageMembers = isset($_GET['pageMembers']) ? (int)$_GET['pageMembers'] : 1;
+    $limitMembers = 5;
+    $teamMembers = TeamMembers::getPaginatedMembersByTeam($koneksi, $idteam, $pageMembers, $limitMembers);
+    $totalMembers = TeamMembers::getTotalMembersByTeam($koneksi, $idteam);
+    $totalPagesMembers = ceil($totalMembers / $limitMembers);
+
     $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
     $limit = 5;
     $teamEvents = EventTeams::getPaginatedEventsByTeam($koneksi, $idteam, $page, $limit);
@@ -79,6 +85,33 @@ if ($idteam) {
                 }
                 ?>
             </ul>
+            <div class="pagination" style="text-align: right;">
+                <?php if ($pageMembers > 1): ?>
+                    <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers - 1 ?>">
+                        << </a>
+                        <?php else: ?>
+                            <a href="#" class="disabled">
+                                << </a>
+                                <?php endif; ?>
+
+                                <?php
+                                $start_page = max(1, $pageMembers - 1);
+                                $end_page = min($totalPagesMembers, $start_page + 2);
+
+                                for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
+                                    <?php if ($hal == $pageMembers): ?>
+                                        <b><?= $hal ?></b>
+                                    <?php else: ?>
+                                        <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+
+                                <?php if ($pageMembers  < $totalPagesMembers): ?>
+                                    <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers  + 1 ?>">>></a>
+                                <?php else: ?>
+                                    <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
+            </div>
         </div>
 
         <?php

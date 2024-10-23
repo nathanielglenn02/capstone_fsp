@@ -79,6 +79,55 @@ class TeamMembers
     /* =======================
        Methods
     ======================== */
+    public static function getPaginatedMembersByTeam($conn, $idTeam, $page = 1, $limit = 5)
+    {
+        $offset = ($page - 1) * $limit;
+        $query = "SELECT m.idmember, m.fname, m.lname FROM team_members tm
+                  JOIN member m ON tm.idmember = m.idmember
+                  WHERE tm.idteam = ? LIMIT ?, ?";
+        $stmt = mysqli_prepare($conn, $query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+        mysqli_stmt_bind_param($stmt, "iii", $idTeam, $offset, $limit);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $members = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $member = new TeamMembers(
+                $conn,
+                $idTeam,
+                $row['idmember'],
+                $row['fname'] . ' ' . $row['lname'],
+                null
+            );
+            $members[] = $member;
+        }
+        mysqli_stmt_close($stmt);
+
+        return $members;
+    }
+
+    public static function getTotalMembersByTeam($conn, $idTeam)
+    {
+        $query = "SELECT COUNT(*) AS total FROM team_members tm
+                  JOIN member m ON tm.idmember = m.idmember
+                  WHERE tm.idteam = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . mysqli_error($conn));
+        }
+        mysqli_stmt_bind_param($stmt, "i", $idTeam);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        mysqli_stmt_close($stmt);
+
+        return $row['total'];
+    }
+
     public static function getMembersByTeam($conn, $idTeam)
     {
         $query = "SELECT m.idmember, m.fname, m.lname FROM team_members tm
