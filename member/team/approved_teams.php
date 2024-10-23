@@ -64,7 +64,6 @@ require_once('../template/navbar.php');
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($team['name']) . "</td>";
 
-                            // Display team members
                             echo "<td>";
                             if (!empty($teamMembers)) {
                                 echo "<ul>";
@@ -77,7 +76,6 @@ require_once('../template/navbar.php');
                             }
                             echo "</td>";
 
-                            // Display achievements
                             echo "<td>";
                             if (!empty($achievements)) {
                                 echo "<ul>";
@@ -90,7 +88,6 @@ require_once('../template/navbar.php');
                             }
                             echo "</td>";
 
-                            // Display events
                             echo "<td>";
                             if (!empty($events)) {
                                 echo "<ul>";
