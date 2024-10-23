@@ -43,10 +43,17 @@ require_once('header.php');
             </li>
             <li>
                 <a href="<?= $main_url ?>member/team/join_status.php">
-                <i class='bx bxs-edit-alt'></i>
+                    <i class='bx bxs-edit-alt'></i>
                     <span class="text">Status Proposal</span>
                 </a>
             </li>
+            <li>
+                <a href="<?= $main_url ?>member/team/approved_teams.php">
+                    <i class='bx bxs-user-detail'></i>
+                    <span class="text">My Teams</span>
+                </a>
+            </li>
+
         </ul>
         <ul class="side-menu">
             <li>
@@ -55,12 +62,6 @@ require_once('header.php');
                     <span class="text">Logout</span>
                 </a>
             </li>
-            <!-- <li>
-                <a href="<?= $main_url ?>auth/login.php" class="login">
-                    <i class='bx bxs-log-out-circle'></i>
-                    <span class="text">Login</span>
-                </a>
-            </li> -->
         </ul>
     </section>
     <!-- SIDEBAR -->

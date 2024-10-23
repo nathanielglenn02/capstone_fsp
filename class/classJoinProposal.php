@@ -79,6 +79,35 @@ class JoinProposal
     /* =======================
        Methods
     ======================== */
+    public static function getApprovedTeamsByMember($koneksi, $idmember)
+    {
+        $query = "
+        SELECT t.* 
+        FROM join_proposal jp
+        INNER JOIN team t ON jp.idteam = t.idteam
+        WHERE jp.idmember = ? AND jp.status = 'approved'
+    ";
+
+        $stmt = $koneksi->prepare($query);
+        if ($stmt === false) {
+            die('Prepare failed: ' . $koneksi->error);
+        }
+
+        $stmt->bind_param("i", $idmember);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $approvedTeams = [];
+        while ($row = $result->fetch_assoc()) {
+            $approvedTeams[] = $row;  // Fetch all approved teams
+        }
+
+        $stmt->close();
+        return $approvedTeams;
+    }
+
+
+
     public static function getApprovedProposalByMember($koneksi, $idmember)
     {
         $query = "SELECT * FROM join_proposal WHERE idmember = ? AND status = 'approved'";
