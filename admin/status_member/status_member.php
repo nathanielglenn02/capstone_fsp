@@ -82,30 +82,32 @@ $total_pages = ceil($total_proposals / $limit);
                 </tbody>
             </table>
             <div class="pagination" style="text-align: right;">
-                <?php if ($page > 1): ?>
-                    <a href="?page=<?= $page - 1 ?>">
-                        << </a>
-                        <?php else: ?>
-                            <a href="#" class="disabled">
-                                << </a>
-                                <?php endif; ?>
-
-                                <?php
-                                $start_page = max(1, $page - 1);
-                                $end_page = min($total_pages, $start_page + 2);
-
-                                for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
-                                    <?php if ($hal == $page): ?>
-                                        <b><?= $hal ?></b>
-                                    <?php else: ?>
-                                        <a href="?page=<?= $hal ?>"><?= $hal ?></a>
+                <?php if ($total_proposals > 0): ?>
+                    <?php if ($page > 1): ?>
+                        <a href="?page=<?= $page - 1 ?>">
+                            << </a>
+                            <?php else: ?>
+                                <a href="#" class="disabled">
+                                    << </a>
                                     <?php endif; ?>
-                                <?php endfor; ?>
 
-                                <?php if ($page < $total_pages): ?>
-                                    <a href="?page=<?= $page + 1 ?>">>></a>
-                                <?php else: ?>
-                                    <a href="#" class="disabled">>></a>
+                                    <?php
+                                    $start_page = max(1, $page - 1);
+                                    $end_page = min($total_pages, $start_page + 2);
+
+                                    for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
+                                        <?php if ($hal == $page): ?>
+                                            <b><?= $hal ?></b>
+                                        <?php else: ?>
+                                            <a href="?page=<?= $hal ?>"><?= $hal ?></a>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <?php if ($page < $total_pages): ?>
+                                        <a href="?page=<?= $page + 1 ?>">>></a>
+                                    <?php else: ?>
+                                        <a href="#" class="disabled">>></a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
             </div>
         </div>
