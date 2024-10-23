@@ -221,8 +221,6 @@ class Game
         } else {
             return null;
         }
-
-        mysqli_stmt_close($stmt);
     }
 
 

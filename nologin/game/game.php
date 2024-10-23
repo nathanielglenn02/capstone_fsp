@@ -7,7 +7,6 @@ require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
-
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $limit = 5;
 
