@@ -10,18 +10,25 @@ require_once('../../service/config.php');
 require_once('../../class/classGame.php');
 require_once('../../class/classTeam.php');
 require_once('../../class/classEvent.php');
+
 $title = "Game Details - Club Informatics 2024";
 require_once('../template/header.php');
 require_once('../template/sidebar.php');
 require_once('../template/navbar.php');
 
 $idgame = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$gameDetails = Game::getGameDetails($koneksi, $idgame);
+
+$limit = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+$gameDetails = Game::getGameDetailsWithEventsPaging($koneksi, $idgame, $limit, $offset);
+$totalEvents = Game::getTotalEventsForGame($koneksi, $idgame);
+$totalPages = ceil($totalEvents / $limit);
 
 $teams = $gameDetails['teams'];
 $events = $gameDetails['events'];
 ?>
-
 <main>
     <div class="head-title">
         <div class="left">
@@ -45,7 +52,6 @@ $events = $gameDetails['events'];
         <div class="order">
             <div class="head">
                 <h3>Game Details</h3>
-                <i class='bx bx-plus'></i>
                 <i class='bx bx-search'></i>
                 <i class='bx bx-filter'></i>
             </div>
@@ -73,9 +79,40 @@ $events = $gameDetails['events'];
                     ?>
                 </tbody>
             </table>
+
+            <div class="pagination" style="text-align: right;">
+                <?php if ($totalEvents > 0): ?>
+                    <?php if ($page > 1): ?>
+                        <a href="?id=<?= $idgame ?>&page=<?= $page - 1 ?>">
+                            << </a>
+                            <?php else: ?>
+                                <a href="#" class="disabled">
+                                    << </a>
+                                    <?php endif; ?>
+
+                                    <?php
+                                    $start_page = max(1, $page - 1);
+                                    $end_page = min($totalPages, $start_page + 2);
+
+                                    for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
+                                        <?php if ($hal == $page): ?>
+                                            <b><?= $hal ?></b>
+                                        <?php else: ?>
+                                            <a href="?id=<?= $idgame ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <?php if ($page < $totalPages): ?>
+                                        <a href="?id=<?= $idgame ?>&page=<?= $page + 1 ?>">>></a>
+                                    <?php else: ?>
+                                        <a href="#" class="disabled">>></a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+            </div>
         </div>
     </div>
 
     <?php
     require_once('../template/footer.php');
     ?>
+</main>

@@ -55,6 +55,65 @@ class Game
     /* =======================
        Methods
     ======================== */
+    public static function getGameDetailsWithEventsPaging($koneksi, $idgame, $limit, $offset)
+    {
+        $query = "
+            SELECT t.idteam, t.name AS team_name, e.idevent, e.name AS event_name, e.date AS event_date, e.description 
+            FROM game g
+            INNER JOIN team t ON g.idgame = t.idgame
+            INNER JOIN event_teams et ON t.idteam = et.idteam
+            INNER JOIN event e ON e.idevent = et.idevent
+            WHERE g.idgame = ?
+            LIMIT ? OFFSET ?
+        ";
+        $stmt = mysqli_prepare($koneksi, $query);
+        if (!$stmt) {
+            die('Prepare Error: ' . mysqli_error($koneksi));
+        }
+
+        mysqli_stmt_bind_param($stmt, 'iii', $idgame, $limit, $offset);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $teams = [];
+        $events = [];
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $idgame);
+            $event = new Event($koneksi, $row['event_name'], $row['description'], $row['event_date']);
+
+            $teams[] = $team;
+            $events[] = $event;
+        }
+
+        mysqli_stmt_close($stmt);
+
+        return ['teams' => $teams, 'events' => $events];
+    }
+
+    public static function getTotalEventsForGame($koneksi, $idgame)
+    {
+        $query = "
+            SELECT COUNT(*) AS total 
+            FROM event_teams et
+            INNER JOIN team t ON et.idteam = t.idteam
+            INNER JOIN game g ON t.idgame = g.idgame
+            WHERE g.idgame = ?
+        ";
+        $stmt = mysqli_prepare($koneksi, $query);
+        if (!$stmt) {
+            die('Prepare Error: ' . mysqli_error($koneksi));
+        }
+
+        mysqli_stmt_bind_param($stmt, 'i', $idgame);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        mysqli_stmt_close($stmt);
+
+        return $row['total'] ?? 0;
+    }
 
     public function createGame($koneksi)
     {
@@ -125,42 +184,6 @@ class Game
 
         return $games;
     }
-
-    public static function getGameDetails($koneksi, $idgame)
-    {
-        $query = "SELECT t.idteam as team_id, t.name as team_name, t.idgame as id_game, e.name as event_name, e.date as event_date, e.description as description 
-                  FROM game as g
-                  INNER JOIN team as t ON g.idgame = t.idgame 
-                  INNER JOIN event_teams as et ON t.idteam = et.idteam
-                  INNER JOIN event as e ON e.idevent = et.idevent 
-                  WHERE g.idgame = ?";
-
-        $stmt = mysqli_prepare($koneksi, $query);
-        if (!$stmt) {
-            die("Prepare Error: " . mysqli_error($koneksi));
-        }
-
-        mysqli_stmt_bind_param($stmt, 'i', $idgame);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        if (!$result) {
-            die("Query Error: " . mysqli_error($koneksi));
-        }
-
-        $teams = [];
-        $events = [];
-
-        while ($row = mysqli_fetch_assoc($result)) {
-
-            $team = new Team($koneksi, $row['team_id'], $row['team_name'], $row['id_game']);
-            $teams[] = $team;
-
-            $event = new Event($koneksi, $row['event_name'], $row['description'], $row['event_date']);
-            $events[] = $event;
-        }
-        return ['teams' => $teams, 'events' => $events];
-    }
-
 
     public function updateGame($koneksi)
     {
