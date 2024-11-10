@@ -9,6 +9,24 @@ if (isset($_POST['simpan'])) {
     $password = trim(htmlspecialchars($_POST['password']));
     $profile = "member";
 
+    $checkStmt = $koneksi->prepare("SELECT idmember FROM member WHERE username = ?");
+    if (!$checkStmt) {
+        die("Prepare failed: " . $koneksi->error);
+    }
+    $checkStmt->bind_param("s", $username);
+    $checkStmt->execute();
+    $checkStmt->store_result();
+
+    if ($checkStmt->num_rows > 0) {
+        echo "<script>
+        alert('Username sudah terdaftar. Silakan gunakan username yang lainnya.');
+        window.location.href = 'registrasi.php';
+        </script>";
+        $checkStmt->close();
+        exit();
+    }
+    $checkStmt->close();
+
     $pass = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $koneksi->prepare("INSERT INTO member (fname, lname, username, password, profile) VALUES (?, ?, ?, ?, ?)");
@@ -28,4 +46,6 @@ if (isset($_POST['simpan'])) {
         window.location.href = 'registrasi.php';
         </script>";
     }
+
+    $stmt->close();
 }
