@@ -737,6 +737,7 @@ html {
 #edit_game .btn,
 #edit_team .btn,
 #edit_event .btn,
+#add_team_image .btn,
 #edit_achievement .btn {
 	padding: 10px 20px;
 	font-size: 16px;
@@ -752,6 +753,7 @@ html {
 
 #edit_game .btn:hover,
 #edit_team .btn:hover,
+#add_team_image .btn,
 #edit_event .btn:hover,
 #edit_achievement .btn:hover {
 	background-color: #005f7f;
@@ -1023,4 +1025,15 @@ html {
 
 .table-data .order table td {
     vertical-align: top !important;
+}
+
+#add_image .btn {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }

@@ -21,11 +21,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamName = $_POST['team_name'];
     $gameId = $_POST['game_id'];
 
+    // Inisialisasi objek tim baru
     $team = new Team($koneksi);
     $team->setTeamName($teamName);
     $team->setGameId($gameId);
 
-    $team->createTeam();
+    // Proses file gambar jika ada
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $imageTmpPath = $_FILES['image']['tmp_name'];
+        $imageName = ''; // Nama gambar sementara
+        $imagePath = ''; // Path gambar sementara
+
+        // Simpan data tim terlebih dahulu untuk mendapatkan teamId
+        $team->createTeam();
+
+        // Ambil teamId yang baru dimasukkan
+        $teamId = $team->getTeamId(); 
+        $imageName = $teamId . '.jpg'; // Gunakan ID tim sebagai nama file gambar
+        $imagePath = '../../public/img/' . $imageName; // Tentukan path penyimpanan gambar
+
+        // Pindahkan file gambar ke folder tujuan
+        if (move_uploaded_file($imageTmpPath, $imagePath)) {
+            // Update path gambar setelah tim berhasil disimpan
+            $team->setImgPath($imagePath);
+            // Update imgPath di database setelah gambar berhasil disimpan
+            $team->updateTeam();
+        } else {
+            $errorMessage = "Gagal meng-upload gambar.";
+        }
+    } else {
+        $errorMessage = "File gambar tidak ditemukan atau terjadi kesalahan.";
+    }
+
+    // Redireksi setelah data tim dan gambar berhasil disimpan
     header('Location: team.php');
     exit();
 }
@@ -48,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="table-data">
         <div class="order">
-            <form id="create_team" method="POST">
+            <form id="create_team" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="team_name">Team Name</label>
                     <input type="text" id="team_name" name="team_name" required>
@@ -61,6 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="image">Pilih gambar JPG:</label>
+                    <input type="file" name="image" id="image" accept="image/jpg" required> <br>
+                </div>
+                
                 <button type="submit" class="btn">Create Team</button>
             </form>
         </div>

@@ -6,24 +6,27 @@ class Team
     ======================== */
     private $teamId;
     private $teamName;
-    private $gameId;
+    private $gameId; // Foreign key ke Game
+
+    private $imgPath;
     private $conn;
 
     /* =======================
         Constructors
     ======================== */
-    public function __construct($conn, $teamId = null, $teamName = null, $gameId = null)
+    public function __construct($conn, $teamId = null, $teamName = null, $gameId = null, $imgPath = null)
     {
         $this->conn = $conn;
         $this->teamId = $teamId;
         $this->teamName = $teamName;
         $this->gameId = $gameId;
+        $this->imgPath = $imgPath;
     }
 
     /* =======================
        Properties
     ======================== */
-
+    // Getter dan Setter
     public function getTeamId()
     {
         return $this->teamId;
@@ -54,37 +57,46 @@ class Team
         $this->gameId = $gameId;
     }
 
+    public function getImgPath()
+    {
+        return $this->imgPath;
+    }
+
+    public function setImgPath($imgPath)
+    {
+        $this->imgPath = $imgPath;
+    }
+
     /* =======================
        Methods
     ======================== */
 
-
-    public static function getAllTeams($koneksi)
-    {
+    // Metode untuk membaca semua team dari database
+    public static function getAllTeams($koneksi){
         $stmt = $koneksi->prepare("
-            SELECT t.idteam, g.name as game_name, t.name as team_name 
+            SELECT t.idteam, g.name as game_name, t.name as team_name, t.imgPath
             FROM team as t
             INNER JOIN game as g ON t.idgame = g.idgame
         ");
         $stmt->execute();
-
+        
         $result = $stmt->get_result();
 
         $teams = [];
         while ($row = $result->fetch_assoc()) {
-            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
+            $team = new Team($koneksi, $row['idteam'], $row['imgPath'], $row['team_name'], $row['game_name']);
             $teams[] = $team;
         }
 
-        $stmt->close();
-        return $teams;
+    $stmt->close();
+    return $teams;
     }
     public static function getAllTeamsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%";
+        $search = "%" . $search . "%"; 
         $stmt = $koneksi->prepare("
-            SELECT t.idteam, g.name as game_name, t.name as team_name 
+            SELECT t.idteam, g.name as game_name, t.name as team_name, t.imgPath
             FROM team as t
             INNER JOIN game as g ON t.idgame = g.idgame
             WHERE t.name LIKE ?
@@ -92,12 +104,11 @@ class Team
         ");
         $stmt->bind_param("sii", $search, $offset, $limit);
         $stmt->execute();
-
+        
         $result = $stmt->get_result();
-
         $teams = [];
         while ($row = $result->fetch_assoc()) {
-            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name']);
+            $team = new Team($koneksi, $row['idteam'],  $row['team_name'], $row['game_name'], $row['imgPath']);
             $teams[] = $team;
         }
 
@@ -142,19 +153,21 @@ class Team
             return null;
         }
 
+        $this->teamId = mysqli_insert_id($this->conn);
+
         mysqli_stmt_close($stmt);
     }
 
     public function updateTeam()
     {
-        $query = "UPDATE team SET name = ?, idgame = ? WHERE idteam = ?";
+        $query = "UPDATE team SET name = ?, idgame = ?, imgPath = ? WHERE idteam = ?";
         $stmt = mysqli_prepare($this->conn, $query);
 
         if ($stmt === false) {
             die('Prepare failed: ' . mysqli_error($this->conn));
         }
 
-        mysqli_stmt_bind_param($stmt, "sii", $this->teamName, $this->gameId, $this->teamId);
+        mysqli_stmt_bind_param($stmt, "sisi", $this->teamName,  $this->gameId, $this->imgPath,  $this->teamId);
 
         if (!mysqli_stmt_execute($stmt)) {
             die('Execute failed: ' . mysqli_stmt_error($stmt));
@@ -163,6 +176,7 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
+    // Metode untuk menghapus tim
     public function deleteTeam($conn)
     {
         $query = "DELETE FROM team WHERE idteam = ?";
@@ -180,4 +194,6 @@ class Team
 
         mysqli_stmt_close($stmt);
     }
+
+    
 }

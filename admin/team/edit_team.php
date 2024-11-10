@@ -32,6 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $team->setTeamName($teamName);
     $team->setGameId($gameId);
 
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Validasi tipe gambar
+        $imageTmpPath = $_FILES['image']['tmp_name'];
+        $imageName = $team->getTeamId() . '.jpg'; // Gunakan ID tim untuk nama gambar
+        $imagePath = '../../public/img/' . $imageName;
+
+        // Cek gambar lama dan hapus jika ada
+        $currentImagePath = $team->getImgPath();
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $currentImagePath)) { 
+            unlink($_SERVER['DOCUMENT_ROOT'] . $currentImagePath); // Menghapus gambar lama
+        }
+
+        // Pindahkan file gambar ke folder public/img/
+        if (move_uploaded_file($imageTmpPath, $_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
+            $team->setImgPath($imagePath); // Set path gambar baru
+        } else {
+            $errorMessage = "Gagal meng-upload gambar.";
+        }
+    }
     $team->updateTeam();
     header('Location: team.php');
     exit();
@@ -69,6 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </option>
                     <?php endforeach; ?>
                 </select>
+
+                <label for="image">Pilih gambar JPG baru (optional):</label>
+                <input type="file" name="image" id="image" accept="image/jpeg"> <br><br>
 
                 <button type="submit" class="btn">Edit Team</button>
             </form>

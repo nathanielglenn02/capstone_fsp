@@ -62,6 +62,7 @@ $total_pages = ceil($total_teams / $limit);
                     <tr>
                         <th>Team Name</th>
                         <th>Game</th>
+                        <th>Team Image</th>
                         <th>Detail</th>
                         <th>Aksi</th>
                     </tr>
@@ -72,6 +73,15 @@ $total_pages = ceil($total_teams / $limit);
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
+                        if ($team->getImgPath()) {
+                            // Jika gambar sudah ada, tampilkan gambar
+                            echo '<td><img src="' . htmlspecialchars($team->getImgPath()) . '" alt="Team Image" width="50" height="50"></td>';
+                        } else {
+                            // Jika gambar belum ada, tampilkan ikon tambah
+                            echo '<td><a href="upload_image.php?id=' . htmlspecialchars($team->getTeamId()) . '">';
+                            echo '<i class="fas fa-plus-circle" style="font-size: 24px; color: #333;"></i>';
+                            echo '</a></td>';
+                        }
                         echo "<td><a href='detail_team.php?idteam=" . $team->getTeamId() . "'>Detail</a></td>";
                         echo "<td>";
                         echo "<a href='edit_team.php?id=" . $team->getTeamId() . "'><i class='fa-solid fa-pen' style='margin-right: 10px;'></i></a>";
