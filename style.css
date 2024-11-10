@@ -707,8 +707,6 @@ html {
 	text-align: center;
 }
 
-
-/* Styling untuk form dengan ID edit_game */
 #edit_game {
 	display: flex;
 	flex-direction: column;
