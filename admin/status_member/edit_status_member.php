@@ -29,17 +29,10 @@ $memberName = Member::getMemberNameById($koneksi, $joinProposal->getIdMember());
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $status = $_POST['status'];
 
-    if ($status !== 'rejected') {
-        $approvedProposal = JoinProposal::getApprovedProposalByMember($koneksi, $joinProposal->getIdMember());
-
-        if ($approvedProposal && $approvedProposal->getId() != $idProposal) {
-            echo "<script>alert('Member ini sudah bergabung dengan tim lain. Tidak bisa mengubah status menjadi waiting atau approved.'); window.location.href = 'status_member.php';</script>";
-            exit();
-        }
+    if ($joinProposal->getStatus() !== $status) {
+        $joinProposal->setStatus($status);
+        $joinProposal->updateProposal($koneksi);
     }
-
-    $joinProposal->setStatus($status);
-    $joinProposal->updateProposal($koneksi);
 
     if ($status === 'approved') {
 
@@ -50,9 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("iii", $idteam, $idmember, $idteam);
         $stmt->execute();
         $stmt->close();
-
-        $joinProposal->rejectOtherProposals($koneksi);
-    } elseif ($status === 'rejected') {
+    } elseif ($status === 'rejected' || $status === 'waiting') {
         $query = "DELETE FROM team_members WHERE idteam = ? AND idmember = ?";
         $stmt = $koneksi->prepare($query);
         $idteam = $joinProposal->getTeamId();
