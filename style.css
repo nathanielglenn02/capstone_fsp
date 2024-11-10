@@ -1022,3 +1022,7 @@ html {
 #create_achievement .btn:hover {
 	background-color: #005f7f;
 }
+
+.table-data .order table td {
+    vertical-align: top !important;
+}

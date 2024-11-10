@@ -48,7 +48,7 @@ require_once('../template/navbar.php');
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Teams You're a Member Of</h3>
+                <h3>Teams You are a Member Of</h3>
             </div>
             <table>
                 <thead>
@@ -117,9 +117,8 @@ require_once('../template/navbar.php');
 
             <div class="pagination" style="text-align: right;">
                 <?php if ($total_approved_teams > 0): ?>
-                    <?php
-                    if ($page > 1): ?>
-                        <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">
+                    <?php if ($page > 1): ?>
+                        <a href="?page=<?= $page - 1 ?>">
                             << </a>
                             <?php else: ?>
                                 <a href="#" class="disabled">
@@ -128,7 +127,6 @@ require_once('../template/navbar.php');
 
                                     <?php
                                     $max_hal = ceil($total_approved_teams / $limit);
-
                                     $start_page = max(1, $page - 1);
                                     $end_page = min($max_hal, $start_page + 2);
 
@@ -136,17 +134,18 @@ require_once('../template/navbar.php');
                                         <?php if ($hal == $page): ?>
                                             <b><?= $hal ?></b>
                                         <?php else: ?>
-                                            <a href="?page=<?= $hal ?>&search=<?= urlencode($search) ?>"><?= $hal ?></a>
+                                            <a href="?page=<?= $hal ?>"><?= $hal ?></a>
                                         <?php endif; ?>
                                     <?php endfor; ?>
 
                                     <?php if ($page < $max_hal): ?>
-                                        <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">>></a>
+                                        <a href="?page=<?= $page + 1 ?>">>></a>
                                     <?php else: ?>
                                         <a href="#" class="disabled">>></a>
                                     <?php endif; ?>
                                 <?php endif; ?>
             </div>
+
         </div>
     </div>
 </main>
