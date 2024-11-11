@@ -32,21 +32,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $team->setTeamName($teamName);
     $team->setGameId($gameId);
 
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-        // Validasi tipe gambar
+    if (isset($_FILES['image']) && $_FILES['image']['error']=== UPLOAD_ERR_OK) {
         $imageTmpPath = $_FILES['image']['tmp_name'];
-        $imageName = $team->getTeamId() . '.jpg'; // Gunakan ID tim untuk nama gambar
+        $imageName = $team->getTeamId() . '.jpg'; 
         $imagePath = '../../public/img/' . $imageName;
-
-        // Cek gambar lama dan hapus jika ada
+ 
         $currentImagePath = $team->getImgPath();
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . $currentImagePath)) { 
-            unlink($_SERVER['DOCUMENT_ROOT'] . $currentImagePath); // Menghapus gambar lama
+        if (file_exists( $currentImagePath)) { 
+            unlink($currentImagePath);
         }
 
-        // Pindahkan file gambar ke folder public/img/
-        if (move_uploaded_file($imageTmpPath, $_SERVER['DOCUMENT_ROOT'] . $imagePath)) {
-            $team->setImgPath($imagePath); // Set path gambar baru
+        if (move_uploaded_file($imageTmpPath, $imagePath)) {
+            $team->setImgPath($imagePath); 
         } else {
             $errorMessage = "Gagal meng-upload gambar.";
         }
@@ -74,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="table-data">
         <div class="order">
-            <form id="edit_team" method="POST">
+            <form id="edit_team" method="POST" enctype="multipart/form-data" >
                 <label for="team_name">Team Name:</label>
                 <input type="text" id="team_name" name="team_name"
                     value="<?php echo htmlspecialchars($team->getTeamName()); ?>" required>
@@ -90,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
 
                 <label for="image">Pilih gambar JPG baru (optional):</label>
-                <input type="file" name="image" id="image" accept="image/jpeg"> <br><br>
+                <input type="file" name="image" id="image" accept="image/jpg"> <br><br>
 
                 <button type="submit" class="btn">Edit Team</button>
             </form>

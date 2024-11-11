@@ -125,12 +125,14 @@ class Team
             die('Prepare failed: ' . mysqli_error($this->conn));
         }
 
+        
         mysqli_stmt_bind_param($stmt, "si", $this->teamName, $this->gameId);
 
         if (!mysqli_stmt_execute($stmt)) {
             die('Execute failed: ' . mysqli_stmt_error($stmt));
         }
 
+        $this->teamId = mysqli_insert_id($this->conn);
         mysqli_stmt_close($stmt);
     }
 
@@ -148,7 +150,7 @@ class Team
         $result = mysqli_stmt_get_result($stmt);
 
         if ($row = mysqli_fetch_assoc($result)) {
-            return new Team($conn, $row['idteam'], $row['name'], $row['idgame']);
+            return new Team($conn, $row['idteam'], $row['name'], $row['idgame'], $row['imgPath']);
         } else {
             return null;
         }
