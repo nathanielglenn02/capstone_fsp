@@ -26,15 +26,15 @@ $team = Team::getTeamById($koneksi, $idteam);
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image'])) {
     $image = $_FILES['image'];
 
-    // Cek apakah file yang di-upload adalah gambar JPG
-    if ($image['type'] === 'image/jpeg' || $image['type'] === 'image/jpg') {
-        // Tentukan direktori untuk menyimpan gambar
-        $targetDir = '../../public/img/';
-        $targetFile = $targetDir . $idteam . '.jpg'; // Gunakan teamId sebagai nama file gambar
+    $fileExtension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
 
-        // Pindahkan gambar ke folder tujuan
+    if ($fileExtension === 'jpg') {
+
+        $targetDir = '../../public/img/';
+        $targetFile = $targetDir . $idteam . '.jpg';
+
         if (move_uploaded_file($image['tmp_name'], $targetFile)) {
-            // Setelah gambar dipindahkan, update path gambar di database
+
             $stmt = $koneksi->prepare("UPDATE team SET imgPath = ? WHERE idteam = ?");
             $stmt->bind_param("si", $targetFile, $idteam);
 
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image'])) {
             $errorMessage = "Terjadi kesalahan saat memindahkan file gambar.";
         }
     } else {
-        $errorMessage = "File yang di-upload harus berformat JPG.";
+        $errorMessage = "File yang diupload harus berformat JPG.";
     }
 }
 ?>
@@ -75,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image'])) {
                 <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
             <?php } ?>
 
-            <h2>Upload Image For Team : </h2> 
-            <h3><?php echo $team->getTeamName()?></h3>
+            <h2>Upload Image For Team : </h2>
+            <h3><?php echo $team->getTeamName() ?></h3>
             <form method="POST" enctype="multipart/form-data" id="add_team_image">
                 <label for="image">Pilih gambar JPG:</label>
-                <input type="file" name="image" id="image" accept="image/jpg" required> <br>
+                <input type="file" name="image" id="image" accept=".jpg" required> <br>
 
                 <button type="submit" class="btn">Upload Image</button>
             </form>

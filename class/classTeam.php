@@ -72,14 +72,15 @@ class Team
     ======================== */
 
     // Metode untuk membaca semua team dari database
-    public static function getAllTeams($koneksi){
+    public static function getAllTeams($koneksi)
+    {
         $stmt = $koneksi->prepare("
             SELECT t.idteam, g.name as game_name, t.name as team_name, t.imgPath
             FROM team as t
             INNER JOIN game as g ON t.idgame = g.idgame
         ");
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
 
         $teams = [];
@@ -88,13 +89,13 @@ class Team
             $teams[] = $team;
         }
 
-    $stmt->close();
-    return $teams;
+        $stmt->close();
+        return $teams;
     }
     public static function getAllTeamsWithPaging($koneksi, $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
-        $search = "%" . $search . "%"; 
+        $search = "%" . $search . "%";
         $stmt = $koneksi->prepare("
             SELECT t.idteam, g.name as game_name, t.name as team_name, t.imgPath
             FROM team as t
@@ -104,7 +105,7 @@ class Team
         ");
         $stmt->bind_param("sii", $search, $offset, $limit);
         $stmt->execute();
-        
+
         $result = $stmt->get_result();
         $teams = [];
         while ($row = $result->fetch_assoc()) {
@@ -125,7 +126,7 @@ class Team
             die('Prepare failed: ' . mysqli_error($this->conn));
         }
 
-        
+
         mysqli_stmt_bind_param($stmt, "si", $this->teamName, $this->gameId);
 
         if (!mysqli_stmt_execute($stmt)) {
@@ -152,13 +153,11 @@ class Team
         if ($row = mysqli_fetch_assoc($result)) {
             return new Team($conn, $row['idteam'], $row['name'], $row['idgame'], $row['imgPath']);
         } else {
+            mysqli_stmt_close($stmt);
             return null;
         }
-
-        $this->teamId = mysqli_insert_id($this->conn);
-
-        mysqli_stmt_close($stmt);
     }
+
 
     public function updateTeam()
     {
@@ -178,14 +177,13 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk menghapus tim
-    public function deleteTeam($conn)
+    public function deleteTeam()
     {
         $query = "DELETE FROM team WHERE idteam = ?";
-        $stmt = mysqli_prepare($conn, $query);
+        $stmt = mysqli_prepare($this->conn, $query);
 
         if ($stmt === false) {
-            die('Prepare failed: ' . mysqli_error($conn));
+            die('Prepare failed: ' . mysqli_error($this->conn));
         }
 
         mysqli_stmt_bind_param($stmt, "i", $this->teamId);
@@ -196,6 +194,4 @@ class Team
 
         mysqli_stmt_close($stmt);
     }
-
-    
 }

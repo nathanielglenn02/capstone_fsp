@@ -25,6 +25,7 @@ if ($idteam == 0) {
 $team = Team::getTeamById($koneksi, $idteam);
 $games = Game::getAllGames($koneksi);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamName = $_POST['team_name'];
     $gameId = $_POST['game_id'];
@@ -32,25 +33,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $team->setTeamName($teamName);
     $team->setGameId($gameId);
 
-    if (isset($_FILES['image']) && $_FILES['image']['error']=== UPLOAD_ERR_OK) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $imageTmpPath = $_FILES['image']['tmp_name'];
-        $imageName = $team->getTeamId() . '.jpg'; 
-        $imagePath = '../../public/img/' . $imageName;
- 
-        $currentImagePath = $team->getImgPath();
-        if (file_exists( $currentImagePath)) { 
-            unlink($currentImagePath);
-        }
+        $imageName = $_FILES['image']['name'];
+        $imageExtension = strtolower(pathinfo($imageName, PATHINFO_EXTENSION));
 
-        if (move_uploaded_file($imageTmpPath, $imagePath)) {
-            $team->setImgPath($imagePath); 
+        if ($imageExtension === 'jpg') {
+            $imagePath = '../../public/img/' . $team->getTeamId() . '.jpg';
+
+            $currentImagePath = $team->getImgPath();
+            if (file_exists($currentImagePath)) {
+                unlink($currentImagePath);
+            }
+
+            if (move_uploaded_file($imageTmpPath, $imagePath)) {
+                $team->setImgPath($imagePath);
+            } else {
+                $errorMessage = "Gagal meng-upload gambar.";
+            }
         } else {
-            $errorMessage = "Gagal meng-upload gambar.";
+            $errorMessage = "File yang diupload harus berformat JPG.";
         }
     }
-    $team->updateTeam();
-    header('Location: team.php');
-    exit();
+
+    if (!isset($errorMessage)) {
+        $team->updateTeam();
+        header('Location: team.php');
+        exit();
+    }
 }
 ?>
 
@@ -71,7 +81,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="table-data">
         <div class="order">
-            <form id="edit_team" method="POST" enctype="multipart/form-data" >
+            <?php if (isset($errorMessage)): ?>
+                <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
+            <?php endif; ?>
+
+            <form id="edit_team" method="POST" enctype="multipart/form-data">
                 <label for="team_name">Team Name:</label>
                 <input type="text" id="team_name" name="team_name"
                     value="<?php echo htmlspecialchars($team->getTeamName()); ?>" required>
@@ -87,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
 
                 <label for="image">Pilih gambar JPG baru (optional):</label>
-                <input type="file" name="image" id="image" accept="image/jpg"> <br><br>
+                <input type="file" name="image" id="image" accept=".jpg"> <br><br>
 
                 <button type="submit" class="btn">Edit Team</button>
             </form>
