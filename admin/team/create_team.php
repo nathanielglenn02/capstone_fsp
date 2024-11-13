@@ -21,41 +21,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamName = $_POST['team_name'];
     $gameId = $_POST['game_id'];
 
-    // Inisialisasi objek tim baru
-    $team = new Team($koneksi);
-    $team->setTeamName($teamName);
-    $team->setGameId($gameId);
-
-    // Proses file gambar jika ada
+    $imageName = 'default.jpg';
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $imageTmpPath = $_FILES['image']['tmp_name'];
-        $imageName = ''; // Nama gambar sementara
-        $imagePath = ''; // Path gambar sementara
+        $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
 
-        // Simpan data tim terlebih dahulu untuk mendapatkan teamId
-        $team->createTeam();
-
-        // Ambil teamId yang baru dimasukkan
-        $teamId = $team->getTeamId(); 
-        $imageName = $teamId . '.jpg'; // Gunakan ID tim sebagai nama file gambar
-        $imagePath = '../../public/img/' . $imageName; // Tentukan path penyimpanan gambar
-
-        // Pindahkan file gambar ke folder tujuan
-        if (move_uploaded_file($imageTmpPath, $imagePath)) {
-            // Update path gambar setelah tim berhasil disimpan
-            $team->setImgPath($imagePath);
-            // Update imgPath di database setelah gambar berhasil disimpan
-            $team->updateTeam();
+        if ($fileExtension !== 'jpg') {
+            $errorMessage = "File yang diupload harus berformat JPG.";
         } else {
-            $errorMessage = "Gagal meng-upload gambar.";
+            $imageName = uniqid() . '.jpg';
+            $imagePath = '../../public/img/' . $imageName;
+
+            if (!move_uploaded_file($imageTmpPath, $imagePath)) {
+                $errorMessage = "Gagal meng-upload gambar.";
+            }
         }
-    } else {
-        $errorMessage = "File gambar tidak ditemukan atau terjadi kesalahan.";
     }
 
-    // Redireksi setelah data tim dan gambar berhasil disimpan
-    header('Location: team.php');
-    exit();
+    if (empty($errorMessage)) {
+        $team = new Team($koneksi);
+        $team->setTeamName($teamName);
+        $team->setGameId($gameId);
+        $team->createTeam();
+
+        $team->setImgPath($imageName);
+        $team->updateTeam();
+
+        header('Location: team.php');
+        exit();
+    }
 }
 ?>
 
@@ -76,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="table-data">
         <div class="order">
+            <?php if (!empty($errorMessage)) { ?>
+                <div class="alert alert-danger"><?php echo htmlspecialchars($errorMessage); ?></div>
+            <?php } ?>
+
             <form id="create_team" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="team_name">Team Name</label>
@@ -91,9 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="form-group">
                     <label for="image">Pilih gambar JPG:</label>
-                    <input type="file" name="image" id="image" accept="image/jpg" required> <br>
+                    <input type="file" name="image" id="image" accept=".jpg"> <br>
                 </div>
-                
+
                 <button type="submit" class="btn">Create Team</button>
             </form>
         </div>

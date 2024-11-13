@@ -6,7 +6,7 @@ class Team
     ======================== */
     private $teamId;
     private $teamName;
-    private $gameId; // Foreign key ke Game
+    private $gameId;
 
     private $imgPath;
     private $conn;
@@ -26,7 +26,7 @@ class Team
     /* =======================
        Properties
     ======================== */
-    // Getter dan Setter
+
     public function getTeamId()
     {
         return $this->teamId;
@@ -71,7 +71,6 @@ class Team
        Methods
     ======================== */
 
-    // Metode untuk membaca semua team dari database
     public static function getAllTeams($koneksi)
     {
         $stmt = $koneksi->prepare("
