@@ -85,7 +85,7 @@ class Team
 
         $teams = [];
         while ($row = $result->fetch_assoc()) {
-            $team = new Team($koneksi, $row['idteam'], $row['imgPath'], $row['team_name'], $row['game_name']);
+            $team = new Team($koneksi, $row['idteam'], $row['team_name'], $row['game_name'], $row['imgPath']);
             $teams[] = $team;
         }
 
@@ -153,11 +153,13 @@ class Team
         if ($row = mysqli_fetch_assoc($result)) {
             return new Team($conn, $row['idteam'], $row['name'], $row['idgame'], $row['imgPath']);
         } else {
-            mysqli_stmt_close($stmt);
             return null;
         }
-    }
 
+        $this->teamId = mysqli_insert_id($this->conn);
+
+        mysqli_stmt_close($stmt);
+    }
 
     public function updateTeam()
     {
@@ -177,13 +179,14 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
-    public function deleteTeam()
+    // Metode untuk menghapus tim
+    public function deleteTeam($conn)
     {
         $query = "DELETE FROM team WHERE idteam = ?";
-        $stmt = mysqli_prepare($this->conn, $query);
+        $stmt = mysqli_prepare($conn, $query);
 
         if ($stmt === false) {
-            die('Prepare failed: ' . mysqli_error($this->conn));
+            die('Prepare failed: ' . mysqli_error($conn));
         }
 
         mysqli_stmt_bind_param($stmt, "i", $this->teamId);
