@@ -74,10 +74,8 @@ $total_pages = ceil($total_teams / $limit);
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         if ($team->getImgPath()) {
-                            // Jika gambar sudah ada, tampilkan gambar
                             echo '<td><img src="../../public/img/' . htmlspecialchars($team->getImgPath()) . '" alt="Team Image" width="50" height="50"></td>';
                         } else {
-                            // Jika gambar belum ada, tampilkan ikon tambah
                             echo '<td><a href="upload_image.php?id=' . htmlspecialchars($team->getTeamId()) . '">';
                             echo '<i class="fas fa-plus-circle" style="font-size: 24px; color: #333;"></i>';
                             echo '</a></td>';
