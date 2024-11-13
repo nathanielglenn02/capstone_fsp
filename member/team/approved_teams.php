@@ -9,7 +9,7 @@ if (!isset($_SESSION['idmember'])) {
 require_once('../../service/config.php');
 require_once('../../class/classJoinProposal.php');
 require_once('../../class/classTeam.php');
-require_once('../../class/classGame.php'); // Include Game class to get game name
+require_once('../../class/classGame.php');
 
 $idmember = $_SESSION['idmember'];
 $limit = 5;
@@ -51,6 +51,7 @@ require_once('../template/navbar.php');
                     <tr>
                         <th>Team Name</th>
                         <th>Game</th>
+                        <th>Image</th> <!-- New column for team image -->
                         <th>Detail</th>
                     </tr>
                 </thead>
@@ -58,17 +59,19 @@ require_once('../template/navbar.php');
                     <?php
                     if (!empty($approvedTeams)) {
                         foreach ($approvedTeams as $team) {
-                            $teamObj = Team::getTeamById($koneksi, $team['idteam']); // Retrieve the team object
-                            $gameObj = Game::getGameById($koneksi, $teamObj->getGameId()); // Retrieve the game object to get the game name
+                            $teamObj = Team::getTeamById($koneksi, $team['idteam']);
+                            $gameObj = Game::getGameById($koneksi, $teamObj->getGameId());
+                            $imgPath = htmlspecialchars($teamObj->getImgPath()); // Retrieve the image path
 
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($teamObj->getTeamName()) . "</td>";
-                            echo "<td>" . htmlspecialchars($gameObj->getGameName()) . "</td>"; // Display the game name
+                            echo "<td>" . htmlspecialchars($gameObj->getGameName()) . "</td>";
+                            echo "<td><img src='../../public/img/$imgPath' alt='Team Image' width='50' height='50'></td>"; // Display the team image
                             echo "<td><a href='detail_team.php?idteam=" . $team['idteam'] . "'>Detail</a></td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='3'>You are not part of any approved teams.</td></tr>";
+                        echo "<tr><td colspan='4'>You are not part of any approved teams.</td></tr>";
                     }
                     ?>
                 </tbody>
