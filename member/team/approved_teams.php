@@ -51,7 +51,7 @@ require_once('../template/navbar.php');
                     <tr>
                         <th>Team Name</th>
                         <th>Game</th>
-                        <th>Image</th> <!-- New column for team image -->
+                        <th>Image</th>
                         <th>Detail</th>
                     </tr>
                 </thead>
@@ -61,12 +61,12 @@ require_once('../template/navbar.php');
                         foreach ($approvedTeams as $team) {
                             $teamObj = Team::getTeamById($koneksi, $team['idteam']);
                             $gameObj = Game::getGameById($koneksi, $teamObj->getGameId());
-                            $imgPath = htmlspecialchars($teamObj->getImgPath()); // Retrieve the image path
+                            $imgPath = htmlspecialchars($teamObj->getImgPath());
 
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($teamObj->getTeamName()) . "</td>";
                             echo "<td>" . htmlspecialchars($gameObj->getGameName()) . "</td>";
-                            echo "<td><img src='../../public/img/$imgPath' alt='Team Image' width='50' height='50'></td>"; // Display the team image
+                            echo "<td><img src='../../public/img/$imgPath' alt='Team Image' width='50' height='50'></td>";
                             echo "<td><a href='detail_team.php?idteam=" . $team['idteam'] . "'>Detail</a></td>";
                             echo "</tr>";
                         }
