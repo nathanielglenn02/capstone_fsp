@@ -9,18 +9,14 @@ if (!isset($_SESSION['idmember'])) {
 require_once('../../service/config.php');
 require_once('../../class/classJoinProposal.php');
 require_once('../../class/classTeam.php');
-require_once('../../class/classAchievement.php');
-require_once('../../class/classEventTeams.php');
-require_once('../../class/classTeamMembers.php');
+require_once('../../class/classGame.php'); // Include Game class to get game name
 
 $idmember = $_SESSION['idmember'];
-
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
 
 $total_approved_teams = JoinProposal::getTotalApprovedTeamsByMember($koneksi, $idmember);
-
 $approvedTeams = JoinProposal::getApprovedTeamsByMemberWithPaging($koneksi, $idmember, $limit, $offset);
 
 $title = "My Approved Teams - Club Informatics 2024";
@@ -48,68 +44,31 @@ require_once('../template/navbar.php');
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Teams You are a Member Of</h3>
+                <h3>Approved Team List</h3>
             </div>
             <table>
                 <thead>
                     <tr>
                         <th>Team Name</th>
-                        <th>Members</th>
-                        <th>Achievements</th>
-                        <th>Events</th>
+                        <th>Game</th>
+                        <th>Detail</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (!empty($approvedTeams)) {
                         foreach ($approvedTeams as $team) {
-                            $teamMembers = TeamMembers::getMembersByTeam($koneksi, $team['idteam']);
-                            $achievements = Achievement::getAchievementsByTeam($koneksi, $team['idteam']);
-                            $events = EventTeams::getEventsByTeam($koneksi, $team['idteam']);
+                            $teamObj = Team::getTeamById($koneksi, $team['idteam']); // Retrieve the team object
+                            $gameObj = Game::getGameById($koneksi, $teamObj->getGameId()); // Retrieve the game object to get the game name
 
                             echo "<tr>";
-                            echo "<td>" . htmlspecialchars($team['name']) . "</td>";
-
-                            echo "<td>";
-                            if (!empty($teamMembers)) {
-                                echo "<ul>";
-                                foreach ($teamMembers as $member) {
-                                    echo "<li>" . htmlspecialchars($member->getMemberName()) . "</li>";
-                                }
-                                echo "</ul>";
-                            } else {
-                                echo "No members found.";
-                            }
-                            echo "</td>";
-
-                            echo "<td>";
-                            if (!empty($achievements)) {
-                                echo "<ul>";
-                                foreach ($achievements as $achievement) {
-                                    echo "<li>" . htmlspecialchars($achievement->getName()) . "</li>";
-                                }
-                                echo "</ul>";
-                            } else {
-                                echo "No achievements.";
-                            }
-                            echo "</td>";
-
-                            echo "<td>";
-                            if (!empty($events)) {
-                                echo "<ul>";
-                                foreach ($events as $event) {
-                                    echo "<li>" . htmlspecialchars($event->getEventName()) . " - " . htmlspecialchars($event->getDate()) . "</li>";
-                                }
-                                echo "</ul>";
-                            } else {
-                                echo "No events.";
-                            }
-                            echo "</td>";
-
+                            echo "<td>" . htmlspecialchars($teamObj->getTeamName()) . "</td>";
+                            echo "<td>" . htmlspecialchars($gameObj->getGameName()) . "</td>"; // Display the game name
+                            echo "<td><a href='detail_team.php?idteam=" . $team['idteam'] . "'>Detail</a></td>";
                             echo "</tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='4'>You are not part of any approved teams.</td></tr>";
+                        echo "<tr><td colspan='3'>You are not part of any approved teams.</td></tr>";
                     }
                     ?>
                 </tbody>
@@ -126,9 +85,9 @@ require_once('../template/navbar.php');
                                     <?php endif; ?>
 
                                     <?php
-                                    $max_hal = ceil($total_approved_teams / $limit);
+                                    $max_page = ceil($total_approved_teams / $limit);
                                     $start_page = max(1, $page - 1);
-                                    $end_page = min($max_hal, $start_page + 2);
+                                    $end_page = min($max_page, $start_page + 2);
 
                                     for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
                                         <?php if ($hal == $page): ?>
@@ -138,14 +97,13 @@ require_once('../template/navbar.php');
                                         <?php endif; ?>
                                     <?php endfor; ?>
 
-                                    <?php if ($page < $max_hal): ?>
+                                    <?php if ($page < $max_page): ?>
                                         <a href="?page=<?= $page + 1 ?>">>></a>
                                     <?php else: ?>
                                         <a href="#" class="disabled">>></a>
                                     <?php endif; ?>
                                 <?php endif; ?>
             </div>
-
         </div>
     </div>
 </main>

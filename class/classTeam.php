@@ -154,10 +154,6 @@ class Team
         } else {
             return null;
         }
-
-        $this->teamId = mysqli_insert_id($this->conn);
-
-        mysqli_stmt_close($stmt);
     }
 
     public function updateTeam()
