@@ -29,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image'])) {
     $fileExtension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
 
     if ($fileExtension === 'jpg') {
-
+        $imageName = $idteam . '.jpg';
         $targetDir = '../../public/img/';
         $targetFile = $targetDir . $idteam . '.jpg';
 
         if (move_uploaded_file($image['tmp_name'], $targetFile)) {
 
             $stmt = $koneksi->prepare("UPDATE team SET imgPath = ? WHERE idteam = ?");
-            $stmt->bind_param("si", $targetFile, $idteam);
+            $stmt->bind_param("si", $imageName, $idteam);
 
             if ($stmt->execute()) {
                 header('Location: team.php');
