@@ -174,7 +174,6 @@ class Team
         mysqli_stmt_close($stmt);
     }
 
-    // Metode untuk menghapus tim
     public function deleteTeam($conn)
     {
         $query = "DELETE FROM team WHERE idteam = ?";
