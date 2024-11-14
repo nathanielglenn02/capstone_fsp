@@ -74,7 +74,8 @@ $total_pages = ceil($total_teams / $limit);
                         echo "<td>" . htmlspecialchars($team->getTeamName()) . "</td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
                         if ($team->getImgPath()) {
-                            echo '<td><img src="../../public/img/' . htmlspecialchars($team->getImgPath()) . '" alt="Team Image" width="50" height="50"></td>';
+                            $imagePath = "../../public/img/" . htmlspecialchars($team->getImgPath());
+                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="60" height="60"></td>';
                         } else {
                             echo '<td><a href="upload_image.php?id=' . htmlspecialchars($team->getTeamId()) . '">';
                             echo '<i class="fas fa-plus-circle" style="font-size: 24px; color: #333;"></i>';

@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             if (move_uploaded_file($imageTmpPath, $imagePath)) {
-                $team->setImgPath($imagePath);
+                $team->setImgPath($team->getTeamId() . '.jpg');
             } else {
                 $errorMessage = "Gagal meng-upload gambar.";
             }

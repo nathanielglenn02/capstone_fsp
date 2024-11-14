@@ -62,11 +62,12 @@ require_once('../template/navbar.php');
                             $teamObj = Team::getTeamById($koneksi, $team['idteam']);
                             $gameObj = Game::getGameById($koneksi, $teamObj->getGameId());
                             $imgPath = htmlspecialchars($teamObj->getImgPath());
+                            $timestamp = time();
 
                             echo "<tr>";
                             echo "<td>" . htmlspecialchars($teamObj->getTeamName()) . "</td>";
                             echo "<td>" . htmlspecialchars($gameObj->getGameName()) . "</td>";
-                            echo "<td><img src='../../public/img/$imgPath' alt='Team Image' width='50' height='50'></td>";
+                            echo "<td><img src='../../public/img/$imgPath?t=$timestamp' alt='Team Image' width='10' height='10'></td>";
                             echo "<td><a href='detail_team.php?idteam=" . $team['idteam'] . "'>Detail</a></td>";
                             echo "</tr>";
                         }

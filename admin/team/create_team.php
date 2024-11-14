@@ -20,8 +20,15 @@ $games = Game::getAllGames($koneksi);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $teamName = $_POST['team_name'];
     $gameId = $_POST['game_id'];
-
     $imageName = 'default.jpg';
+
+    $team = new Team($koneksi);
+    $team->setTeamName($teamName);
+    $team->setGameId($gameId);
+
+    $team->createTeam();
+    $teamId = $team->getTeamId();
+
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $imageTmpPath = $_FILES['image']['tmp_name'];
         $fileExtension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
@@ -29,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($fileExtension !== 'jpg') {
             $errorMessage = "File yang diupload harus berformat JPG.";
         } else {
-            $imageName = uniqid() . '.jpg';
+            $imageName = $teamId . '.jpg';
             $imagePath = '../../public/img/' . $imageName;
 
             if (!move_uploaded_file($imageTmpPath, $imagePath)) {
@@ -39,11 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($errorMessage)) {
-        $team = new Team($koneksi);
-        $team->setTeamName($teamName);
-        $team->setGameId($gameId);
-        $team->createTeam();
-
         $team->setImgPath($imageName);
         $team->updateTeam();
 
