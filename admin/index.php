@@ -41,7 +41,6 @@ $total_pages = ceil($total_teams / $limit);
         </div>
     </div>
 
-
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -56,19 +55,28 @@ $total_pages = ceil($total_teams / $limit);
             <table>
                 <thead>
                     <tr>
-                        <th>ID Team</th>
+                        <th>Team</th>
                         <th>Name</th>
                         <th>Game</th>
+                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-
                     foreach ($teams as $team) {
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
+
+                        $imgPath = htmlspecialchars($team->getImgPath());
+                        if (!empty($imgPath)) {
+                            $imagePath = "../public/img/" . htmlspecialchars($team->getImgPath());
+                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="60" height="60"></td>';
+                        } else {
+                            echo "<td><img src='../public/img/default.jpg' alt='Gambar Tim Default' width='50' height='50'></td>";
+                        }
+
                         echo "</tr>";
                     }
                     ?>
@@ -76,8 +84,7 @@ $total_pages = ceil($total_teams / $limit);
             </table>
             <div class="pagination" style="text-align: right;">
                 <?php if ($total_teams > 0): ?>
-                    <?php
-                    if ($page > 1): ?>
+                    <?php if ($page > 1): ?>
                         <a href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">
                             << </a>
                             <?php else: ?>
@@ -86,10 +93,9 @@ $total_pages = ceil($total_teams / $limit);
                                     <?php endif; ?>
 
                                     <?php
-                                    $max_hal = ceil($total_teams / $limit);
-
+                                    $max_page = ceil($total_teams / $limit);
                                     $start_page = max(1, $page - 1);
-                                    $end_page = min($max_hal, $start_page + 2);
+                                    $end_page = min($max_page, $start_page + 2);
 
                                     for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
                                         <?php if ($hal == $page): ?>
@@ -99,7 +105,7 @@ $total_pages = ceil($total_teams / $limit);
                                         <?php endif; ?>
                                     <?php endfor; ?>
 
-                                    <?php if ($page < $max_hal): ?>
+                                    <?php if ($page < $max_page): ?>
                                         <a href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">>></a>
                                     <?php else: ?>
                                         <a href="#" class="disabled">>></a>
@@ -108,9 +114,7 @@ $total_pages = ceil($total_teams / $limit);
             </div>
         </div>
     </div>
-    <?php
-    require_once('template/footer.php');
-    ?>
+    <?php require_once('template/footer.php'); ?>
 </main>
 
 </section>

@@ -47,7 +47,7 @@ $total_pages = ceil($total_games / $limit);
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Game</h3>
+                <h3>Game List</h3>
                 <form method="GET" action="">
                     <input type="text" name="search" placeholder="Search Game..."
                         value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>" />

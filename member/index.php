@@ -59,6 +59,7 @@ if (isset($_SESSION['logout_success'])) {
                         <th>ID Team</th>
                         <th>Name</th>
                         <th>Game</th>
+                        <th>Gambar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,15 @@ if (isset($_SESSION['logout_success'])) {
                         echo "<td>" . htmlspecialchars($team->getTeamId()) . "</td>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
+
+                        $imgPath = htmlspecialchars($team->getImgPath());
+                        if (!empty($imgPath)) {
+                            $imagePath = "../public/img/" . htmlspecialchars($team->getImgPath());
+                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="60" height="60"></td>';
+                        } else {
+                            echo "<td><img src='../public/img/default.jpg' alt='Gambar Tim Default' width='50' height='50'></td>";
+                        }
+
                         echo "</tr>";
                     }
                     ?>
