@@ -15,3 +15,12 @@ require_once('header.php');
         </a>
     </nav>
     <!-- NAVBAR -->
+
+    <script>
+        const menuIcon = document.querySelector('.bx-menu');
+        const sidebar = document.getElementById('sidebar');
+
+        menuIcon.addEventListener('click', () => {
+            sidebar.classList.toggle('hide');
+        });
+    </script>
