@@ -9,6 +9,22 @@ if (isset($_POST['simpan'])) {
     $password = trim(htmlspecialchars($_POST['password']));
     $profile = "member";
 
+    if (strlen($username) < 5 || !preg_match('/[a-zA-Z]/', $username) || !preg_match('/\d/', $username)) {
+        echo "<script>
+            alert('Username harus minimal 5 karakter dan merupakan campuran huruf dan angka.');
+            window.location.href = 'registrasi.php';
+            </script>";
+        exit();
+    }
+
+    if (strlen($password) < 8 || !preg_match('/[a-zA-Z]/', $password) || !preg_match('/\d/', $password)) {
+        echo "<script>
+            alert('Password harus minimal 8 karakter dan merupakan campuran huruf dan angka.');
+            window.location.href = 'registrasi.php';
+            </script>";
+        exit();
+    }
+
     $checkStmt = $koneksi->prepare("SELECT idmember FROM member WHERE username = ?");
     if (!$checkStmt) {
         die("Prepare failed: " . $koneksi->error);

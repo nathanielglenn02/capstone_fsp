@@ -5,7 +5,7 @@ require_once('../service/config.php');
 require_once('template/header.php');
 require_once('../class/classMember.php');
 ?>
-<<main>
+<main>
     <div class="login-container">
         <div class="login-form">
             <h3>Masuk ke Akun Anda</h3>
@@ -29,9 +29,9 @@ require_once('../class/classMember.php');
             </div>
         </div>
     </div>
-    </main>
+</main>
 
-    <?php
-    require_once('template/footer.php');
+<?php
+require_once('template/footer.php');
 
-    ?>
+?>
