@@ -9,6 +9,14 @@ if (isset($_POST['simpan'])) {
     $password = trim(htmlspecialchars($_POST['password']));
     $profile = "member";
 
+    if ($username === $password) {
+        echo "<script>
+            alert('Username dan password tidak boleh sama.');
+            window.location.href = 'registrasi.php';
+            </script>";
+        exit();
+    }
+
     if (strlen($username) < 5 || !preg_match('/[a-zA-Z]/', $username) || !preg_match('/\d/', $username)) {
         echo "<script>
             alert('Username harus minimal 5 karakter dan merupakan campuran huruf dan angka.');
