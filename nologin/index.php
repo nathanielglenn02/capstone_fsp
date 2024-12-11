@@ -52,6 +52,7 @@ $total_pages = ceil($total_teams / $limit);
                     <tr>
                         <th>Name</th>
                         <th>Game</th>
+                        <th>Image</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +61,14 @@ $total_pages = ceil($total_teams / $limit);
                         echo "<tr>";
                         echo "<td><p>" . htmlspecialchars($team->getTeamName()) . "</p></td>";
                         echo "<td>" . htmlspecialchars($team->getGameId()) . "</td>";
+
+                        $imgPath = htmlspecialchars($team->getImgPath());
+                        if (!empty($imgPath)) {
+                            $imagePath = "../public/img/" . htmlspecialchars($team->getImgPath());
+                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="60" height="60"></td>';
+                        } else {
+                            echo "<td><img src='../public/img/default.jpg' alt='Gambar Tim Default' width='50' height='50'></td>";
+                        }
                         echo "</tr>";
                     }
                     ?>
