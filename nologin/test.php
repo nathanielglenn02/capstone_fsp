@@ -11,6 +11,7 @@ require_once "../service/config.php";
     <title>Informatics E-Sport</title>
     <link rel="stylesheet" href="test.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="<?= $main_url ?>asset/image/toga.png" type="image/x-icon">
 
 </head>
 
