@@ -98,6 +98,40 @@ class Achievement
         mysqli_stmt_close($stmt);
     }
 
+    public static function getAllAchievements($koneksi)
+    {
+        $query = "
+            SELECT a.idachievement, t.name as team_name, a.name, a.date, a.description 
+            FROM achievement as a
+            INNER JOIN team as t ON a.idteam = t.idteam
+            ORDER BY a.date DESC
+        "; // Mengurutkan berdasarkan tanggal terbaru
+
+        $result = $koneksi->query($query); // Eksekusi query
+
+        if (!$result) {
+            die("Query Error: " . mysqli_error($koneksi)); // Error handling jika query gagal
+        }
+
+        $achievements = []; // Array untuk menyimpan hasil data
+
+        while ($row = mysqli_fetch_assoc($result)) {
+            // Mengisi array dengan objek Achievement
+            $achievement = new Achievement(
+                $koneksi,
+                $row['idachievement'],
+                $row['team_name'], // Mengambil nama tim dari hasil JOIN
+                $row['name'],
+                $row['date'],
+                $row['description']
+            );
+            $achievements[] = $achievement;
+        }
+
+        return $achievements; // Mengembalikan array berisi objek achievement
+    }
+
+
     public static function getAllAchievementWithPaging($koneksi,  $page = 1, $limit = 5, $search = "")
     {
         $offset = ($page - 1) * $limit;
