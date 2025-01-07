@@ -111,7 +111,7 @@ body {
     position: fixed;
     top: 15px;
     left: 20px;
-    z-index: 3000;
+    z-index: 3001;
     color: #00d4ff;
     display: none;
 }
@@ -263,8 +263,22 @@ footer::before {
     margin: 0 auto 20px auto;
 }
 
+.slider {
+    display: flex;
+    width: 300%; /* Total lebar (3 gambar, masing-masing 100%) */
+    height: 100%; /* Sesuai tinggi container */
+    transition: transform 0.5s ease-in-out; /* Animasi transisi */
+}
+
+.slider img {
+    width: 100%; /* Setiap gambar memenuhi lebar viewport */
+    height: 100%; /* Setiap gambar memenuhi tinggi container */
+    object-fit: cover; /* Menyesuaikan gambar */
+}
+
+
 /* Responsif */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .navbar {
         display: none;
     }
@@ -295,5 +309,42 @@ footer::before {
 
     footer {
         font-size: 0.9em;
+    }
+} */
+@media (max-width: 1020px) {
+    .sidebar {
+        width: 0;
+    }
+
+    .sidebar.open {
+        width: 250px; /* Sidebar akan terlihat saat dibuka */
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .carousel-slider {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        overflow: visible;
+    }
+
+    .card {
+        flex: 1 1 auto; /* Menyesuaikan lebar grid */
+        margin: 0 auto;
+    }
+
+    .hero-content {
+        padding: 10px;
+    }
+
+    footer {
+        padding: 20px 10px;
     }
 }
