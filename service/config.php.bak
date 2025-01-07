@@ -12,4 +12,4 @@ if ($koneksi->connect_error) {
     die("error!");
 }
 
-$main_url = "/Capstone-FSP/";
+$main_url = "http://localhost/Capstone-FSP/";

@@ -8,11 +8,11 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= $main_url ?>style.css">
+    <link rel="stylesheet" href="../style.css">
     <!-- Font-Awesome-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
-    <link rel="icon" href="<?= $main_url ?>asset/image/toga.png" type="image/x-icon">
+    <link rel="icon" href="../../asset/image/toga.png" type="image/x-icon">
 
     <title><?= $title  ?></title>
 </head>

@@ -40,6 +40,26 @@
 	color: #666;
 }
 
+.back-to-dashboard {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn-dashboard {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dashboard:hover {
+    background-color: #0056b3;
+}
+
 .login-container {
 	display: flex;
 	justify-content: center;
@@ -1036,4 +1056,127 @@ html {
 	border-radius: 4px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tabel Responsif */
+.table-data .order {
+    overflow-x: auto; /* Aktifkan scrolling horizontal */
+    margin-bottom: 20px;
+}
+
+.table-data .order table {
+    width: 100%; /* Lebar penuh */
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table-data .order th,
+.table-data .order td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    white-space: nowrap; /* Hindari pemotongan teks */
+}
+
+.table-data .order th {
+    background-color: #f4f4f4;
+}
+
+.table-data .order img {
+    border-radius: 5px;
+}
+
+/* Pagination */
+.pagination a {
+    margin: 0 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #f4f4f4;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
+}
+
+.pagination .disabled {
+    pointer-events: none;
+    color: #aaa;
+}
+
+/* Responsif pada layar kecil */
+@media (max-width: 768px) {
+    .table-data .order table {
+        font-size: 12px; /* Ukuran teks lebih kecil */
+    }
+
+    .table-data .order th,
+    .table-data .order td {
+        padding: 8px; /* Kurangi padding */
+    }
+
+    .head-title h1 {
+        font-size: 1.5em; /* Sesuaikan ukuran heading */
+    }
+
+    .pagination a {
+        padding: 3px 7px; /* Perkecil tombol pagination */
+    }
+}
+
+
+
+
+@media (max-width: 768px){
+	
 }

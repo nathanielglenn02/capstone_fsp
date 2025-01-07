@@ -128,17 +128,6 @@ body {
     padding: 0 20px;
 }
 
-/* Background Gambar */
-.hero-background img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
 /* Overlay */
 .hero::before {
     content: "";
@@ -152,7 +141,7 @@ body {
 }
 
 /* Hero Content */
-.hero-content {
+/* .hero-content {
     position: relative;
     z-index: 1;
     text-align: center;
@@ -169,6 +158,22 @@ body {
 .hero-content p {
     font-size: 1.2em;
     margin-bottom: 20px;
+} */
+
+.hero-content {
+    color: white; /* Warna teks utama */
+    text-align: center; /* Pusatkan teks */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Tambahkan bayangan pada teks untuk meningkatkan keterbacaan */
+}
+
+.hero-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
 }
 
 /* Tombol */
@@ -263,20 +268,6 @@ footer::before {
     margin: 0 auto 20px auto;
 }
 
-.slider {
-    display: flex;
-    width: 300%; /* Total lebar (3 gambar, masing-masing 100%) */
-    height: 100%; /* Sesuai tinggi container */
-    transition: transform 0.5s ease-in-out; /* Animasi transisi */
-}
-
-.slider img {
-    width: 100%; /* Setiap gambar memenuhi lebar viewport */
-    height: 100%; /* Setiap gambar memenuhi tinggi container */
-    object-fit: cover; /* Menyesuaikan gambar */
-}
-
-
 /* Responsif */
 /* @media (max-width: 768px) {
     .navbar {
@@ -347,4 +338,257 @@ footer::before {
     footer {
         padding: 20px 10px;
     }
+    
+    .indicators {
+    position: absolute;
+    bottom: 20px; /* Posisi di bawah slider */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px; /* Jarak antar bulatan */
+    z-index: 3; /* Di atas slider */
+}
+
+.indicators .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: white; /* Warna bulatan */
+    border-radius: 50%; /* Bulat sempurna */
+    opacity: 0.5; /* Bulatan tidak aktif */
+    transition: opacity 0.3s;
+}
+
+.indicators .indicator.active {
+    opacity: 1; /* Bulatan aktif */
+    background-color: #007bff; /* Warna bulatan aktif */
+}
+    
+   /* Pastikan hero memiliki posisi relatif untuk layering */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Tinggi penuh layar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background slider */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Letakkan slider di belakang konten */
+    overflow: hidden;
+}
+
+
+.slider {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    background-image: url('../asset/image/images1.jpg'),
+                      url('../asset/image/images2.jpg'),
+                      url('../asset/image/images3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Pastikan gambar memenuhi area slide */
+    background-position: center;
+}
+
+/* Konten hero */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Letakkan konten di atas slider */
+    text-align: center;
+    color: white; /* Ubah warna teks agar terlihat */
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+    
+
+/* Carousel */
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.carousel-slider {
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
+    width: 900px;
+    gap: 20px;
+}
+
+.card {
+    flex: 0 0 300px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Tombol Carousel */
+.carousel button {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Pastikan hero memiliki posisi relatif untuk layering */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Tinggi penuh layar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Background slider */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Letakkan slider di belakang konten */
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    background-image: url('../asset/image/images1.jpg'),
+                      url('../asset/image/images2.jpg'),
+                      url('../asset/image/images3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Pastikan gambar memenuhi area slide */
+    background-position: center;
+}
+
+/* Konten hero */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Letakkan konten di atas slider */
+    text-align: center;
+    color: white; /* Ubah warna teks agar terlihat */
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.indicators {
+    position: absolute;
+    bottom: 20px; /* Posisi di bawah slider */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px; /* Jarak antar bulatan */
+    z-index: 3; /* Di atas slider */
+}
+
+.indicators .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: white; /* Warna bulatan */
+    border-radius: 50%; /* Bulat sempurna */
+    opacity: 0.5; /* Bulatan tidak aktif */
+    transition: opacity 0.3s;
+}
+
+.indicators .indicator.active {
+    opacity: 1; /* Bulatan aktif */
+    background-color: #007bff; /* Warna bulatan aktif */
 }

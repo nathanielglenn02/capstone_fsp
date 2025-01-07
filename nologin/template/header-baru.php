@@ -10,7 +10,7 @@ require_once "../service/config.php";
     <title>Informatics E-Sport</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" href="<?= $main_url ?>asset/image/toga.png" type="image/x-icon">
+    <link rel="icon" href="../asset/image/toga.png" type="image/x-icon">
 
 </head>
 
@@ -28,7 +28,7 @@ require_once "../service/config.php";
                 <li><a href="#teams">Teams</a></li>
                 <li><a href="#events">Events</a></li>
                 <li><a href="#achievements">Achievements</a></li>
-                <li><a href="<?= $main_url ?>auth/login.php" class="btn-login" style="color:#00d4ff">Login</a></li>
+                <li><a href="../auth/login.php" class="btn-login" style="color:#00d4ff">Login</a></li>
             </ul>
         </nav>
     </header>
