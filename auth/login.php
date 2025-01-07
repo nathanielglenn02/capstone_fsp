@@ -8,7 +8,7 @@ require_once('template/header.php');
 require_once('../class/classMember.php');
 
 // Periksa apakah pengguna sudah login
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['idmember'])) {
     if ($_SESSION['profile'] == 'admin') {
         header("Location: ../admin/index.php");
     } else {

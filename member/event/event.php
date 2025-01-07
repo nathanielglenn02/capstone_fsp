@@ -11,7 +11,7 @@ require_once('../../class/classEvent.php');
 
 $title = "Event - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_event.php');
 require_once('../template/navbar.php');
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

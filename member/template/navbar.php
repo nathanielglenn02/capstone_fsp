@@ -13,6 +13,8 @@ require_once('header.php');
         <a href="#" class="profile">
             <img src="img/people.png">
         </a>
+
+
     </nav>
     <!-- NAVBAR -->
 

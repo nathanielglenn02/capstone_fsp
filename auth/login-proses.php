@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row["password"])) {
             // Set sesi login
             $_SESSION['ssLogin'] = true;
-            $_SESSION['user_id'] = $row['idmember'];
+            $_SESSION['idmember'] = $row['idmember'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['profile'] = $row['profile'];
 
@@ -50,4 +50,3 @@ if (isset($_POST['login'])) {
     // Tutup statement
     $stmt->close();
 }
-?>

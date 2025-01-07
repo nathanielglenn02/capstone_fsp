@@ -16,7 +16,7 @@ $joinProposals = JoinProposal::getProposalsByMember($koneksi, $idmember);
 
 $title = "Status Join Proposal - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_team.php');
 require_once('../template/navbar.php');
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

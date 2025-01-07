@@ -1,8 +1,8 @@
 <?php
 require_once "../service/config.php";
 $title = 'Dashboard';
-require_once('template/header.php');
-require_once('template/sidebar.php');
+require_once('template/header_index.php');
+require_once('template/sidebar_index.php');
 require_once('template/navbar.php');
 require_once('../class/classTeam.php');
 
@@ -20,8 +20,6 @@ $stmt->execute();
 $total_teams_result = $stmt->get_result();
 $total_teams = $total_teams_result->fetch_assoc()['total'];
 $total_pages = ceil($total_teams / $limit);
-
-session_start();
 
 if (isset($_SESSION['logout_success'])) {
     echo "<p style='color: green;'>" . $_SESSION['logout_success'] . "</p>";
@@ -43,7 +41,7 @@ if (isset($_SESSION['logout_success'])) {
 
 
     <div class="table-data">
-        <div class="order">
+        <div class="order   ">
             <div class="head">
                 <h3>Team List</h3>
                 <form method="GET" action="">
@@ -74,9 +72,9 @@ if (isset($_SESSION['logout_success'])) {
                         $imgPath = htmlspecialchars($team->getImgPath());
                         if (!empty($imgPath)) {
                             $imagePath = "../public/img/" . htmlspecialchars($team->getImgPath());
-                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="60" height="60"></td>';
+                            echo '<td><img src="' . $imagePath . '?t=' . time() . '" alt="Team Image" width="10" height="10"></td>';
                         } else {
-                            echo "<td><img src='../public/img/default.jpg' alt='Gambar Tim Default' width='50' height='50'></td>";
+                            echo "<td><img src='../public/img/default.jpg' alt='Gambar Tim Default' width='10' height='10'></td>";
                         }
 
                         echo "</tr>";
