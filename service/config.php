@@ -3,7 +3,7 @@
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database = "capstone";
+$database = "fullstack";
 
 $koneksi = mysqli_connect($hostname, $username, $password, $database);
 

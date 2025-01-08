@@ -1,17 +1,14 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body */
 body {
     font-family: Arial, sans-serif;
     overflow-x: hidden;
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -26,7 +23,6 @@ body {
     top: 0;
 }
 
-/* Logo */
 .navbar .logo {
     font-size: 1.5em;
     font-weight: bold;
@@ -35,7 +31,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Menu */
 .navbar ul {
     list-style: none;
     display: flex;
@@ -65,8 +60,6 @@ body {
     font-weight: bold;
 }
 
-
-/* Sidebar */
 .sidebar {
     height: 100%;
     width: 0;
@@ -80,7 +73,6 @@ body {
     padding-top: 60px;
 }
 
-/* Sidebar Links */
 .sidebar a {
     padding: 15px 25px;
     text-decoration: none;
@@ -94,7 +86,6 @@ body {
     color: #007BFF;
 }
 
-/* Tombol Tutup Sidebar */
 .sidebar .closebtn {
     position: absolute;
     top: 10px;
@@ -104,7 +95,6 @@ body {
     cursor: pointer;
 }
 
-/* Tombol Menu (Hamburger) */
 .menu-btn {
     font-size: 2em;
     cursor: pointer;
@@ -116,7 +106,6 @@ body {
     display: none;
 }
 
-/* Hero Section */
 .hero {
     position: relative;
     height: 100vh;
@@ -128,7 +117,6 @@ body {
     padding: 0 20px;
 }
 
-/* Overlay */
 .hero::before {
     content: "";
     position: absolute;
@@ -140,30 +128,10 @@ body {
     z-index: 0;
 }
 
-/* Hero Content */
-/* .hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 20px;
-    color: #fff;
-    max-width: 600px;
-}
-
-.hero-content h1 {
-    font-size: 2.2em;
-    margin-bottom: 10px;
-}
-
-.hero-content p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-} */
-
 .hero-content {
-    color: white; /* Warna teks utama */
-    text-align: center; /* Pusatkan teks */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Tambahkan bayangan pada teks untuk meningkatkan keterbacaan */
+    color: white; 
+    text-align: center; 
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
 }
 
 .hero-content h1 {
@@ -176,7 +144,6 @@ body {
     margin-bottom: 30px;
 }
 
-/* Tombol */
 .btn-main {
     padding: 12px 25px;
     font-size: 1em;
@@ -191,10 +158,10 @@ body {
     background: #0056b3;
 }
 
-/* Section */
 .section {
     padding: 80px 20px;
     background: #fff;
+    margin: 0 auto;
 }
 
 .section h2 {
@@ -203,7 +170,6 @@ body {
     font-size: 2em;
 }
 
-/* Carousel */
 .carousel {
     display: flex;
     align-items: center;
@@ -229,7 +195,6 @@ body {
     text-align: center;
 }
 
-/* Tombol Carousel */
 .carousel button {
     background: rgba(255, 255, 255, 0.8);
     color: #333;
@@ -244,7 +209,6 @@ body {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* Footer Styling */
 footer {
     background: #111;
     color: #00d4ff;
@@ -258,7 +222,6 @@ footer {
     width: 100%;
 }
 
-/* Garis atas */
 footer::before {
     content: '';
     display: block;
@@ -268,255 +231,23 @@ footer::before {
     margin: 0 auto 20px auto;
 }
 
-/* Responsif */
-/* @media (max-width: 768px) {
-    .navbar {
-        display: none;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    .hero-content h1 {
-        font-size: 1.8em;
-    }
-
-    .hero-content p {
-        font-size: 1em;
-    }
-
-    .btn-main {
-        font-size: 0.9em;
-    }
-
-    .carousel-slider {
-        width: 100%;
-    }
-
-    .card {
-        flex: 0 0 250px;
-    }
-
-    footer {
-        font-size: 0.9em;
-    }
-} */
-@media (max-width: 1020px) {
-    .sidebar {
-        width: 0;
-    }
-
-    .sidebar.open {
-        width: 250px; /* Sidebar akan terlihat saat dibuka */
-    }
-
-    .navbar {
-        display: none;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-
-    .carousel-slider {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-        overflow: visible;
-    }
-
-    .card {
-        flex: 1 1 auto; /* Menyesuaikan lebar grid */
-        margin: 0 auto;
-    }
-
-    .hero-content {
-        padding: 10px;
-    }
-
-    footer {
-        padding: 20px 10px;
-    }
-    
-    .indicators {
-    position: absolute;
-    bottom: 20px; /* Posisi di bawah slider */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px; /* Jarak antar bulatan */
-    z-index: 3; /* Di atas slider */
-}
-
-.indicators .indicator {
-    width: 10px;
-    height: 10px;
-    background-color: white; /* Warna bulatan */
-    border-radius: 50%; /* Bulat sempurna */
-    opacity: 0.5; /* Bulatan tidak aktif */
-    transition: opacity 0.3s;
-}
-
-.indicators .indicator.active {
-    opacity: 1; /* Bulatan aktif */
-    background-color: #007bff; /* Warna bulatan aktif */
-}
-    
-   /* Pastikan hero memiliki posisi relatif untuk layering */
 .hero {
     position: relative;
     width: 100%;
-    height: 100vh; /* Tinggi penuh layar */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-/* Background slider */
 .hero-background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Letakkan slider di belakang konten */
-    overflow: hidden;
-}
-
-
-.slider {
-    display: flex;
-    width: 300%;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-    background-image: url('../asset/image/images1.jpg'),
-                      url('../asset/image/images2.jpg'),
-                      url('../asset/image/images3.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.slide {
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover; /* Pastikan gambar memenuhi area slide */
-    background-position: center;
-}
-
-/* Konten hero */
-.hero-content {
-    position: relative;
-    z-index: 2; /* Letakkan konten di atas slider */
-    text-align: center;
-    color: white; /* Ubah warna teks agar terlihat */
-    padding: 20px;
-}
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-.btn-main {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.2rem;
-}
-    
-
-/* Carousel */
-.carousel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px 0;
-}
-
-.carousel-slider {
-    display: flex;
-    overflow: hidden;
-    scroll-behavior: smooth;
-    width: 900px;
-    gap: 20px;
-}
-
-.card {
-    flex: 0 0 300px;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Tombol Carousel */
-.carousel button {
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
-    border: 1px solid #ccc;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.carousel button:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-    
-    
-    
-    
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Pastikan hero memiliki posisi relatif untuk layering */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Tinggi penuh layar */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-/* Background slider */
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Letakkan slider di belakang konten */
+    z-index: 1;
     overflow: hidden;
 }
 
@@ -536,16 +267,15 @@ footer::before {
     flex-shrink: 0;
     width: 100%;
     height: 100%;
-    background-size: cover; /* Pastikan gambar memenuhi area slide */
+    background-size: cover; 
     background-position: center;
 }
 
-/* Konten hero */
 .hero-content {
     position: relative;
-    z-index: 2; /* Letakkan konten di atas slider */
+    z-index: 2; 
     text-align: center;
-    color: white; /* Ubah warna teks agar terlihat */
+    color: white; 
     padding: 20px;
 }
 
@@ -571,24 +301,315 @@ footer::before {
 
 .indicators {
     position: absolute;
-    bottom: 20px; /* Posisi di bawah slider */
+    bottom: 20px; 
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px; /* Jarak antar bulatan */
-    z-index: 3; /* Di atas slider */
+    gap: 10px; 
+    z-index: 3; 
 }
 
 .indicators .indicator {
     width: 10px;
     height: 10px;
-    background-color: white; /* Warna bulatan */
-    border-radius: 50%; /* Bulat sempurna */
-    opacity: 0.5; /* Bulatan tidak aktif */
+    background-color: white; 
+    border-radius: 50%; 
+    opacity: 0.5; 
     transition: opacity 0.3s;
 }
 
 .indicators .indicator.active {
-    opacity: 1; /* Bulatan aktif */
-    background-color: #007bff; /* Warna bulatan aktif */
+    opacity: 1; 
+    background-color: #007bff; 
+}
+
+@media (max-width: 1020px) {
+    .sidebar {
+        width: 0;
+    }
+
+    .sidebar.open {
+        width: 250px; 
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .carousel-slider {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        overflow: visible;
+    }
+
+    .card {
+        flex: 1 1 auto; 
+        margin: 0 auto;
+    }
+
+    .hero-content {
+        padding: 10px;
+    }
+
+    footer {
+        padding: 20px 10px;
+    }
+    
+    .indicators {
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px; 
+    z-index: 3; 
+    }
+
+.indicators .indicator {
+    width: 10px;
+    height: 10px;
+    background-color: white; 
+    border-radius: 50%; 
+    opacity: 0.5; 
+    transition: opacity 0.3s;
+}
+
+.indicators .indicator.active {
+    opacity: 1; 
+    background-color: #007bff; 
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    overflow: hidden;
+}
+
+.slider {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+    background-image: url('../asset/image/images1.jpg'),
+                      url('../asset/image/images2.jpg'),
+                      url('../asset/image/images3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; 
+    background-position: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; 
+    text-align: center;
+    color: white; 
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.btn-main {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+}
+
+
+.carousel-slider {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel button {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#games-prev {
+    left: 0;
+}
+
+#games-next {
+    right: 0;
+}
+
+.game-card {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.game-card.active {
+    display: block;
+    opacity: 1;
+    position: relative;
+}
+
+#teams-prev {
+    left: 0;
+}
+
+#teams-next {
+    right: 0;
+}
+
+.team-card {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-card.active {
+    display: block;
+    opacity: 1;
+    position: relative;
+}
+
+#achievements-prev {
+    left: 0;
+}
+
+#achievements-next {
+    right: 0;
+}
+
+.achievement-card {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-card.active {
+    display: block;
+    opacity: 1;
+    position: relative;
+}
+
+
+#events-prev {
+    left: 0;
+}
+
+#events-next {
+    right: 0;
+}
+
+.event-card {
+    display: none;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-card.active {
+    display: block;
+    opacity: 1;
+    position: relative;
+}
 }

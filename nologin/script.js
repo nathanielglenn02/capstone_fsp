@@ -6,7 +6,6 @@ function closeNav() {
     document.getElementById("sidebar").style.width = "0";
 }
 
-// Fungsi Infinite Scroll Carousel
 function createCarousel(id, prevBtnId, nextBtnId) {
     const slider = document.getElementById(id);
     const prevBtn = document.getElementById(prevBtnId);
@@ -14,7 +13,6 @@ function createCarousel(id, prevBtnId, nextBtnId) {
 
     let scrollAmount = 0;
 
-    // Geser ke kanan
     function scrollRight() {
         if (scrollAmount < slider.scrollWidth - slider.clientWidth) {
             scrollAmount += 300;

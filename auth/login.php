@@ -1,5 +1,5 @@
 <?php
-session_start(); // Memulai sesi
+session_start();
 
 $title = "Login - Club Informatics 2024";
 
@@ -7,7 +7,6 @@ require_once('../service/config.php');
 require_once('template/header.php');
 require_once('../class/classMember.php');
 
-// Periksa apakah pengguna sudah login
 if (isset($_SESSION['idmember'])) {
     if ($_SESSION['profile'] == 'admin') {
         header("Location: ../admin/index.php");

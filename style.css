@@ -269,13 +269,10 @@ html {
 	overflow-x: hidden;
 }
 
-
-/* HIDDEN */
 .hidden {
 	visibility: hidden;
 }
 
-/* SIDEBAR */
 #sidebar {
 	position: fixed;
 	top: 0;
@@ -402,10 +399,6 @@ html {
 	justify-content: center;
 }
 
-/* SIDEBAR */
-
-
-/* CONTENT */
 #content {
 	position: relative;
 	width: calc(100% - 280px);
@@ -419,7 +412,6 @@ html {
 }
 
 
-/* NAVBAR */
 #content nav {
 	height: 56px;
 	background: var(--light);
@@ -476,10 +468,6 @@ html {
 	border-radius: 50%;
 }
 
-/* NAVBAR */
-
-
-/* MAIN */
 #content main {
 	width: 100%;
 	padding: 36px 24px;
@@ -718,9 +706,6 @@ html {
 	margin-bottom: 0;
 }
 
-/* MAIN */
-/* CONTENT */
-/* FOOTER */
 .footer {
 	padding: 10px;
 	margin: 5px;
@@ -874,8 +859,6 @@ html {
 	resize: vertical;
 }
 
-/* CREATE STYLE */
-/* CREATE GAME */
 #create_game .form-group {
 	margin-bottom: 15px;
 }
@@ -919,7 +902,6 @@ html {
 	background-color: #005f7f;
 }
 
-/* CREAM TEAM */
 #create_team .form-group {
 	margin-bottom: 15px;
 }
@@ -958,7 +940,6 @@ html {
 	background-color: #005f7f;
 }
 
-/* CREATE EVENT */
 #create_event .form-group {
 	margin-bottom: 15px;
 }
@@ -997,7 +978,6 @@ html {
 	background-color: #005f7f;
 }
 
-/* CREATE ACHIEVEMENT */
 #create_achievement .form-group {
 	margin-bottom: 15px;
 }
@@ -1058,9 +1038,6 @@ html {
 	transition: background-color 0.3s ease;
 }
 
-/* COCOK HANYA UNTUK TAMPILAN TABEL RESPONSIF */
-
-/* Tabel Responsif */
 .table-data .order {
     overflow-x: auto;
     margin-bottom: 20px;
@@ -1088,7 +1065,6 @@ html {
     border-radius: 5px;
 }
 
-/* Pagination */
 .pagination a {
     margin: 0 5px;
     padding: 5px 10px;
@@ -1114,38 +1090,35 @@ html {
     padding: 10px;
     font-size: 14px;
     white-space: nowrap;
-    width: 25% !important; /* Atur lebar kolom sesuai kebutuhan */
+    width: 25% !important; 
 }
 
-/* Jika ingin menetapkan lebar yang berbeda untuk setiap kolom */
 .table-data .order table th:nth-child(1),
 .table-data .order table td:nth-child(1) {
-    width: 15% !important; /* Lebar kolom ID Team */
+    width: 15% !important; 
 }
 
 .table-data .order table th:nth-child(2),
 .table-data .order table td:nth-child(2) {
-    width: 40% !important; /* Lebar kolom Name */
+    width: 40% !important; 
 }
 
 .table-data .order table th:nth-child(3),
 .table-data .order table td:nth-child(3) {
-    width: 25% !important; /* Lebar kolom Game */
+    width: 25% !important;
 }
 
 .table-data .order table th:nth-child(4),
 .table-data .order table td:nth-child(4) {
-    width: 20% !important; /* Lebar kolom Gambar */
+    width: 20% !important; 
 }
 
-/* Responsif pada layar kecil */
 @media (max-width: 768px) {
 
 	body {
         font-size: 14px;
     }
 
-    /* Sesuaikan padding dan margin */
     .head-title h1 {
         font-size: 1.5em;
         margin-bottom: 10px;
@@ -1164,12 +1137,10 @@ html {
         display: none;
     }
 
-    /* Sesuaikan tombol pagination */
     .pagination a {
         padding: 3px 7px;
     }
 
-    /* Buat sidebar collapsible */
     #sidebar {
         width: 60px !important;
     }
@@ -1183,25 +1154,21 @@ html {
         display: none;
     }
 
-    /* Sesuaikan lebar konten */
     #content {
         width: calc(100% - 60px);
         left: 60px;
     }
 
-    /* Sesuaikan navbar */
     #content nav {
         padding: 0 10px;
         position: relative;
     }
 
-    /* Sesuaikan gambar profil */
     #content nav .profile img {
         width: 30px;
         height: 30px;
     }
 
-    /* Tambahkan menu navigasi di navbar */
     #content nav .nav-menu {
         display: none;
         flex-direction: column;

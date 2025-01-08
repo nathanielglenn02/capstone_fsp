@@ -105,22 +105,22 @@ class Achievement
             FROM achievement as a
             INNER JOIN team as t ON a.idteam = t.idteam
             ORDER BY a.date DESC
-        "; // Mengurutkan berdasarkan tanggal terbaru
+        ";
 
-        $result = $koneksi->query($query); // Eksekusi query
+        $result = $koneksi->query($query);
 
         if (!$result) {
-            die("Query Error: " . mysqli_error($koneksi)); // Error handling jika query gagal
+            die("Query Error: " . mysqli_error($koneksi));
         }
 
-        $achievements = []; // Array untuk menyimpan hasil data
+        $achievements = [];
 
         while ($row = mysqli_fetch_assoc($result)) {
-            // Mengisi array dengan objek Achievement
+
             $achievement = new Achievement(
                 $koneksi,
                 $row['idachievement'],
-                $row['team_name'], // Mengambil nama tim dari hasil JOIN
+                $row['team_name'],
                 $row['name'],
                 $row['date'],
                 $row['description']
@@ -128,7 +128,7 @@ class Achievement
             $achievements[] = $achievement;
         }
 
-        return $achievements; // Mengembalikan array berisi objek achievement
+        return $achievements;
     }
 
 

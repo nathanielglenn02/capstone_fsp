@@ -1,12 +1,10 @@
 <section id="home" class="hero">
     <div class="hero-background">
-        <!-- Slider Container -->
         <div class="slider">
             <div class="slide" style="background-image: url('../asset/image/images1.jpg');"></div>
             <div class="slide" style="background-image: url('../asset/image/images2.jpg');"></div>
             <div class="slide" style="background-image: url('../asset/image/images3.jpg');"></div>
         </div>
-        <!-- Indicators -->
         <div class="indicators"></div>
     </div>
     <div class="hero-content">
@@ -25,36 +23,33 @@
 
     imageUrls.forEach((url) => {
         const img = new Image();
-        img.src = url; // Preload gambar ke dalam cache browser
+        img.src = url;
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        const slider = document.querySelector('.slider'); // Elemen slider
-        const slides = document.querySelectorAll('.slide'); // Semua slide
-        const totalSlides = slides.length; // Jumlah total slide
-        const indicatorsContainer = document.querySelector('.indicators'); // Container indikator
-        let index = 0; // Indeks awal
-        let startX = 0; // Posisi awal sentuhan atau klik mouse
-        let endX = 0; // Posisi akhir sentuhan atau lepas mouse
-        let isDragging = false; // Status apakah sedang drag
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const indicatorsContainer = document.querySelector('.indicators');
+        let index = 0;
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
 
-        // Fungsi untuk memperbarui posisi slider
         function updateSliderPosition() {
-            slider.style.transform = `translateX(-${index * 100}%)`; // Pindah posisi
-            updateIndicators(); // Perbarui indikator
+            slider.style.transform = `translateX(-${index * 100}%)`;
+            updateIndicators();
         }
 
-        // Fungsi untuk membuat indikator
         function createIndicators() {
             for (let i = 0; i < totalSlides; i++) {
                 const indicator = document.createElement('div');
                 indicator.classList.add('indicator');
-                if (i === 0) indicator.classList.add('active'); // Aktifkan indikator pertama
+                if (i === 0) indicator.classList.add('active');
                 indicatorsContainer.appendChild(indicator);
             }
         }
 
-        // Fungsi untuk memperbarui indikator
         function updateIndicators() {
             const indicators = document.querySelectorAll('.indicator');
             indicators.forEach((indicator, i) => {
@@ -62,7 +57,6 @@
             });
         }
 
-        // Swipe handling untuk touch devices
         slider.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
         });
@@ -70,16 +64,13 @@
         slider.addEventListener('touchend', (e) => {
             endX = e.changedTouches[0].clientX;
             if (endX - startX > 50) {
-                // Geser ke kanan
                 index = index > 0 ? index - 1 : totalSlides - 1;
             } else if (startX - endX > 50) {
-                // Geser ke kiri
                 index = (index + 1) % totalSlides;
             }
             updateSliderPosition();
         });
 
-        // Mouse drag handling untuk desktop
         slider.addEventListener('mousedown', (e) => {
             startX = e.clientX;
             isDragging = true;
@@ -94,25 +85,22 @@
             if (!isDragging) return;
             isDragging = false;
             if (endX - startX > 50) {
-                // Geser ke kanan
                 index = index > 0 ? index - 1 : totalSlides - 1;
             } else if (startX - endX > 50) {
-                // Geser ke kiri
                 index = (index + 1) % totalSlides;
             }
             updateSliderPosition();
         });
 
         slider.addEventListener('mouseleave', () => {
-            if (isDragging) isDragging = false; // Hentikan drag jika mouse keluar area slider
+            if (isDragging) isDragging = false;
         });
 
-        // Jalankan slider secara otomatis
         setInterval(() => {
-            index = (index + 1) % totalSlides; // Reset ke awal setelah slide terakhir
-            updateSliderPosition(); // Panggil fungsi untuk update posisi
-        }, 5000); // Interval 5 detik
+            index = (index + 1) % totalSlides;
+            updateSliderPosition();
+        }, 5000);
 
-        createIndicators(); // Buat indikator saat halaman dimuat
+        createIndicators();
     });
 </script>
