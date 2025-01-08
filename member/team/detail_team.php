@@ -13,7 +13,7 @@ require_once('../../class/classEventTeams.php');
 
 $title = "Team Details - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_team.php');
 require_once('../template/navbar.php');
 
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;
@@ -88,31 +88,31 @@ if ($idteam) {
 
             <div class="pagination" style="text-align: right;">
                 <?php if ($totalMembers > 0): ?>
-                    <?php if ($pageMembers > 1): ?>
-                        <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers - 1 ?>">
+                <?php if ($pageMembers > 1): ?>
+                <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers - 1 ?>">
+                    << </a>
+                        <?php else: ?>
+                        <a href="#" class="disabled">
                             << </a>
-                            <?php else: ?>
-                                <a href="#" class="disabled">
-                                    << </a>
-                                    <?php endif; ?>
+                                <?php endif; ?>
 
-                                    <?php
+                                <?php
                                     $start_page = max(1, $pageMembers - 1);
                                     $end_page = min($totalPagesMembers, $start_page + 2);
 
                                     for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
-                                        <?php if ($hal == $pageMembers): ?>
-                                            <b><?= $hal ?></b>
-                                        <?php else: ?>
-                                            <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
-                                        <?php endif; ?>
-                                    <?php endfor; ?>
+                                <?php if ($hal == $pageMembers): ?>
+                                <b><?= $hal ?></b>
+                                <?php else: ?>
+                                <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                <?php endif; ?>
+                                <?php endfor; ?>
 
-                                    <?php if ($pageMembers  < $totalPagesMembers): ?>
-                                        <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers  + 1 ?>">>></a>
-                                    <?php else: ?>
-                                        <a href="#" class="disabled">>></a>
-                                    <?php endif; ?>
+                                <?php if ($pageMembers  < $totalPagesMembers): ?>
+                                <a href="?idteam=<?= $idteam ?>&page=<?= $pageMembers  + 1 ?>">>></a>
+                                <?php else: ?>
+                                <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
                                 <?php endif; ?>
             </div>
 
@@ -148,31 +148,31 @@ if ($idteam) {
 
             <div class="pagination" style="text-align: right;">
                 <?php if ($totalEvents > 0): ?>
-                    <?php if ($page > 1): ?>
-                        <a href="?idteam=<?= $idteam ?>&page=<?= $page - 1 ?>">
+                <?php if ($page > 1): ?>
+                <a href="?idteam=<?= $idteam ?>&page=<?= $page - 1 ?>">
+                    << </a>
+                        <?php else: ?>
+                        <a href="#" class="disabled">
                             << </a>
-                            <?php else: ?>
-                                <a href="#" class="disabled">
-                                    << </a>
-                                    <?php endif; ?>
+                                <?php endif; ?>
 
-                                    <?php
+                                <?php
                                     $start_page = max(1, $page - 1);
                                     $end_page = min($totalPages, $start_page + 2);
 
                                     for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
-                                        <?php if ($hal == $page): ?>
-                                            <b><?= $hal ?></b>
-                                        <?php else: ?>
-                                            <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
-                                        <?php endif; ?>
-                                    <?php endfor; ?>
+                                <?php if ($hal == $page): ?>
+                                <b><?= $hal ?></b>
+                                <?php else: ?>
+                                <a href="?idteam=<?= $idteam ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                <?php endif; ?>
+                                <?php endfor; ?>
 
-                                    <?php if ($page < $totalPages): ?>
-                                        <a href="?idteam=<?= $idteam ?>&page=<?= $page + 1 ?>">>></a>
-                                    <?php else: ?>
-                                        <a href="#" class="disabled">>></a>
-                                    <?php endif; ?>
+                                <?php if ($page < $totalPages): ?>
+                                <a href="?idteam=<?= $idteam ?>&page=<?= $page + 1 ?>">>></a>
+                                <?php else: ?>
+                                <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
                                 <?php endif; ?>
             </div>
         </div>
@@ -208,27 +208,27 @@ if ($idteam) {
 
             <div class="pagination" style="text-align: right;">
                 <?php if ($totalAchievements > 0): ?>
-                    <?php if ($pageAchievements > 1): ?>
-                        <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $pageAchievements - 1 ?>">
+                <?php if ($pageAchievements > 1): ?>
+                <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $pageAchievements - 1 ?>">
+                    << </a>
+                        <?php else: ?>
+                        <a href="#" class="disabled">
                             << </a>
-                            <?php else: ?>
-                                <a href="#" class="disabled">
-                                    << </a>
-                                    <?php endif; ?>
+                                <?php endif; ?>
 
-                                    <?php for ($i = 1; $i <= $totalPagesAchievements; $i++): ?>
-                                        <?php if ($i == $pageAchievements): ?>
-                                            <b><?= $i ?></b>
-                                        <?php else: ?>
-                                            <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $i ?>"><?= $i ?></a>
-                                        <?php endif; ?>
-                                    <?php endfor; ?>
+                                <?php for ($i = 1; $i <= $totalPagesAchievements; $i++): ?>
+                                <?php if ($i == $pageAchievements): ?>
+                                <b><?= $i ?></b>
+                                <?php else: ?>
+                                <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $i ?>"><?= $i ?></a>
+                                <?php endif; ?>
+                                <?php endfor; ?>
 
-                                    <?php if ($pageAchievements < $totalPagesAchievements): ?>
-                                        <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $pageAchievements + 1 ?>">>></a>
-                                    <?php else: ?>
-                                        <a href="#" class="disabled">>></a>
-                                    <?php endif; ?>
+                                <?php if ($pageAchievements < $totalPagesAchievements): ?>
+                                <a href="?idteam=<?= $idteam ?>&pageAchievements=<?= $pageAchievements + 1 ?>">>></a>
+                                <?php else: ?>
+                                <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
                                 <?php endif; ?>
             </div>
 

@@ -13,7 +13,7 @@ require_once('../../class/classEvent.php');
 
 $title = "Game Details - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_game.php');
 require_once('../template/navbar.php');
 
 $idgame = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -82,31 +82,31 @@ $events = $gameDetails['events'];
 
             <div class="pagination" style="text-align: right;">
                 <?php if ($totalEvents > 0): ?>
-                    <?php if ($page > 1): ?>
-                        <a href="?id=<?= $idgame ?>&page=<?= $page - 1 ?>">
+                <?php if ($page > 1): ?>
+                <a href="?id=<?= $idgame ?>&page=<?= $page - 1 ?>">
+                    << </a>
+                        <?php else: ?>
+                        <a href="#" class="disabled">
                             << </a>
-                            <?php else: ?>
-                                <a href="#" class="disabled">
-                                    << </a>
-                                    <?php endif; ?>
+                                <?php endif; ?>
 
-                                    <?php
+                                <?php
                                     $start_page = max(1, $page - 1);
                                     $end_page = min($totalPages, $start_page + 2);
 
                                     for ($hal = $start_page; $hal <= $end_page; $hal++): ?>
-                                        <?php if ($hal == $page): ?>
-                                            <b><?= $hal ?></b>
-                                        <?php else: ?>
-                                            <a href="?id=<?= $idgame ?>&page=<?= $hal ?>"><?= $hal ?></a>
-                                        <?php endif; ?>
-                                    <?php endfor; ?>
+                                <?php if ($hal == $page): ?>
+                                <b><?= $hal ?></b>
+                                <?php else: ?>
+                                <a href="?id=<?= $idgame ?>&page=<?= $hal ?>"><?= $hal ?></a>
+                                <?php endif; ?>
+                                <?php endfor; ?>
 
-                                    <?php if ($page < $totalPages): ?>
-                                        <a href="?id=<?= $idgame ?>&page=<?= $page + 1 ?>">>></a>
-                                    <?php else: ?>
-                                        <a href="#" class="disabled">>></a>
-                                    <?php endif; ?>
+                                <?php if ($page < $totalPages): ?>
+                                <a href="?id=<?= $idgame ?>&page=<?= $page + 1 ?>">>></a>
+                                <?php else: ?>
+                                <a href="#" class="disabled">>></a>
+                                <?php endif; ?>
                                 <?php endif; ?>
             </div>
         </div>
