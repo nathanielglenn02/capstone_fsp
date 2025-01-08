@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['idmember'])) {
-    header('Location: ../../auth/login.php');
+if (!isset($_SESSION['idmember']) || $_SESSION['profile'] !== 'admin') {
+    header('Location: ../auth/login.php');
     exit;
 }
 
 require_once "../service/config.php";
 $title = 'Dashboard';
-require_once('template/header.php');
-require_once('template/sidebar.php');
+require_once('template/header_index.php');
+require_once('template/sidebar_index.php');
 require_once('template/navbar.php');
 require_once('../class/classTeam.php');
 

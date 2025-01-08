@@ -11,5 +11,3 @@ if ($koneksi->connect_error) {
     echo "koneksi database rusak";
     die("error!");
 }
-
-$main_url = "/Capstone-FSP/";

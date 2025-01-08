@@ -1159,9 +1159,11 @@ html {
     .table-data .order td {
         padding: 8px;
     }
-	.bx-menu {
-        display: none; /* Sembunyikan tombol menu */
+
+    .toggle-btn {
+        display: none;
     }
+
     /* Sesuaikan tombol pagination */
     .pagination a {
         padding: 3px 7px;
@@ -1169,7 +1171,7 @@ html {
 
     /* Buat sidebar collapsible */
     #sidebar {
-        width: 60px;
+        width: 60px !important;
     }
 
     #sidebar .side-menu li a {
@@ -1236,12 +1238,15 @@ html {
         border-bottom: none;
     }
 
-	#sidebar.hide:hover {
-		width: 280px;
-	}
-	
-	#sidebar.hide:hover .side-menu li a .text {
-		display: inline;
-	}
-	
+    #sidebar.hide:hover {
+        width: 280px;
+    }
+
+    #sidebar.hide:hover .side-menu li a .text {
+        display: inline;
+    }
+
+    .bx-menu {
+        display: none !important;
+    }
 }

@@ -24,11 +24,13 @@ if (isset($_POST['login'])) {
             $_SESSION['idmember'] = $row['idmember'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['profile'] = $row['profile'];
+            $_SESSION['firstname'] = $row['fname'];
+            $_SESSION['lastname'] = $row['lname'];
 
             // Redirect berdasarkan peran
             if ($row['profile'] == 'admin') {
                 header("Location: ../admin/index.php");
-            } else {
+            } elseif ($row['profile'] == 'member') {
                 header("Location: ../member/index.php");
             }
             exit;

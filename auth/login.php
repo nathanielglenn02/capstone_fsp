@@ -11,10 +11,10 @@ require_once('../class/classMember.php');
 if (isset($_SESSION['idmember'])) {
     if ($_SESSION['profile'] == 'admin') {
         header("Location: ../admin/index.php");
-    } else {
-        header("Location: ../member/index.php");
+    } elseif ($_SESSION['profile'] === 'member') {
+        header('Location: ../member/index.php');
     }
-    exit(); // Pastikan kode di bawah tidak dijalankan
+    exit;
 }
 ?>
 <main>

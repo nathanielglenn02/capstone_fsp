@@ -9,6 +9,10 @@ require_once('header.php');
         <i class='bx bx-menu'></i>
         <div style="flex-grow: 1;"></div>
 
+        <?php if (isset($_SESSION['profile']) && $_SESSION['profile'] == 'admin'): ?>
+            <span>Halo Admin, <?= $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></span>
+        <?php endif; ?>
+
         <a href="#" class="profile">
             <img src="img/people.png">
         </a>

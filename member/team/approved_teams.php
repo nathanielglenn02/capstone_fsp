@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['idmember'])) {
+if (!isset($_SESSION['idmember']) || $_SESSION['profile'] !== 'member') {
     header('Location: ../../auth/login.php');
     exit;
 }

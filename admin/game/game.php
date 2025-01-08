@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['idmember'])) {
+if (!isset($_SESSION['idmember']) || $_SESSION['profile'] !== 'admin') {
     header('Location: ../../auth/login.php');
     exit;
 }
@@ -11,7 +11,7 @@ require_once('../../class/classGame.php');
 
 $title = "Game - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_game.php');
 require_once('../template/navbar.php');
 
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;

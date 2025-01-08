@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['idmember'])) {
+if (!isset($_SESSION['idmember']) || $_SESSION['profile'] !== 'admin') {
     header('Location: ../../auth/login.php');
     exit;
 }
@@ -11,7 +11,7 @@ require_once('../../class/classEvent.php');
 
 $title = "Event - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_event.php');
 require_once('../template/navbar.php');
 
 $_SESSION['return_url'] = $_SERVER['REQUEST_URI'];

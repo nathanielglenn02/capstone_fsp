@@ -10,6 +10,10 @@ require_once('header.php');
 
         <div style="flex-grow: 1;"></div>
 
+        <?php if (isset($_SESSION['profile']) && $_SESSION['profile'] == 'member'): ?>
+            <span>Halo Member, <?= $_SESSION['firstname'] . ' ' . $_SESSION['lastname']; ?></span>
+        <?php endif; ?>
+
         <a href="#" class="profile">
             <img src="img/people.png">
         </a>
