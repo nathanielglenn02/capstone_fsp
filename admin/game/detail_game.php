@@ -13,7 +13,7 @@ require_once('../../class/classEvent.php');
 
 $title = "Game Details - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_game.php');
 require_once('../template/navbar.php');
 
 $idgame = isset($_GET['id']) ? (int)$_GET['id'] : 0;

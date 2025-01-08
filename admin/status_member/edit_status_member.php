@@ -12,7 +12,7 @@ require_once('../../class/classMember.php');
 
 $title = "Edit Status - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_status_member.php');
 require_once('../template/navbar.php');
 
 $return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';

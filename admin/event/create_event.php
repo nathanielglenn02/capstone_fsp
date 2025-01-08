@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = "Create Event - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_event.php');
 require_once('../template/navbar.php');
 ?>
 

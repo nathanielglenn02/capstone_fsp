@@ -12,7 +12,7 @@ require_once('../../class/classGame.php');
 
 $title = "Edit Team - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_team.php');
 require_once('../template/navbar.php');
 
 $idteam = isset($_GET['id']) ? intval($_GET['id']) : 0;

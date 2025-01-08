@@ -13,7 +13,7 @@ require_once('../../class/classEventTeams.php');
 
 $title = "Team Details - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_team.php');
 require_once('../template/navbar.php');
 
 $idteam = isset($_GET['idteam']) ? intval($_GET['idteam']) : null;

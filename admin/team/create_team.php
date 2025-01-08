@@ -12,7 +12,7 @@ require_once('../../class/classGame.php');
 
 $title = "Create Team - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_team.php');
 require_once('../template/navbar.php');
 
 $games = Game::getAllGames($koneksi);

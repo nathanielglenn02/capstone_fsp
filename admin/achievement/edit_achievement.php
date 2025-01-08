@@ -13,7 +13,7 @@ require_once('../../class/classGame.php');
 
 $title = "Edit Achievement - Club Informatics 2024";
 require_once('../template/header.php');
-require_once('../template/sidebar.php');
+require_once('../template/sidebar_achievement.php');
 require_once('../template/navbar.php');
 
 $return_url = isset($_SESSION['return_url']) ? $_SESSION['return_url'] : 'achievement.php';
